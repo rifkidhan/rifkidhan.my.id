@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { motion, useAnimation } from "framer-motion";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -156,3 +157,16 @@ const Loader = () => {
 };
 
 export default Loader;
+=======
+import { motion } from "framer-motion";
+
+const Loader = () => {
+	return (
+		<div className="absolute top-0 z-100 bg-stone-900 w-full h-screen">
+			<div></div>
+		</div>
+	);
+};
+
+export default Loader;
+>>>>>>> 9e54861 (Initial Commit)

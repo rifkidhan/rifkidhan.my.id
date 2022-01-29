@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const siteConfig = {
 	title: "Rifkidhan",
 	description: `Personal Life Rifki Ramadhan`,
@@ -8,3 +9,15 @@ const siteConfig = {
 };
 
 module.exports = siteConfig;
+=======
+const siteConfig = {
+    title: "Rifkidhan",
+    description: `Personal Life Rifki Ramadhan`,
+    url: "https://localhost:3000",
+    twitterUsername: "@rifkidhan",
+    email: "rifkiramadhan.9428@gmail.com",
+    themeColor: "#e7e5e4",
+};
+
+module.exports = siteConfig;
+>>>>>>> 9e54861 (Initial Commit)
