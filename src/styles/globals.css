@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.category_button_bg {
+	background-image: linear-gradient(to right, #1c1917 50%, #e7e5e4 50%);
+	background-size: 200% 100%;
+}
+
+@layer base {
+	body {
+		@apply bg-stone-200 text-stone-900;
+	}
+	h1 {
+		@apply font-serif text-4xl font-bold md:text-7xl lg:text-9xl;
+	}
+	h2 {
+		@apply font-serif text-4xl font-bold md:text-7xl lg:text-9xl;
+	}
+	h3 {
+		@apply font-serif text-2xl md:text-3xl lg:text-4xl;
+	}
+	html {
+		@apply font-sans text-sm;
+	}
+}
+
+@layer components {
+	.postcard_index {
+		@apply grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3;
+	}
+	.postcard {
+		@apply overflow-hidden transition ease-in-out duration-500 hover:scale-105 hover:rounded-lg hover:shadow-lg;
+	}
+	.postcard_image {
+		@apply relative w-full h-52 grayscale;
+	}
+	.header {
+		@apply fixed block transition-all ease-in-out duration-500 w-full py-5 px-10 z-98 border-stone-900 border-b-2 bg-stone-200;
+	}
+	.menu {
+		@apply bg-stone-900 fixed z-99 top-0 left-0 w-full h-full px-10 py-10 overflow-y-scroll;
+	}
+	.menu_link {
+		@apply transition-colors ease-in-out duration-300 text-stone-200 hover:text-amber-400;
+	}
+	.navbar_active {
+		@apply visible;
+	}
+	.navbar_inactive {
+		@apply invisible -translate-y-full;
+	}
+	.category_button {
+		@apply border-2 border-stone-900 w-28 h-10 bg-[right_200rem] transition-all ease-out duration-500 hover:bg-[left_200rem];
+	}
+	.to_top_button {
+		@apply bg-stone-900 border border-stone-200 p-3 rounded-full;
+	}
+	.to_top_button_wrapper {
+		@apply fixed bottom-10 right-10 z-50 md:right-20 md:bottom-24;
+	}
+	.scroll-lock {
+		@apply overflow-hidden m-0 touch-none h-screen;
+	}
+}
