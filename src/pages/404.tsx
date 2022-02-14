@@ -6,7 +6,7 @@ export default function NotFound() {
 		() => import("@/components/lottie/NotFoundAnimate"),
 		{ ssr: false }
 	);
-	const Header = dynamic(() => import("@/components/display/Header404"));
+	const Header = dynamic(() => import("@/components/display/HeaderError"));
 	const Footer = dynamic(() => import("@/components/display/Footer"));
 	return (
 		<>
