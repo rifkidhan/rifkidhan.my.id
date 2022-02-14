@@ -1,0 +1,96 @@
+@layer base {
+	@font-face {
+		font-family: "Quicksand";
+		font-weight: 300, 400, 500, 600, 700;
+		src: url("/fonts/Quicksand-VariableFont_wght.ttf") format("ttf");
+	}
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-Italic.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-Italic.woff") format("woff");
+		font-weight: normal;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-BoldItalic.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-BoldItalic.woff") format("woff");
+		font-weight: bold;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-Bold.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-Bold.woff") format("woff");
+		font-weight: bold;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-Light.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-Light.woff") format("woff");
+		font-weight: 300;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-LightItalic.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-LightItalic.woff") format("woff");
+		font-weight: 300;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-Medium.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-Medium.woff") format("woff");
+		font-weight: 500;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-MediumItalic.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-MediumItalic.woff") format("woff");
+		font-weight: 500;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-Regular.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-Regular.woff") format("woff");
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-SemiBold.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-SemiBold.woff") format("woff");
+		font-weight: 600;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url("/fonts/cormorant/Cormorant-SemiBoldItalic.woff2") format("woff2"),
+			url("/fonts/cormorant/Cormorant-SemiBoldItalic.woff") format("woff");
+		font-weight: 600;
+		font-style: italic;
+		font-display: swap;
+	}
+}
