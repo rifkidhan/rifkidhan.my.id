@@ -5,7 +5,11 @@ type Props = {
 };
 
 const Section = ({ children }: Props) => {
-	return <div className="container mx-auto px-10">{children}</div>;
+	return (
+		<section className="container mx-auto px-10 block relative">
+			{children}
+		</section>
+	);
 };
 
 export default Section;

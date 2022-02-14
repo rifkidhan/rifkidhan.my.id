@@ -7,7 +7,7 @@ export default function BackToTop() {
 
 	useEffect(() => {
 		const backTopTopButtonShow = () => {
-			const scrollPos = window.pageYOffset;
+			const scrollPos = window.scrollY;
 			setScrollPostition(scrollPos);
 
 			setIsShow(scrollPosition > 500);
@@ -43,7 +43,7 @@ export default function BackToTop() {
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					className="h-7 w-7 text-neutral-100"
+					className="h-7 w-7 text-stone-50"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"

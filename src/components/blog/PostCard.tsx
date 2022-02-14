@@ -14,7 +14,7 @@ export default function PostCard({ slug, image, content, title }: Props) {
 		<Link href={`/blog/${slug}`}>
 			<a>
 				<div className="postcard group">
-					<div className="postcard_image group-hover:grayscale-0">
+					<div className="postcard_image group-hover:grayscale-0 transition-all duration-300">
 						<Image
 							src={`${imageUrl}/${image}`}
 							layout="fill"
@@ -22,8 +22,8 @@ export default function PostCard({ slug, image, content, title }: Props) {
 							alt={`Image From ${title}`}
 						/>
 					</div>
-					<div className="p-5 bg-white">
-						<h5 className="group-hover:text-amber-400 transition ease-in-out duration-300">
+					<div className="p-5">
+						<h5 className="group-hover:text-orange-600 transition ease-in-out duration-300">
 							{title}
 						</h5>
 						<div

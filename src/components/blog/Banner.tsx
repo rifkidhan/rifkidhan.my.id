@@ -9,7 +9,7 @@ type Props = {
 export default function Banner({ image, title }: Props) {
 	return (
 		<div>
-			<div className="relative w-full h-96 md:h-[36rem] lg:h-[42rem] xl:[48rem]">
+			<div className="relative w-full grayscale h-96 md:h-[36rem] lg:h-[42rem] xl:[48rem]">
 				<Image
 					src={`${imageUrl}/${image}`}
 					alt={`Image From ${title}`}

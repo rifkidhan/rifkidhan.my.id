@@ -6,7 +6,6 @@ import type {
 import { getBlogPost, getBlogPostBySlug } from "@/libs/data/queries";
 import Layout from "@/components/Layout";
 import { Banner, BlogTitle, BlogBody } from "@/components/blog";
-import { Container } from "@/components/display";
 import { BackIcon } from "@/components/icons";
 import { useRouter } from "next/router";
 import type { ReactElement } from "react";
@@ -23,7 +22,7 @@ export default function BlogDetails({
 					<NextSeo title={`${item.title}`} />
 					<div>
 						<Banner title={item.title} image={item.feature_image.id} />
-						<Container>
+						<div className="isContainer">
 							<div className="flex flex-col my-14 gap-16">
 								<button type="button" onClick={() => router.back()}>
 									<BackIcon />
@@ -31,7 +30,7 @@ export default function BlogDetails({
 								<BlogTitle title={item.title} subtitle={item.subtitle} />
 								<BlogBody content={item.content} />
 							</div>
-						</Container>
+						</div>
 					</div>
 				</div>
 			))}

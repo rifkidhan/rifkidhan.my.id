@@ -133,3 +133,22 @@ export async function getBlogPostBySlug() {
 
     return data.blog
 }
+
+export async function getAboutData() {
+    const data = await fetchAPI(
+        `
+            query getAbout {
+                about_me {
+                  title
+                  slug
+                  image {
+                    id
+                  }
+                  description
+                }
+              }
+        `
+    )
+
+    return data.about_me
+}

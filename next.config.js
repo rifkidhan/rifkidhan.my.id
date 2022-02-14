@@ -59,6 +59,7 @@ const nextConfig = {
     disable: process.env.NODE_ENV === "development",
     register: true,
     runtimeCaching,
+    cacheOnFrontEndNav: true,
   },
 }
 

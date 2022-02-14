@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { PostCard, CategoryButton } from "@/components/blog";
-import { Container } from "@/components/display";
+import { Breadcrumb } from "@/components/display";
 import Layout from "@/components/Layout";
 import {
 	getBlogPostIndex,
@@ -25,10 +25,8 @@ const Blogs = ({}) => {
 	return (
 		<div className="flex flex-col gap-10">
 			<NextSeo title="Blogs" />
-			<div className="py-24 border-b-2 bg-stone-900 w-full">
-				<h2 className="text-center text-stone-200">Blogs</h2>
-			</div>
-			<Container>
+			<Breadcrumb title={"Blogs"} />
+			<div className="isContainer">
 				<div className="flex gap-5 items-center justify-center overflow-auto snap-x touch-pan-x">
 					{blog_category?.blog_category.map((category: any) => (
 						<div key={category.id} className="snap-center">
@@ -39,11 +37,11 @@ const Blogs = ({}) => {
 						</div>
 					))}
 				</div>
-			</Container>
-			<Container>
+			</div>
+			<div className="isContainer">
 				<h3 className="text-center">{category} Blogs</h3>
-			</Container>
-			<Container>
+			</div>
+			<div className="isContainer">
 				<div className="postcard_index my-10 mx-auto px-5">
 					{blog?.blog.map((blog: any) => (
 						<div key={blog.id}>
@@ -56,7 +54,7 @@ const Blogs = ({}) => {
 						</div>
 					))}
 				</div>
-			</Container>
+			</div>
 		</div>
 	);
 };
