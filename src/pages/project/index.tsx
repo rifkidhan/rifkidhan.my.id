@@ -10,7 +10,7 @@ const ProjectPage = () => {
 	});
 
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen gap-10">
+		<div className="page-wrapper page-wrapper__atCenter">
 			<NextSeo title="My Project" />
 			<Loader />
 			<Breadcrumb title={"My Project"} />

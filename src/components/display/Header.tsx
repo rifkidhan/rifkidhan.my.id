@@ -72,21 +72,19 @@ const MenuItems = ({ changeToggle }: MenuItemsType) => {
 	return (
 		<motion.nav variants={sidebar} className="menu">
 			<div className="isContainer">
-				<motion.div variants={navigation} className="flex flex-col gap-7 pt-24">
+				<motion.div variants={navigation} className="menu_item">
 					{data?.menu.map((menu: any) => (
-						<motion.div
-							variants={menuItems}
-							className="border-b-2 pb-10"
-							key={menu.id}
-						>
-							<Link href={`/${menu.slug}`} passHref>
-								<a
-									className="text-7xl menu_link font-serif"
-									onClick={changeToggle}
-								>
-									{menu.title}
-								</a>
-							</Link>
+						<motion.div variants={menuItems} key={menu.id}>
+							{menu.slug === "home" && (
+								<Link href={`/`} passHref>
+									<a onClick={changeToggle}>{menu.title}</a>
+								</Link>
+							)}
+							{menu.slug !== "home" && (
+								<Link href={`/${menu.slug}`} passHref>
+									<a onClick={changeToggle}>{menu.title}</a>
+								</Link>
+							)}
 						</motion.div>
 					))}
 				</motion.div>
@@ -103,11 +101,10 @@ const Path = (props: any) => (
 
 const MenuToggle = ({ toggle }: MenuToggleType) => {
 	return (
-		<div className="z-100 relative">
+		<div className="menu_toggle">
 			<button onClick={toggle} aria-label="Menu">
 				<motion.svg
 					xmlns="http://www.w3.org/2000/svg"
-					className="h-10 w-10"
 					fill="none"
 					viewBox="0 0 24 24"
 					variants={{
@@ -143,11 +140,10 @@ const MenuToggle = ({ toggle }: MenuToggleType) => {
 
 const MenuToggleWhite = ({ toggle }: MenuToggleType) => {
 	return (
-		<div className="z-100 relative">
+		<div className="menu_toggle">
 			<button onClick={toggle} aria-label="Menu">
 				<motion.svg
 					xmlns="http://www.w3.org/2000/svg"
-					className="h-10 w-10"
 					fill="none"
 					viewBox="0 0 24 24"
 					variants={{
@@ -265,18 +261,20 @@ export default function Header() {
 
 	return (
 		<header
-			className={`${visible ? "navbar_active" : "navbar_inactive"} ${
-				isTop
-					? "bg-transparent border-stone-50"
-					: "bg-stone-50 border-stone-900"
-			} header`}
+			className={`header ${visible ? "navbar_active" : "navbar_inactive"} ${
+				isTop ? "header_bgOnTop" : "header_bgOnScroll"
+			} ${
+				isTop && changeColor ? "header_border--white" : "header_border--black"
+			}`}
 		>
-			<div className="flex flex-row justify-between container">
+			<div className="header_inner">
 				<Link href={"/"}>
 					<a
 						className={`${
-							isTop && changeColor ? "text-stone-50" : "text-stone-900"
-						} text-4xl font-sans font-medium`}
+							isTop && changeColor
+								? "header_logoType--white"
+								: "header_logoType--black"
+						}`}
 					>
 						Rifkidhan
 					</a>

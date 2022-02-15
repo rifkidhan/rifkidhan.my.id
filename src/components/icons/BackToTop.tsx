@@ -23,11 +23,8 @@ export default function BackToTop() {
 	};
 
 	return (
-		<div
-			className={`${isShow ? "visible" : "invisible"} to_top_button_wrapper`}
-		>
+		<div className={`backToTop ${isShow ? "visible" : "invisible"}`}>
 			<motion.button
-				className="to_top_button"
 				initial={false}
 				whileHover={{
 					y: -7,
@@ -39,11 +36,11 @@ export default function BackToTop() {
 						bounce: 0.25,
 					},
 				}}
+				aria-label="Back To Top Button"
 				onClick={backToTopButton}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					className="h-7 w-7 text-stone-50"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"

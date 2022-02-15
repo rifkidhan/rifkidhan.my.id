@@ -124,7 +124,6 @@ const Loader = () => {
 			router.events.off("routeChangeStart", waiting);
 		};
 	}, [router, loading, willHidden]);
-	console.log(loading, willHidden);
 
 	const title = "Rifkidhan.";
 

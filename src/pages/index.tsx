@@ -6,10 +6,9 @@ import { HeroSection, BlogSection } from "@/components/home";
 
 const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen gap-10">
+		<div className="page-wrapper page-wrapper__atCenter">
 			<HeroSection />
 			<BlogSection posts={posts} />
-			<HeroSection />
 		</div>
 	);
 };

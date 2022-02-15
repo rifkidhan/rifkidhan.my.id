@@ -105,7 +105,7 @@ const PostHome = ({ title, content, image, slug }: post) => {
 						onMouseLeave={() => setOnHover(false)}
 						className="flex items-center w-fit gap-3 mt-5 hover:text-orange-500"
 					>
-						<div>Read More</div>
+						<p>Read More</p>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="h-7 w-10"

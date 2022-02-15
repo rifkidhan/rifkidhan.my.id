@@ -16,22 +16,22 @@ export default function BlogDetails({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const router = useRouter();
 	return (
-		<div className="flex flex-col gap-10">
+		<div className="page-wrapper">
 			{post?.map((item: any) => (
 				<div key={item.id}>
 					<NextSeo title={`${item.title}`} />
-					<div>
-						<Banner title={item.title} image={item.feature_image.id} />
-						<div className="isContainer">
-							<div className="flex flex-col my-14 gap-16">
-								<button type="button" onClick={() => router.back()}>
-									<BackIcon />
-								</button>
-								<BlogTitle title={item.title} subtitle={item.subtitle} />
-								<BlogBody content={item.content} />
-							</div>
-						</div>
-					</div>
+					<Banner title={item.title} image={item.feature_image.id} />
+					<section className="post isContainer">
+						<button
+							type="button"
+							onClick={() => router.back()}
+							aria-label="Back button"
+						>
+							<BackIcon />
+						</button>
+						<BlogTitle title={item.title} subtitle={item.subtitle} />
+						<BlogBody content={item.content} />
+					</section>
 				</div>
 			))}
 		</div>

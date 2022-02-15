@@ -23,13 +23,13 @@ const Blogs = ({}) => {
 	const { data: blog_category } = useSWR(getBlogCategory, fetcher);
 
 	return (
-		<div className="flex flex-col gap-10">
+		<div className="page-wrapper">
 			<NextSeo title="Blogs" />
 			<Breadcrumb title={"Blogs"} />
-			<div className="isContainer">
-				<div className="flex gap-5 items-center justify-center overflow-auto snap-x touch-pan-x">
+			<section className="blog_index isContainer">
+				<div className="category_button_wrapper no-scrollBar">
 					{blog_category?.blog_category.map((category: any) => (
-						<div key={category.id} className="snap-center">
+						<div key={category.id}>
 							<CategoryButton
 								onClick={() => setCategory(`${category.title}`)}
 								title={category.title}
@@ -37,12 +37,8 @@ const Blogs = ({}) => {
 						</div>
 					))}
 				</div>
-			</div>
-			<div className="isContainer">
 				<h3 className="text-center">{category} Blogs</h3>
-			</div>
-			<div className="isContainer">
-				<div className="postcard_index my-10 mx-auto px-5">
+				<div className="postCard_index">
 					{blog?.blog.map((blog: any) => (
 						<div key={blog.id}>
 							<PostCard
@@ -54,7 +50,7 @@ const Blogs = ({}) => {
 						</div>
 					))}
 				</div>
-			</div>
+			</section>
 		</div>
 	);
 };

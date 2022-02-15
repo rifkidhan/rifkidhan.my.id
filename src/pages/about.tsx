@@ -11,10 +11,10 @@ const AboutPage = ({
 	about,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
-		<div className="flex flex-col items-center justify-center min-h-screen gap-10">
+		<div className="page-wrapper page-wrapper__atCenter">
 			<NextSeo title={about.title} />
 			<Breadcrumb title={about.title} />
-			<div className="flex flex-row min-h-screen gap-10 items-center justify-center">
+			<div className="flex flex-col md:flex-row md:min-h-screen gap-10 items-center justify-center isContainer">
 				<div className="rounded-full overflow-hidden w-32 h-32">
 					<div className="relative w-full h-full">
 						<Image
