@@ -6,10 +6,7 @@ import siteConfig from "@/libs/siteConfig";
 import { DefaultSeo } from "next-seo";
 import Head from "next/head";
 import { useRouter } from "next/router";
-<<<<<<< HEAD
 import { metaLink, metaTags } from "@/libs/siteMeta";
-=======
->>>>>>> 9e54861 (Initial Commit)
 
 type NextPageWithLayout = NextPage & {
 	getLayout?: (page: ReactElement) => ReactNode;
@@ -55,37 +52,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 					handle: siteConfig.twitterUsername,
 					site: siteConfig.twitterUsername,
 				}}
-<<<<<<< HEAD
 				additionalLinkTags={metaLink}
 				additionalMetaTags={metaTags}
-=======
-				additionalMetaTags={[
-					{
-						name: "application-name",
-						content: "Rifki Ramadhan Web",
-					},
-					{
-						name: "apple-mobile-web-app-capable",
-						content: "yes",
-					},
-					{
-						name: "apple-mobile-web-app-status-bar-style",
-						content: "default",
-					},
-					{
-						name: "apple-mobile-web-app-title",
-						content: "Rifki Ramadhan Web",
-					},
-					{
-						name: "format-detection",
-						content: "telephone=no",
-					},
-					{
-						name: "mobile-web-app-capable",
-						content: "yes",
-					},
-				]}
->>>>>>> 9e54861 (Initial Commit)
 			/>
 			<Component {...pageProps} />
 		</>
