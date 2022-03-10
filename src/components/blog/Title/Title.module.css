@@ -1,0 +1,6 @@
+.title {
+  @apply flex flex-col gap-5 py-2 text-center xl:gap-10;
+}
+.title h2 {
+  @apply font-sans text-xl font-medium lg:text-2xl 2xl:text-4xl;
+}

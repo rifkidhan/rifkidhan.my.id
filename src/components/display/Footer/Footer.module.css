@@ -1,0 +1,3 @@
+.root {
+  @apply flex flex-col items-center border-t border-stone-900 py-5 text-stone-900;
+}

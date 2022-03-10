@@ -1,0 +1,13 @@
+.root {
+  @apply block cursor-pointer;
+}
+.Bg {
+  background-image: linear-gradient(to right, #1c1917 50%, #fafaf9 50%);
+  background-size: 200% 100%;
+}
+.Item {
+  @apply flex h-10 w-28 items-center justify-center border border-stone-900 bg-[right_200rem] transition-all duration-500 ease-out hover:bg-[left_200rem] hover:text-stone-50;
+}
+.Item_title {
+  @apply block text-center;
+}

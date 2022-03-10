@@ -1,20 +1,21 @@
 import type { ReactNode } from "react";
+import { LazyMotion, domAnimation } from "framer-motion";
 import { Footer, Header, Loader } from "@/components/display";
 import BackToTop from "@/components/icons/BackToTop";
 
 type Props = {
-	children?: ReactNode;
+  children?: ReactNode;
 };
 
 export const Layout = ({ children }: Props) => {
-	return (
-		<div>
-			<Header />
-			<BackToTop />
-			<main>{children}</main>
-			<Footer />
-		</div>
-	);
+  return (
+    <LazyMotion features={domAnimation}>
+      <Header />
+      <BackToTop />
+      <main>{children}</main>
+      <Footer />
+    </LazyMotion>
+  );
 };
 
 export default Layout;

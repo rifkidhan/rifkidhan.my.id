@@ -8,45 +8,48 @@ import Image from "next/image";
 import { Breadcrumb } from "@/components/display";
 
 const AboutPage = ({
-	about,
+  about,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-	return (
-		<div className="page-wrapper page-wrapper__atCenter">
-			<NextSeo title={about.title} />
-			<Breadcrumb title={about.title} />
-			<div className="flex flex-col md:flex-row md:min-h-screen gap-10 items-center justify-center isContainer">
-				<div className="rounded-full overflow-hidden w-32 h-32">
-					<div className="relative w-full h-full">
-						<Image
-							src={`${imageUrl}/${about.image.id}`}
-							layout="fill"
-							objectFit="cover"
-						/>
-					</div>
-				</div>
-				<div>
-					<div
-						className="prose"
-						dangerouslySetInnerHTML={{ __html: `${about.description}` }}
-					/>
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="page-wrapper page-wrapper__atCenter">
+      <NextSeo title={about.title} />
+      <Breadcrumb title={about.title} />
+      <div className="isContainer flex flex-col items-center justify-center gap-10 md:min-h-screen md:flex-row">
+        <div className="h-32 w-32 overflow-hidden rounded-full">
+          <div className="relative h-full w-full">
+            <Image
+              src={`${imageUrl}/${about.image.id}`}
+              layout="fill"
+              objectFit="cover"
+              alt="Pemilik"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <div>
+          <div
+            className="prose"
+            dangerouslySetInnerHTML={{ __html: `${about.description}` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AboutPage;
 
 export async function getStaticProps({}: GetStaticPropsContext) {
-	const about = await getAboutData();
+  const about = await getAboutData();
 
-	return {
-		props: {
-			about,
-		},
-	};
+  return {
+    props: {
+      about,
+    },
+    revalidate: 60 * 10,
+  };
 }
 
 AboutPage.getLayout = function getLayout(page: ReactElement) {
-	return <Layout>{page}</Layout>;
+  return <Layout>{page}</Layout>;
 };

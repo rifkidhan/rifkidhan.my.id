@@ -1,0 +1,48 @@
+.root {
+  @apply fixed top-0 z-98 block w-full border-b py-5 px-10 transition-all duration-500 ease-in-out;
+}
+.navbarActive {
+  @apply visible;
+}
+.navbarInactive {
+  @apply invisible -translate-y-full;
+}
+.bgOnTop {
+  @apply bg-transparent;
+}
+.bgOnScroll {
+  @apply bg-stone-50;
+}
+.borderBlack {
+  @apply border-stone-900;
+}
+.borderWhite {
+  @apply border-stone-50;
+}
+.inner {
+  @apply container flex flex-row justify-between;
+}
+.logoTypeBlack {
+  @apply font-sans text-4xl font-medium text-stone-900;
+}
+.logoTypeWhite {
+  @apply font-sans text-4xl font-medium text-stone-50;
+}
+.menu {
+  @apply fixed top-0 left-0 z-99 h-full w-full overflow-y-scroll bg-stone-900 px-10 py-10;
+}
+.menuToggle {
+  @apply relative z-100;
+}
+.menuToggle svg {
+  @apply h-10 w-10;
+}
+.menuItem {
+  @apply flex flex-col gap-7 pt-24;
+}
+.menuItem div {
+  @apply border-b-2 pb-10;
+}
+.menuItem a {
+  @apply font-serif text-7xl font-semibold text-stone-50  transition-colors duration-300 ease-in-out hover:text-orange-600;
+}
