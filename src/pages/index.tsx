@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import Layout from "@/components/Layout";
+import { LayoutBlack as Layout } from "@/components/layout";
 import { getHomeFeature, getPostForHome } from "@/libs/data/queries";
 import { HeroSection, FeatureSection, BlogSection } from "@/components/home";
 

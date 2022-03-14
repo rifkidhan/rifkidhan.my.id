@@ -31,10 +31,6 @@
 .postImage {
   @apply relative block h-full w-full items-center;
 }
-.readMoreBg {
-  background-image: linear-gradient(to right, #1c1917 50%, #fafaf9 50%);
-  background-size: 200% 100%;
-}
-.readMoreItem {
-  @apply flex h-16 w-56 items-center justify-center border border-stone-900 bg-[right_200rem] transition-all duration-500 ease-out hover:bg-[left_200rem] hover:text-stone-50;
+.readMore {
+  @apply border border-stone-900 p-5 transition-all duration-300 hover:scale-105 hover:rounded-lg;
 }

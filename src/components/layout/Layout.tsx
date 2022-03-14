@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { LazyMotion, domAnimation } from "framer-motion";
-import { Footer, Header, Loader } from "@/components/display";
+import { Footer, HeaderWhite as Header } from "@/components/display";
 import BackToTop from "@/components/icons/BackToTop";
 
 type Props = {

@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import { LayoutDefault as Layout } from "@/components/layout";
 import type { ReactElement } from "react";
 import { NextSeo } from "next-seo";
 import { Breadcrumb } from "@/components/display";

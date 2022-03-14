@@ -4,7 +4,7 @@ import type {
   InferGetStaticPropsType,
 } from "next";
 import { getBlogPost, getBlogPostBySlug } from "@/libs/data/queries";
-import Layout from "@/components/Layout";
+import { LayoutTransparent as Layout } from "@/components/layout";
 import { Banner, Title, Body } from "@/components/blog";
 import { BackIcon } from "@/components/icons";
 import { useRouter } from "next/router";

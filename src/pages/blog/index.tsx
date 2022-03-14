@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { PostCard, CategoryButton } from "@/components/blog";
 import { Breadcrumb } from "@/components/display";
-import Layout from "@/components/Layout";
+import { LayoutDefault as Layout } from "@/components/layout";
 import {
   getBlogPostIndex,
   getBlogPostFilterIndex,

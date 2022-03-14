@@ -4,7 +4,7 @@ import { Footer } from "@/components/display";
 
 export default function NotFound() {
   const Header = dynamic(
-    () => import("@/components/display/Header/HeaderError")
+    () => import("@/components/display/Header/HeaderBlack")
   );
   const Animation = dynamic(() => import("@/components/display/Lottie"), {
     ssr: false,

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import debounce from "@/libs/debounce";
 import { m } from "framer-motion";
 import { fetcher } from "@/libs/api";
@@ -138,7 +137,6 @@ const MenuToggle = ({ toggle }: MenuToggleType) => {
     </div>
   );
 };
-
 const MenuToggleWhite = ({ toggle }: MenuToggleType) => {
   return (
     <div className={s.menuToggle}>
@@ -189,7 +187,6 @@ const Menu = () => {
       const currentScrollPos = window.scrollY;
       setIsOnTop(currentScrollPos < 100);
     }, 100);
-
     window.addEventListener("scroll", scrollHandler);
 
     return () => {
@@ -250,7 +247,7 @@ export default function Header() {
   return (
     <header
       className={`${s.root} ${visible ? s.navbarActive : s.navbarInactive} ${
-        isTop ? s.bgOnTop : s.bgOnScroll
+        isTop ? s.bgOnTopGlass : s.bgOnScroll
       } ${isTop ? s.borderWhite : s.borderBlack}`}
     >
       <div className={s.inner}>

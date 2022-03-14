@@ -1,4 +1,4 @@
-import Layout from "@/components/Layout";
+import { LayoutDefault as Layout } from "@/components/layout";
 import type { InferGetStaticPropsType, GetStaticPropsContext } from "next";
 import type { ReactElement } from "react";
 import { NextSeo } from "next-seo";

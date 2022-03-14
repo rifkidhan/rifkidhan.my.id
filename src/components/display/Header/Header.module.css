@@ -10,6 +10,9 @@
 .bgOnTop {
   @apply bg-transparent;
 }
+.bgOnTopGlass {
+  @apply bg-stone-900/50;
+}
 .bgOnScroll {
   @apply bg-stone-50;
 }
