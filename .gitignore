@@ -48,3 +48,6 @@ yarn-error.log*
 **/public/robots.txt
 **/sitemap.xml
 **/sitemap-*.xml
+
+# prettier
+.prettierrc

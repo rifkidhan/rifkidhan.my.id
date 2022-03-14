@@ -1,0 +1,30 @@
+.root {
+  @apply relative flex min-h-screen w-full flex-col items-center gap-20 md:gap-44;
+}
+.heading {
+  @apply flex flex-col gap-4 text-center;
+}
+.heading h3 {
+  @apply font-sans text-base font-semibold uppercase md:text-lg lg:text-2xl;
+}
+.heading h2 {
+  @apply font-bold italic;
+}
+.features {
+  @apply flex flex-col gap-y-24;
+}
+.feature {
+  @apply grid w-full grid-cols-1 gap-5 md:grid-cols-2 md:gap-12;
+}
+.featureText {
+  @apply my-auto;
+}
+.featureTextTitle {
+  @apply font-serif text-xl font-semibold md:text-2xl lg:text-4xl;
+}
+.featureTextDescription {
+  @apply prose lg:prose-xl;
+}
+.featureAnimation {
+  @apply m-auto md:w-4/5;
+}
