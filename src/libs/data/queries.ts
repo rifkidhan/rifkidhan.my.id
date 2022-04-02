@@ -146,8 +146,16 @@ export async function getBlogPost(slug: string) {
                 }
                 feature_image {
                     id
+                    width
+                    height
                 }
                 content
+                date_created
+                date_updated
+                user_created
+                meta_title
+                meta_description
+                tags
             }
         }
     `,

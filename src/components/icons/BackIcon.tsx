@@ -1,5 +1,5 @@
 import { m } from "framer-motion";
-import { useState } from "react";
+import { FC, useState } from "react";
 
 const svgVariants = {
   mouseEnter: {
@@ -14,7 +14,7 @@ const svgVariants = {
   },
 };
 
-export default function BackIcon() {
+const BackIcon: FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div
@@ -40,4 +40,6 @@ export default function BackIcon() {
       </svg>
     </div>
   );
-}
+};
+
+export default BackIcon;

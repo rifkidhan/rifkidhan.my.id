@@ -1,8 +1,12 @@
 import type { ReactElement } from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { LayoutBlack as Layout } from "@/components/layout";
+import { Layout } from "@/components/common";
 import { getHomeFeature, getPostForHome } from "@/libs/data/queries";
-import { HeroSection, FeatureSection, BlogSection } from "@/components/home";
+import {
+  HeroSection,
+  FeatureSection,
+  BlogSection,
+} from "@/components/page/home";
 
 const Home = ({
   posts,
@@ -26,7 +30,7 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
       posts,
       homeFeatures,
     },
-    revalidate: 60 * 10,
+    revalidate: 60,
   };
 };
 

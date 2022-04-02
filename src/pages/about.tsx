@@ -1,38 +1,19 @@
-import { LayoutDefault as Layout } from "@/components/layout";
+import { Layout } from "@/components/common";
 import type { InferGetStaticPropsType, GetStaticPropsContext } from "next";
 import type { ReactElement } from "react";
 import { NextSeo } from "next-seo";
 import { getAboutData } from "@/libs/data/queries";
-import { imageUrl } from "@/libs/constant";
-import Image from "next/image";
-import { Breadcrumb } from "@/components/display";
+import { Breadcrumb } from "@/components/common";
+import { Profile } from "@/components/page/about";
 
 const AboutPage = ({
   about,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="page-wrapper page-wrapper__atCenter">
-      <NextSeo title={about.title} />
+      <NextSeo title={about.title} description="All about Rifki Ramadhan" />
       <Breadcrumb title={about.title} />
-      <div className="isContainer flex flex-col items-center justify-center gap-10 md:min-h-screen md:flex-row">
-        <div className="h-32 w-32 overflow-hidden rounded-full">
-          <div className="relative h-full w-full">
-            <Image
-              src={`${imageUrl}/${about.image.id}`}
-              layout="fill"
-              objectFit="cover"
-              alt="Pemilik"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <div>
-          <div
-            className="prose"
-            dangerouslySetInnerHTML={{ __html: `${about.description}` }}
-          />
-        </div>
-      </div>
+      <Profile image={about.image.id} description={about.description} />
     </div>
   );
 };
@@ -46,7 +27,7 @@ export async function getStaticProps({}: GetStaticPropsContext) {
     props: {
       about,
     },
-    revalidate: 60 * 10,
+    revalidate: 60,
   };
 }
 

@@ -1,9 +1,0 @@
-.root {
-  @apply flex h-screen w-full items-end justify-center bg-stone-900;
-}
-.root div {
-  @apply py-20;
-}
-.root h1 {
-  @apply text-center text-stone-50;
-}

@@ -1,27 +1,34 @@
-import Head from "next/head";
 import dynamic from "next/dynamic";
-import { Footer } from "@/components/display";
+import { NextSeo } from "next-seo";
+import { Footer } from "@/components/common";
+import Link from "next/link";
 
 export default function NotFound() {
-  const Header = dynamic(
-    () => import("@/components/display/Header/HeaderBlack")
-  );
-  const Animation = dynamic(() => import("@/components/display/Lottie"), {
+  const Animation = dynamic(() => import("@/components/common/Lottie"), {
     ssr: false,
   });
   return (
     <>
-      <Header />
+      <NextSeo
+        nofollow={true}
+        noindex={true}
+        title="Not Found"
+        description="Page Not Found"
+      />
       <main className="isContainer">
-        <Head>
-          <title>404 | Rifkidhan</title>
-        </Head>
-        <section className="flex min-h-screen flex-col items-center justify-center py-10">
-          <div className="mb-5 w-1/2">
+        <section className="mb-10 flex min-h-screen flex-col items-center justify-center gap-10">
+          <div className="mb-5 w-1/2 dark:rounded-full dark:bg-stone-50">
             <Animation src="lottie/NotFoundAnimate.lottie" />
           </div>
-          <h3 className="font-semibold uppercase">Empat Nol Empat</h3>
-          <p>Halaman yang kamu cari tidak ada.</p>
+          <div className="text-center">
+            <h3 className="font-semibold uppercase">Empat Nol Empat</h3>
+            <p>Halaman yang kamu cari tidak ada.</p>
+          </div>
+          <Link href={"/"}>
+            <a className="border border-stone-900 py-3 px-5 transition-all duration-300 hover:bg-stone-900 hover:text-stone-50 dark:border-stone-50 dark:hover:bg-stone-50 dark:hover:text-stone-900">
+              Kembali ke Home
+            </a>
+          </Link>
         </section>
       </main>
       <Footer />

@@ -1,8 +1,7 @@
 import type { ReactElement } from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { PostCard, CategoryButton } from "@/components/blog";
-import { Breadcrumb } from "@/components/display";
-import { LayoutDefault as Layout } from "@/components/layout";
+import { PostCard, CategoryButton } from "@/components/page/blog";
+import { Layout, Breadcrumb } from "@/components/common";
 import {
   getBlogPostIndex,
   getBlogPostFilterIndex,
@@ -27,7 +26,7 @@ const Blogs = ({}) => {
 
   return (
     <div className="page-wrapper">
-      <NextSeo title="Blogs" />
+      <NextSeo title="Blogs" description="All blogs on this website" />
       <Breadcrumb title={"Blogs"} />
       <section className="blog_index isContainer">
         <div className="category_button_wrapper no-scrollBar">
@@ -70,7 +69,7 @@ export async function getStaticProps({}: GetStaticPropsContext) {
         getBlogCategory: categories,
       },
     },
-    revalidate: 60 * 10,
+    revalidate: 60,
   };
 }
 
