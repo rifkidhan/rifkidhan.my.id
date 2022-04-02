@@ -2,7 +2,7 @@
   @apply overflow-hidden border border-stone-900 duration-300 hover:scale-105 hover:rounded-lg dark:border-stone-50;
 }
 .image {
-  @apply relative h-52 w-full grayscale transition-all duration-300;
+  @apply block w-full grayscale transition-all duration-300;
 }
 .text {
   @apply p-5;

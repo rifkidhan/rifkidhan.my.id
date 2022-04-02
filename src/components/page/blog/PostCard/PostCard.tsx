@@ -19,7 +19,9 @@ const PostCard: FC<Props> = ({ slug, image, content, title }) => {
           <div className={`${s.image} group-hover:grayscale-0`}>
             <Image
               src={`${imageUrl}/${image}`}
-              layout="fill"
+              layout="responsive"
+              width={500}
+              height={400}
               objectFit="cover"
               alt={`Image From ${title}`}
               loading="lazy"
