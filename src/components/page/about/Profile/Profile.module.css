@@ -1,0 +1,15 @@
+.wrapper {
+  @apply grid grid-cols-1 items-center justify-center gap-10 md:grid-cols-6;
+}
+.image {
+  @apply md:col-span-2;
+}
+.image div {
+  @apply block h-full w-full overflow-hidden rounded-full;
+}
+.description {
+  @apply md:col-span-4;
+}
+.description div {
+  @apply prose prose-stone max-w-none border-y border-stone-900 py-5 dark:prose-invert dark:border-stone-50;
+}

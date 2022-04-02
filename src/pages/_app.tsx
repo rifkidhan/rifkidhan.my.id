@@ -38,8 +38,8 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           site_name: siteConfig.title,
           images: [
             {
-              url: `${siteConfig.url}/vercel.svg`,
-              width: 1024,
+              url: `${siteConfig.url}/rifkidhan.png`,
+              width: 512,
               height: 512,
               alt: siteConfig.title,
             },

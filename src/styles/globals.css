@@ -1,12 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
+.dark {
+  color-scheme: dark;
+}
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-stone-50 font-medium text-stone-900 selection:bg-amber-500;
+    @apply bg-stone-50 font-medium text-stone-900 selection:bg-amber-500 dark:bg-stone-900 dark:text-stone-50;
   }
   h1 {
     @apply font-serif text-3xl font-medium md:text-5xl lg:text-7xl;

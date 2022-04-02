@@ -1,9 +1,0 @@
-.root {
-  @apply grid grid-cols-1 items-center justify-center md:h-[50vh] md:grid-cols-2 lg:min-h-screen;
-}
-.h1 {
-  @apply m-auto flex flex-col text-stone-900;
-}
-.h1 span {
-  @apply font-sans text-xl font-medium md:text-2xl lg:text-4xl;
-}

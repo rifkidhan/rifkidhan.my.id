@@ -1,0 +1,12 @@
+.root {
+  @apply flex w-full flex-col-reverse flex-wrap items-center justify-center gap-5 border-t border-stone-900 py-5 text-stone-900 dark:border-stone-50 dark:text-stone-50 md:flex-row md:gap-10;
+}
+.socialMedia {
+  @apply flex flex-row items-center justify-center divide-x divide-stone-900 dark:divide-stone-50;
+}
+.socialMedia li {
+  @apply inline-flex px-2;
+}
+.socialMediaIcon {
+  @apply h-5 w-5 fill-stone-900 opacity-50 transition-all duration-300 hover:opacity-100 dark:fill-stone-50;
+}

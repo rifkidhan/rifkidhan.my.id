@@ -4,12 +4,14 @@ import type {
   InferGetStaticPropsType,
 } from "next";
 import { getBlogPost, getBlogPostBySlug } from "@/libs/data/queries";
-import { LayoutTransparent as Layout } from "@/components/layout";
-import { Banner, Title, Body } from "@/components/blog";
+import { Layout } from "@/components/common";
+import { Banner, Title, Body } from "@/components/page/blog";
 import { BackIcon } from "@/components/icons";
 import { useRouter } from "next/router";
 import type { ReactElement } from "react";
-import { NextSeo } from "next-seo";
+import { ArticleJsonLd, NextSeo } from "next-seo";
+import siteConfig from "@/libs/siteConfig";
+import { imageUrl } from "@/libs/constant";
 
 export default function BlogDetails({
   post,
@@ -19,7 +21,29 @@ export default function BlogDetails({
     <div className="page-wrapper">
       {post?.map((item: any) => (
         <div key={item.id}>
-          <NextSeo title={`${item.title}`} />
+          <NextSeo
+            title={item.meta_title}
+            description={item.meta_description}
+            openGraph={{
+              title: item.meta_title,
+              description: item.meta_description,
+              url: `${siteConfig.url}/blog/${item.slug}`,
+              type: "article",
+              article: {
+                publishedTime: item.date_created,
+                modifiedTime: item.date_updated,
+                tags: item.tags,
+              },
+              images: [
+                {
+                  url: `${imageUrl}/${item.feature_image.id}`,
+                  width: item.feature_image.width,
+                  height: item.feature_image.height,
+                  alt: item.title,
+                },
+              ],
+            }}
+          />
           <Banner title={item.title} image={item.feature_image.id} />
           <section className="post isContainer">
             <button
@@ -43,7 +67,7 @@ export async function getStaticPaths({}: GetStaticPathsContext) {
 
   return {
     paths: getPost.map((post: any) => `/blog/${post.slug}`),
-    fallback: true,
+    fallback: "blocking",
   };
 }
 
@@ -56,7 +80,7 @@ export async function getStaticProps({
     props: {
       post,
     },
-    revalidate: 60 * 10,
+    revalidate: 60,
   };
 }
 
