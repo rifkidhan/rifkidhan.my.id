@@ -31,6 +31,3 @@
 .featureAnimation div {
   @apply m-auto w-4/5 md:w-full;
 }
-.loading {
-  @apply flex h-80 w-80 items-center justify-center p-3 text-center;
-}

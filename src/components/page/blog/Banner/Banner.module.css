@@ -1,3 +1,3 @@
 .root {
-  @apply relative h-96 w-full grayscale md:h-[36rem] lg:h-[42rem] xl:h-screen;
+  @apply relative h-96 w-full md:h-[36rem] lg:h-[42rem] xl:h-screen;
 }

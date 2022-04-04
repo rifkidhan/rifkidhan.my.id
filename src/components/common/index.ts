@@ -5,3 +5,4 @@ export { default as Breadcrumb } from "./Breadcrumb";
 export { default as DarkMode } from "./DarkMode";
 export { default as LoadingDots } from "./LoadingDots";
 export { default as BackToTop } from "./BackToTop";
+export * from "./Seo";

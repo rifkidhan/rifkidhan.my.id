@@ -8,5 +8,5 @@
   @apply inline-flex px-2;
 }
 .socialMediaIcon {
-  @apply h-5 w-5 fill-stone-900 opacity-50 transition-all duration-300 hover:opacity-100 dark:fill-stone-50;
+  @apply h-5 w-5 stroke-stone-900 stroke-2 transition-all duration-300 hover:fill-stone-900 dark:stroke-stone-50 dark:hover:fill-stone-50;
 }

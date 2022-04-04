@@ -155,6 +155,7 @@ const DarkMode = ({ ...props }) => {
           <m.button
             onClick={() => setSetting("light")}
             key={"dark"}
+            aria-label="Dark Mode Button"
             initial="initial"
             animate="animate"
             exit="exit"
@@ -165,6 +166,7 @@ const DarkMode = ({ ...props }) => {
           <m.button
             onClick={() => setSetting("dark")}
             key={"light"}
+            ariaaa-label="Light Mode Button"
             initial="initial"
             animate="animate"
             exit="exit"
