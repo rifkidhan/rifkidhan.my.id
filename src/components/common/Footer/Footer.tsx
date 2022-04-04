@@ -13,7 +13,7 @@ const Footer: FC = () => {
           <a
             href="https://twitter.com/rifkidhan"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="Twitter"
           >
             <Twitter className={s.socialMediaIcon} />
@@ -23,7 +23,7 @@ const Footer: FC = () => {
           <a
             href="https://facebook.com/rifki303"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="Facebook"
           >
             <Facebook className={s.socialMediaIcon} />
@@ -33,7 +33,7 @@ const Footer: FC = () => {
           <a
             href="https://github.com/rifkidhan"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="Github"
           >
             <Github className={s.socialMediaIcon} />
@@ -43,7 +43,7 @@ const Footer: FC = () => {
           <a
             href="mailto:rifkiramadhan.9428@gmail.com"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="Email"
           >
             <Email className={s.socialMediaIcon} />
