@@ -1,5 +1,5 @@
 .root {
-  @apply fixed top-0 z-98 block w-full border-b py-2 px-5 transition-all duration-500 ease-in-out md:px-10 md:py-5;
+  @apply fixed top-0 z-98 block w-full border-b py-3 px-5 transition-all duration-500 ease-in-out md:px-10 md:py-5;
 }
 .navbarActive {
   @apply visible;
@@ -26,10 +26,10 @@
   @apply container flex w-full flex-row justify-between;
 }
 .logoTypeBlack {
-  @apply font-sans text-2xl font-medium text-stone-900 dark:text-stone-50 md:text-4xl;
+  @apply font-sans text-4xl font-medium text-stone-900 dark:text-stone-50;
 }
 .logoTypeWhite {
-  @apply font-sans text-2xl font-medium text-stone-50 dark:text-stone-900 md:text-4xl;
+  @apply font-sans text-4xl font-medium text-stone-50 dark:text-stone-900;
 }
 .menu {
   @apply fixed top-0 left-0 z-99 h-full w-full overflow-y-scroll bg-stone-900 px-10 py-10 dark:bg-stone-50;
@@ -38,19 +38,19 @@
   @apply relative z-100 m-auto;
 }
 .menuToggleClose {
-  @apply h-7 w-7 stroke-stone-50 stroke-[2.5] dark:stroke-stone-900 md:h-10 md:w-10;
+  @apply h-10 w-10 stroke-stone-50 stroke-[2.5] dark:stroke-stone-900;
 }
 .menuToggleOpen {
-  @apply hidden h-7 w-7 stroke-stone-900 stroke-[0.5px] dark:block md:h-10 md:w-10;
+  @apply hidden h-10 w-10 stroke-stone-900 stroke-[0.5px] dark:block;
 }
 .menuToggleOpenDark {
-  @apply block h-7 w-7 stroke-stone-50 stroke-[0.5px] dark:hidden md:h-10 md:w-10;
+  @apply block h-10 w-10 stroke-stone-50 stroke-[0.5px] dark:hidden;
 }
 .menuToggleChange {
-  @apply block h-7 w-7 stroke-stone-900 stroke-[0.5px] dark:hidden md:h-10 md:w-10;
+  @apply block h-10 w-10 stroke-stone-900 stroke-[0.5px] dark:hidden;
 }
 .menuToggleChangeDark {
-  @apply hidden h-7 w-7 stroke-stone-50 stroke-[0.5px] dark:block md:h-10 md:w-10;
+  @apply hidden h-10 w-10 stroke-stone-50 stroke-[0.5px] dark:block;
 }
 .menuItem {
   @apply flex flex-col gap-7 pt-24;
@@ -62,10 +62,10 @@
   @apply font-serif text-7xl font-semibold text-stone-50 transition-colors duration-300 ease-in-out hover:text-orange-600 dark:text-stone-900 dark:hover:text-orange-600;
 }
 .darkMode {
-  @apply h-7 w-7 stroke-stone-900 dark:stroke-stone-50 md:h-10 md:w-10;
+  @apply h-10 w-10 stroke-stone-900 dark:stroke-stone-50;
 }
 .darkModeInvert {
-  @apply h-7 w-7 stroke-stone-50 dark:stroke-stone-900 md:h-10 md:w-10;
+  @apply h-10 w-10 stroke-stone-50 dark:stroke-stone-900;
 }
 .innerLeft {
   @apply flex flex-row items-center gap-x-2;

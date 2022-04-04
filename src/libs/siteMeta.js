@@ -25,6 +25,10 @@ export const metaLink = [
     rel: "mask-icon",
     href: "/icons/safari-pinned-tab.svg",
   },
+  {
+    rel: "preconnect",
+    href: "https://fonts.googleapis.com",
+  },
 ];
 
 export const metaTags = [

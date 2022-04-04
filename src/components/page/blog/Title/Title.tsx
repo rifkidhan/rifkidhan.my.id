@@ -8,10 +8,12 @@ interface Props {
 
 const BlogTitle: FC<Props> = ({ title, subtitle }) => {
   return (
-    <div className={s.title}>
-      <h1>{title}</h1>
-      <h2>{subtitle}</h2>
-    </div>
+    <>
+      <div className={s.title}>
+        <h1>{title}</h1>
+        <h2>{subtitle}</h2>
+      </div>
+    </>
   );
 };
 

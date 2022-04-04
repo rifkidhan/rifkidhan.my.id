@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { PostCard, CategoryButton } from "@/components/page/blog";
-import { Layout, Breadcrumb } from "@/components/common";
+import { Layout, Breadcrumb, BaseSeo } from "@/components/common";
 import {
   getBlogPostIndex,
   getBlogPostFilterIndex,
@@ -12,7 +12,6 @@ import {
 import useSWR, { SWRConfig } from "swr";
 import { fetcher } from "@/libs/api";
 import { useState } from "react";
-import { NextSeo } from "next-seo";
 
 const Blogs = ({}) => {
   const [category, setCategory] = useState<string>("All");
@@ -26,7 +25,11 @@ const Blogs = ({}) => {
 
   return (
     <div className="page-wrapper">
-      <NextSeo title="Blogs" description="All blogs on this website" />
+      <BaseSeo
+        title="Blogs"
+        description="All blogs on this website"
+        slug="/blogs"
+      />
       <Breadcrumb title={"Blogs"} />
       <section className="blog_index isContainer">
         <div className="category_button_wrapper no-scrollBar">

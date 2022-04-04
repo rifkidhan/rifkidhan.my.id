@@ -192,6 +192,8 @@ export async function getAboutData() {
                   slug
                   image {
                     id
+                    width
+                    height
                   }
                   description
                 }

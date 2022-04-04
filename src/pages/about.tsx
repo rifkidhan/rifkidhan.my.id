@@ -1,4 +1,4 @@
-import { Layout } from "@/components/common";
+import { Layout, ProfileSeo } from "@/components/common";
 import type { InferGetStaticPropsType, GetStaticPropsContext } from "next";
 import type { ReactElement } from "react";
 import { NextSeo } from "next-seo";
@@ -11,7 +11,18 @@ const AboutPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="page-wrapper page-wrapper__atCenter">
-      <NextSeo title={about.title} description="All about Rifki Ramadhan" />
+      <ProfileSeo
+        title={about.title}
+        description={about.description}
+        slug={"/about"}
+        firstName="Rifki"
+        lastName="Ramadhan"
+        userName="Rifkidhan"
+        gender="male"
+        images={about.image.id}
+        width={about.image.width}
+        height={about.image.height}
+      />
       <Breadcrumb title={about.title} />
       <Profile image={about.image.id} description={about.description} />
     </div>

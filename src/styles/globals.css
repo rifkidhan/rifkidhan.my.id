@@ -39,6 +39,9 @@
   .scroll-lock {
     @apply m-0 h-screen touch-none overflow-hidden;
   }
+  .loading {
+    @apply flex h-80 w-80 items-center justify-center p-3 text-center;
+  }
 
   /* Blog style */
   .blog_index {

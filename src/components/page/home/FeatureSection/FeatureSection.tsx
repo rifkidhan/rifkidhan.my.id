@@ -18,7 +18,7 @@ interface Features {
 }
 
 const Loading = () => (
-  <div className={s.loading}>
+  <div className="loading">
     <LoadingDots />
   </div>
 );
@@ -42,19 +42,19 @@ const FeatureSection: FC<Features> = ({ features }) => {
       <div className={`${s.features} isContainer`}>
         {features.map((feature: Feature) => (
           <div key={feature.id} className={s.feature}>
-            <div className={s.featureText}>
-              <h4 className={s.featureTextTitle}>{feature.title}</h4>
-              <div
-                className={s.featureTextDescription}
-                dangerouslySetInnerHTML={{ __html: `${feature.description}` }}
-              />
-            </div>
             <div className={s.featureAnimation}>
               <div>
                 <Animation
                   src={`${imageUrl}/${feature.animation.filename_disk}`}
                 />
               </div>
+            </div>
+            <div className={s.featureText}>
+              <h4 className={s.featureTextTitle}>{feature.title}</h4>
+              <div
+                className={s.featureTextDescription}
+                dangerouslySetInnerHTML={{ __html: `${feature.description}` }}
+              />
             </div>
           </div>
         ))}

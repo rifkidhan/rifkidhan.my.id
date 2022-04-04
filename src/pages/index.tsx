@@ -7,6 +7,7 @@ import {
   FeatureSection,
   BlogSection,
 } from "@/components/page/home";
+import { BaseSeo } from "@/components/common";
 
 const Home = ({
   posts,
@@ -14,6 +15,11 @@ const Home = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="page-wrapper page-wrapper__atCenter">
+      <BaseSeo
+        title="Home"
+        description="Rifkidhan is Rifki Ramadhan's personal website. Rifkidhan can make you a website base on your need."
+        slug="/"
+      />
       <HeroSection />
       <FeatureSection features={homeFeatures} />
       <BlogSection posts={posts} />

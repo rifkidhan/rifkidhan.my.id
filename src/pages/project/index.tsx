@@ -1,18 +1,30 @@
-import { Layout, Breadcrumb } from "@/components/common";
+import { Layout, Breadcrumb, BaseSeo } from "@/components/common";
 import type { ReactElement } from "react";
-import { NextSeo } from "next-seo";
+import { LoadingDots } from "@/components/common";
 import dynamic from "next/dynamic";
+
+const Loading = () => (
+  <div className="loading">
+    <LoadingDots />
+  </div>
+);
+
+const dynamicProps = {
+  loading: Loading,
+  ssr: false,
+};
 
 const ProjectPage = () => {
   const Yoga = dynamic(() => import("@/components/common/Lottie"), {
-    ssr: false,
+    ...dynamicProps,
   });
 
   return (
     <div className="page-wrapper page-wrapper__atCenter">
-      <NextSeo
-        title="My Project"
-        description="All project create by Rifki Ramadhan"
+      <BaseSeo
+        title="Rifki Ramadhan Project"
+        description="All project created by Rifki Ramadhan"
+        slug="/project"
       />
       <Breadcrumb title={"My Project"} />
       <div className="isContainer mb-10 flex flex-col items-center gap-10">
