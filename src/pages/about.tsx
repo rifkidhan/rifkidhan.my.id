@@ -1,10 +1,8 @@
-import { Layout, ProfileSeo } from "@/components/common";
-import type { InferGetStaticPropsType, GetStaticPropsContext } from "next";
-import type { ReactElement } from "react";
-import { NextSeo } from "next-seo";
-import { getAboutData } from "@/libs/data/queries";
-import { Breadcrumb } from "@/components/common";
-import { Profile } from "@/components/page/about";
+import { Layout, ProfileSeo } from "@components/common";
+import type { InferGetStaticPropsType, GetStaticProps } from "next";
+import { Breadcrumb } from "@components/common";
+import { Profile } from "@components/page/about";
+import { getAboutMe } from "@libs/data/data";
 
 const AboutPage = ({
   about,
@@ -31,8 +29,8 @@ const AboutPage = ({
 
 export default AboutPage;
 
-export async function getStaticProps({}: GetStaticPropsContext) {
-  const about = await getAboutData();
+export const getStaticProps: GetStaticProps = async () => {
+  const about = await getAboutMe();
 
   return {
     props: {
@@ -40,8 +38,6 @@ export async function getStaticProps({}: GetStaticPropsContext) {
     },
     revalidate: 60,
   };
-}
-
-AboutPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
 };
+
+AboutPage.Layout = Layout;

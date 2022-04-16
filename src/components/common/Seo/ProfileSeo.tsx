@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { NextSeo } from "next-seo";
-import { url } from "@/libs/siteConfig";
-import { imageUrl } from "@/libs/constant";
+import { url } from "@libs/siteConfig";
+import { imageUrl } from "@libs/constant";
 
 interface Props {
   title: string;
@@ -16,40 +16,29 @@ interface Props {
   height?: number;
 }
 
-const ProfileSeo: FC<Props> = ({
-  title,
-  description,
-  slug,
-  firstName,
-  lastName,
-  userName,
-  gender,
-  images,
-  width,
-  height,
-}) => {
+const ProfileSeo: FC<Props> = (props) => {
   return (
     <>
       <NextSeo
-        title={title}
-        description={description}
+        title={props.title}
+        description={props.description}
         openGraph={{
-          title: title,
-          description: description,
-          url: url + slug,
+          title: props.title,
+          description: props.description,
+          url: url + props.slug,
           type: "profile",
           profile: {
-            firstName: firstName,
-            lastName: lastName,
-            username: userName,
-            gender: gender,
+            firstName: props.firstName,
+            lastName: props.lastName,
+            username: props.userName,
+            gender: props.gender,
           },
           images: [
             {
-              url: `${imageUrl}/${images}`,
-              width: width,
-              height: height,
-              alt: title,
+              url: `${imageUrl}/${props.images}`,
+              width: props.width,
+              height: props.height,
+              alt: props.title,
             },
           ],
         }}

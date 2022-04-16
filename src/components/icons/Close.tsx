@@ -28,16 +28,17 @@ const draw = {
 const Close = ({ ...props }) => {
   return (
     <m.svg
-      {...props}
+      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill="none"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      shapeRendering="geometricPrecision"
+      {...props}
     >
-      <m.path variants={draw} custom={1} d="M4.02944 20.9706L21 4" />
-      <m.path variants={draw} custom={2} d="M3.32233 3.32233L21 21" />
+      <m.path variants={draw} custom={1} d="M18 6L6 18" />
+      <m.path variants={draw} custom={2} d="M6 6l12 12" />
     </m.svg>
   );
 };

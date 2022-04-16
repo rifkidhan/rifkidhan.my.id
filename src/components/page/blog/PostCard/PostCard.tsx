@@ -1,8 +1,9 @@
 import s from "./PostCard.module.css";
 import Image from "next/image";
-import { imageUrl } from "@/libs/constant";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { imageUrl } from "@libs/directus";
+import Markdown from "markdown-to-jsx";
 
 interface Props {
   title: string;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const PostCard: FC<Props> = ({ slug, image, content, title }) => {
+  const [loading, setLoading] = useState<boolean>(true);
   return (
     <Link href={`/blog/${slug}`}>
       <a>
@@ -24,17 +26,20 @@ const PostCard: FC<Props> = ({ slug, image, content, title }) => {
               height={400}
               objectFit="cover"
               alt={`Image From ${title}`}
-              loading="lazy"
+              priority
+              className={
+                loading
+                  ? "scale-110 blur-2xl grayscale"
+                  : "scale-100 blur-0 grayscale-0"
+              }
+              onLoadingComplete={() => setLoading(false)}
             />
           </div>
           <div className={s.text}>
             <h4 className={`${s.textTitle} group-hover:text-orange-600`}>
               {title}
             </h4>
-            <div
-              className={s.textBody}
-              dangerouslySetInnerHTML={{ __html: `${content}` }}
-            />
+            <Markdown className={s.textBody}>{content}</Markdown>
           </div>
         </div>
       </a>

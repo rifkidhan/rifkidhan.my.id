@@ -1,36 +1,27 @@
 import { FC } from "react";
 import Link from "next/link";
 import s from "./HomeBlog.module.css";
-import { PostCard } from "@/components/page/blog";
+import { PostCard } from "@components/page/blog";
+import type { Blog } from "@libs/data/types";
 
-interface Post {
-  id: any;
-  title: string;
-  feature_image: {
-    id: string;
-  };
-  content: any;
-  slug: string;
+interface Blogs {
+  blogs?: Blog[];
 }
 
-interface Posts {
-  posts: Post[];
-}
-
-const BlogSection: FC<Posts> = ({ posts }) => {
+const BlogSection: FC<Blogs> = ({ blogs }) => {
   return (
     <section className={s.root}>
       <div className={`${s.title}`}>
         <h2>This is my blogs.</h2>
       </div>
       <div className={`${s.posts}`}>
-        {posts.map((post) => (
-          <div key={post.id}>
+        {blogs?.map((blog) => (
+          <div key={blog.id}>
             <PostCard
-              title={post.title}
-              slug={post.slug}
-              image={post.feature_image.id}
-              content={post.content}
+              title={blog.title}
+              slug={blog.slug}
+              image={blog.feature_image.id}
+              content={blog.content}
             />
           </div>
         ))}

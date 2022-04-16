@@ -1,27 +1,38 @@
-import type { ReactElement } from "react";
-import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { PostCard, CategoryButton } from "@/components/page/blog";
-import { Layout, Breadcrumb, BaseSeo } from "@/components/common";
-import {
-  getBlogPostIndex,
-  getBlogPostFilterIndex,
-  getBlogCategory,
-  getBlogPostsIndex,
-  getCategoryBlog,
-} from "@/libs/data/queries";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import { PostCard, CategoryButton } from "@components/page/blog";
+import { Layout, Breadcrumb, BaseSeo } from "@components/common";
 import useSWR, { SWRConfig } from "swr";
-import { fetcher } from "@/libs/api";
 import { useState } from "react";
+import { fetcher } from "@libs/directus";
+
+const blogsWithoutFilter = `blog?fields=id,title,slug,feature_image,content`;
+const blogCategory = `blog_category?fields=id,title`;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = await fetcher(blogsWithoutFilter);
+  const categories = await fetcher(blogCategory);
+
+  return {
+    props: {
+      fallback: {
+        [blogsWithoutFilter]: posts,
+        [blogCategory]: categories,
+      },
+    },
+    revalidate: 60,
+  };
+};
 
 const Blogs = ({}) => {
   const [category, setCategory] = useState<string>("All");
 
-  const variables = { category: `${category}` };
+  const blogsWithFilter = `blog?filter[category][blog_category_id][title][_eq]=${category}&fields=id,title,slug,feature_image,content`;
+
   const { data: blog } = useSWR(
-    category !== "All" ? [getBlogPostFilterIndex, variables] : getBlogPostIndex,
+    category !== "All" ? blogsWithFilter : blogsWithoutFilter,
     fetcher
   );
-  const { data: blog_category } = useSWR(getBlogCategory, fetcher);
+  const { data: blog_category } = useSWR(blogCategory, fetcher);
 
   return (
     <div className="page-wrapper">
@@ -34,7 +45,7 @@ const Blogs = ({}) => {
       <section className="blog_index isContainer">
         <div className="category_button_wrapper no-scrollBar">
           <CategoryButton onClick={() => setCategory("All")} title="All" />
-          {blog_category?.blog_category.map((category: any) => (
+          {blog_category?.data.map((category: any) => (
             <div key={category.id}>
               <CategoryButton
                 onClick={() => setCategory(`${category.title}`)}
@@ -45,12 +56,12 @@ const Blogs = ({}) => {
         </div>
         <h3 className="text-center">{category} Blogs</h3>
         <div className="postCard_index">
-          {blog?.blog.map((blog: any) => (
+          {blog?.data.map((blog: any) => (
             <div key={blog.id}>
               <PostCard
                 title={blog.title}
                 slug={blog.slug}
-                image={blog.feature_image.id}
+                image={blog.feature_image}
                 content={blog.content}
               />
             </div>
@@ -60,21 +71,6 @@ const Blogs = ({}) => {
     </div>
   );
 };
-
-export async function getStaticProps({}: GetStaticPropsContext) {
-  const posts = await getBlogPostsIndex();
-  const categories = await getCategoryBlog();
-
-  return {
-    props: {
-      fallback: {
-        getBlogPostIndex: posts,
-        getBlogCategory: categories,
-      },
-    },
-    revalidate: 60,
-  };
-}
 
 const IndexBlog = ({
   fallback,
@@ -88,6 +84,4 @@ const IndexBlog = ({
 
 export default IndexBlog;
 
-IndexBlog.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+IndexBlog.Layout = Layout;

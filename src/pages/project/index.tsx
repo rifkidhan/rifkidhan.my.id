@@ -1,6 +1,5 @@
-import { Layout, Breadcrumb, BaseSeo } from "@/components/common";
-import type { ReactElement } from "react";
-import { LoadingDots } from "@/components/common";
+import { Layout, Breadcrumb, BaseSeo } from "@components/common";
+import { LoadingDots } from "@components/common";
 import dynamic from "next/dynamic";
 
 const Loading = () => (
@@ -15,7 +14,7 @@ const dynamicProps = {
 };
 
 const ProjectPage = () => {
-  const Yoga = dynamic(() => import("@/components/common/Lottie"), {
+  const Yoga = dynamic(() => import("@components/common/Lottie"), {
     ...dynamicProps,
   });
 
@@ -42,6 +41,4 @@ const ProjectPage = () => {
 
 export default ProjectPage;
 
-ProjectPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+ProjectPage.Layout = Layout

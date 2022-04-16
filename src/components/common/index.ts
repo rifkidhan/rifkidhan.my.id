@@ -6,3 +6,6 @@ export { default as DarkMode } from "./DarkMode";
 export { default as LoadingDots } from "./LoadingDots";
 export { default as BackToTop } from "./BackToTop";
 export * from "./Seo";
+export { default as Date } from "./Date";
+export { default as Loader } from "./Loader";
+export { default as HeadDefault } from "./HeadDefault";

@@ -1,8 +1,7 @@
 import { FC } from "react";
 import { m } from "framer-motion";
 import useSWR from "swr";
-import { fetcher } from "@/libs/api";
-import { getMenu } from "@/libs/data/queries";
+import { fetcher } from "@libs/directus";
 import Link from "next/link";
 import s from "./Header.module.css";
 
@@ -56,14 +55,16 @@ const menuItems = {
   },
 };
 
+const menuFetch = `menu?fields=id,title,slug`;
+
 const MenuItems: FC<MenuItemsType> = ({ changeToggle }) => {
-  const { data } = useSWR(getMenu, fetcher);
+  const { data: menu } = useSWR(menuFetch, fetcher);
 
   return (
     <m.nav variants={sidebar} className={s.menu}>
       <div className="isContainer">
         <m.div variants={navigation} className={s.menuItem}>
-          {data?.menu.map((menu: any) => (
+          {menu?.data.map((menu: any) => (
             <m.div variants={menuItems} key={menu.id}>
               {menu.slug === "home" && (
                 <Link href={`/`} passHref>

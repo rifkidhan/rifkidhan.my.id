@@ -1,6 +1,6 @@
-import { imageUrl } from "@/libs/constant";
+import { imageUrl } from "@libs/directus";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useState } from "react";
 import s from "./Profile.module.css";
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
 }
 
 const Profile: FC<Props> = ({ image, description }) => {
+  const [loading, setLoading] = useState<boolean>(true);
   return (
     <section className={`${s.wrapper} isContainer`}>
       <div className={s.image}>
@@ -19,8 +20,14 @@ const Profile: FC<Props> = ({ image, description }) => {
             height={500}
             layout="responsive"
             objectFit="cover"
-            alt="Pemilik"
-            loading="lazy"
+            alt="Rifki Ramadhan"
+            priority
+            className={
+              loading
+                ? "scale-110 blur-2xl grayscale"
+                : "scale-100 blur-0 grayscale-0"
+            }
+            onLoadingComplete={() => setLoading(false)}
           />
         </div>
       </div>
