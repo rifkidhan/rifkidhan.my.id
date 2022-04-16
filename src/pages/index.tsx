@@ -1,16 +1,15 @@
-import type { ReactElement } from "react";
-import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { Layout } from "@/components/common";
-import { getHomeFeature, getPostForHome } from "@/libs/data/queries";
+import { InferGetStaticPropsType, GetStaticProps } from "next";
+import { Layout } from "@components/common";
 import {
   HeroSection,
   FeatureSection,
   BlogSection,
-} from "@/components/page/home";
-import { BaseSeo } from "@/components/common";
+} from "@components/page/home";
+import { BaseSeo } from "@components/common";
+import { getPostForHome, getHomeFeature } from "@libs/data/data";
 
 const Home = ({
-  posts,
+  blogs,
   homeFeatures,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
@@ -22,18 +21,18 @@ const Home = ({
       />
       <HeroSection />
       <FeatureSection features={homeFeatures} />
-      <BlogSection posts={posts} />
+      <BlogSection blogs={blogs} />
     </div>
   );
 };
 
-export const getStaticProps = async ({}: GetStaticPropsContext) => {
-  const posts = await getPostForHome();
+export const getStaticProps: GetStaticProps = async () => {
+  const blogs = await getPostForHome();
   const homeFeatures = await getHomeFeature();
 
   return {
     props: {
-      posts,
+      blogs,
       homeFeatures,
     },
     revalidate: 60,
@@ -42,6 +41,4 @@ export const getStaticProps = async ({}: GetStaticPropsContext) => {
 
 export default Home;
 
-Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
-};
+Home.Layout = Layout;

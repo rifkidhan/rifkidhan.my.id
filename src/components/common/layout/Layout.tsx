@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from "react";
 import { LazyMotion, domAnimation } from "framer-motion";
-import { Footer, Header, BackToTop } from "@/components/common";
+import { Footer, Header, BackToTop } from "@components/common";
 
 interface Props {
   children?: ReactNode;

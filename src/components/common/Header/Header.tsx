@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
-import debounce from "@/libs/debounce";
+import debounce from "@libs/debounce";
 import { m } from "framer-motion";
 import { useRouter } from "next/router";
-import { DarkMode } from "@/components/common";
+import { DarkMode } from "@components/common";
 import MenuItems from "./MenuItems";
 import ToggleMenu from "./ToggleMenu";
 import s from "./Header.module.css";

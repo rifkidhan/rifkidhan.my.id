@@ -1,5 +1,5 @@
 import s from "./Footer.module.css";
-import { Twitter, Facebook, Email, Github } from "@/components/icons";
+import { Twitter, Facebook, Email, Github } from "@components/icons";
 import { FC } from "react";
 
 const Footer: FC = () => {

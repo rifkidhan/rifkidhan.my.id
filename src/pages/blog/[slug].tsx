@@ -1,15 +1,14 @@
 import type {
-  GetStaticPropsContext,
   GetStaticPathsContext,
   InferGetStaticPropsType,
+  GetStaticPropsContext,
 } from "next";
-import { getBlogPost, getBlogPostBySlug } from "@/libs/data/queries";
-import { Layout } from "@/components/common";
-import { Banner, Title, Body } from "@/components/page/blog";
-import { BackIcon } from "@/components/icons";
+import { getBlogPost, getBlogPostBySlug } from "@libs/data/data";
+import { Layout } from "@components/common";
+import { Banner, Title, Body } from "@components/page/blog";
+import { BackIcon } from "@components/icons";
 import { useRouter } from "next/router";
-import type { ReactElement } from "react";
-import { PostSeo } from "@/components/common";
+import { PostSeo } from "@components/common";
 
 export default function BlogDetails({
   post,
@@ -29,7 +28,9 @@ export default function BlogDetails({
             imageHeight={item.feature_image.height}
             datePublished={item.date_created}
             dateModified={item.date_updated}
-            author={item.user_created}
+            author={
+              item.user_created.first_name + " " + item.user_created.last_name
+            }
           />
           <Banner title={item.title} image={item.feature_image.id} />
           <section className="post isContainer">
@@ -37,10 +38,19 @@ export default function BlogDetails({
               type="button"
               onClick={() => router.back()}
               aria-label="Back button"
+              className="absolute"
             >
               <BackIcon />
             </button>
-            <Title title={item.title} subtitle={item.subtitle} />
+            <Title
+              title={item.title}
+              subtitle={item.subtitle}
+              published={item.date_created}
+              author={
+                item.user_created.first_name + " " + item.user_created.last_name
+              }
+              updated={item.date_updated}
+            />
             <Body content={item.content} />
           </section>
         </div>
@@ -49,18 +59,18 @@ export default function BlogDetails({
   );
 }
 
-export async function getStaticPaths({}: GetStaticPathsContext) {
+export const getStaticPaths = async ({}: GetStaticPathsContext) => {
   const getPost = await getBlogPostBySlug();
 
   return {
-    paths: getPost.map((post: any) => `/blog/${post.slug}`),
+    paths: getPost?.map((post: any) => `/blog/${post.slug}`),
     fallback: "blocking",
   };
-}
+};
 
-export async function getStaticProps({
+export const getStaticProps = async ({
   params,
-}: GetStaticPropsContext<{ slug: string }>) {
+}: GetStaticPropsContext<{ slug: string }>) => {
   const post = await getBlogPost(params!.slug);
 
   return {
@@ -69,8 +79,6 @@ export async function getStaticProps({
     },
     revalidate: 60,
   };
-}
-
-BlogDetails.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
 };
+
+BlogDetails.Layout = Layout;

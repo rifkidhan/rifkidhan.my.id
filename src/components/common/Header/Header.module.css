@@ -37,20 +37,17 @@
 .menuToggle {
   @apply relative z-100 m-auto;
 }
-.menuToggleClose {
-  @apply h-10 w-10 stroke-stone-50 stroke-[2.5] dark:stroke-stone-900;
+.menuHamburger{
+  @apply h-10 w-10 stroke-1
 }
-.menuToggleOpen {
-  @apply hidden h-10 w-10 stroke-stone-900 stroke-[0.5px] dark:block;
+.menuHamburgerTop {
+  @apply stroke-stone-50 dark:stroke-stone-900
 }
-.menuToggleOpenDark {
-  @apply block h-10 w-10 stroke-stone-50 stroke-[0.5px] dark:hidden;
+.menuHamburgerNotTop {
+  @apply stroke-stone-900 dark:stroke-stone-50
 }
-.menuToggleChange {
-  @apply block h-10 w-10 stroke-stone-900 stroke-[0.5px] dark:hidden;
-}
-.menuToggleChangeDark {
-  @apply hidden h-10 w-10 stroke-stone-50 stroke-[0.5px] dark:block;
+.menuClose {
+  @apply h-10 w-10 stroke-stone-50 stroke-1 dark:stroke-stone-900;
 }
 .menuItem {
   @apply flex flex-col gap-7 pt-24;
@@ -62,7 +59,7 @@
   @apply font-serif text-7xl font-semibold text-stone-50 transition-colors duration-300 ease-in-out hover:text-orange-600 dark:text-stone-900 dark:hover:text-orange-600;
 }
 .darkMode {
-  @apply h-10 w-10 stroke-stone-900 dark:stroke-stone-50;
+  @apply h-10 w-10 stroke-stone-900 dark:stroke-stone-50 stroke-1;
 }
 .darkModeInvert {
   @apply h-10 w-10 stroke-stone-50 dark:stroke-stone-900;

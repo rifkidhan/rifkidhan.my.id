@@ -1,8 +1,10 @@
 import s from "./Feature.module.css";
 import dynamic from "next/dynamic";
-import { imageUrl } from "@/libs/constant";
+import { imageUrl } from "@libs/directus";
 import { FC } from "react";
-import { LoadingDots } from "@/components/common";
+import { LoadingDots } from "@components/common";
+import Markdown from "markdown-to-jsx";
+import type { HomeFeature } from "@libs/data/interface";
 
 interface Feature {
   id: string;
@@ -14,7 +16,7 @@ interface Feature {
 }
 
 interface Features {
-  features: Feature[];
+  features: HomeFeature[];
 }
 
 const Loading = () => (
@@ -28,7 +30,7 @@ const dynamicProps = {
   ssr: false,
 };
 
-const Animation = dynamic(() => import("@/components/common/Lottie"), {
+const Animation = dynamic(() => import("@components/common/Lottie"), {
   ...dynamicProps,
 });
 
@@ -40,7 +42,7 @@ const FeatureSection: FC<Features> = ({ features }) => {
         <h2>Make your website without dizzie</h2>
       </div>
       <div className={`${s.features} isContainer`}>
-        {features.map((feature: Feature) => (
+        {features.map((feature) => (
           <div key={feature.id} className={s.feature}>
             <div className={s.featureAnimation}>
               <div>
@@ -51,10 +53,9 @@ const FeatureSection: FC<Features> = ({ features }) => {
             </div>
             <div className={s.featureText}>
               <h4 className={s.featureTextTitle}>{feature.title}</h4>
-              <div
-                className={s.featureTextDescription}
-                dangerouslySetInnerHTML={{ __html: `${feature.description}` }}
-              />
+              <Markdown className={s.featureTextDescription}>
+                {feature.content}
+              </Markdown>
             </div>
           </div>
         ))}

@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
 import { NextSeo } from "next-seo";
-import { Footer } from "@/components/common";
+import { Footer } from "@components/common";
 import Link from "next/link";
 
 export default function NotFound() {
-  const Animation = dynamic(() => import("@/components/common/Lottie"), {
+  const Animation = dynamic(() => import("@components/common/Lottie"), {
     ssr: false,
   });
   return (

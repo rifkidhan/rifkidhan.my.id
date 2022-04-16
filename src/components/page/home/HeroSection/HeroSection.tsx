@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import { FC } from "react";
-import { LoadingDots } from "@/components/common";
+import { LoadingDots } from "@components/common";
 import s from "./Hero.module.css";
 
 const Loading = () => (
@@ -14,7 +14,7 @@ const dynamicProps = {
 };
 
 const HeroSection: FC = () => {
-  const Animation = dynamic(() => import("@/components/common/Lottie"), {
+  const Animation = dynamic(() => import("@components/common/Lottie"), {
     ...dynamicProps,
   });
   return (
