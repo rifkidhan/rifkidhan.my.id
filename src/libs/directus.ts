@@ -1,6 +1,6 @@
 import { Directus } from "@directus/sdk";
 import getConfig from "next/config";
-import type { AllContent } from "./data/interface";
+import type { AllContent } from "./data/types";
 
 const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
 const { url } = publicRuntimeConfig;

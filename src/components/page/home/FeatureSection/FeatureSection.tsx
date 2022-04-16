@@ -4,7 +4,7 @@ import { imageUrl } from "@libs/directus";
 import { FC } from "react";
 import { LoadingDots } from "@components/common";
 import Markdown from "markdown-to-jsx";
-import type { HomeFeature } from "@libs/data/interface";
+import type { HomeFeature } from "@libs/data/types";
 
 interface Feature {
   id: string;

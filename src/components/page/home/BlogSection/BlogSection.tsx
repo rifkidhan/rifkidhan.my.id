@@ -2,7 +2,7 @@ import { FC } from "react";
 import Link from "next/link";
 import s from "./HomeBlog.module.css";
 import { PostCard } from "@components/page/blog";
-import type { Blog } from "@libs/data/interface";
+import type { Blog } from "@libs/data/types";
 
 interface Blogs {
   blogs?: Blog[];
