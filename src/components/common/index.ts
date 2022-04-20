@@ -9,3 +9,4 @@ export * from "./Seo";
 export { default as Date } from "./Date";
 export { default as Loader } from "./Loader";
 export { default as HeadDefault } from "./HeadDefault";
+export { default as Preview } from "./Alert";

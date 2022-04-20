@@ -6,18 +6,20 @@ export type Blog = {
     first_name: string;
     last_name: string;
   };
-  date_created: Date;
-  date_updated: Date;
+  date_created: string;
+  date_updated: string;
   status: string;
   category: BlogCategory;
   slug: string;
   meta_title: string;
   meta_description: string;
-  tags: JSON;
+  tags: string[];
   title: string;
   subtitle: string;
   feature_image: {
     id: string;
+    width: number;
+    height: number;
   };
   content: string;
 };

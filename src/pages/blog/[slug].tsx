@@ -2,20 +2,25 @@ import type {
   GetStaticPathsContext,
   InferGetStaticPropsType,
   GetStaticPropsContext,
+  GetStaticProps,
+  GetStaticPaths,
 } from "next";
 import { getBlogPost, getBlogPostBySlug } from "@libs/data/data";
 import { Layout } from "@components/common";
 import { Banner, Title, Body } from "@components/page/blog";
 import { BackIcon } from "@components/icons";
 import { useRouter } from "next/router";
-import { PostSeo } from "@components/common";
+import { PostSeo, Preview } from "@components/common";
 
 export default function BlogDetails({
   post,
+  preview,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
+
   return (
     <div className="page-wrapper">
+      {preview && <Preview />}
       {post?.map((item: any) => (
         <div key={item.id}>
           <PostSeo
@@ -59,22 +64,25 @@ export default function BlogDetails({
   );
 }
 
-export const getStaticPaths = async ({}: GetStaticPathsContext) => {
+export const getStaticPaths: GetStaticPaths = async ({}) => {
   const getPost = await getBlogPostBySlug();
 
   return {
-    paths: getPost?.map((post: any) => `/blog/${post.slug}`),
+    paths: getPost?.map((post: any) => `/blog/${post.slug}`) || [],
     fallback: "blocking",
   };
 };
 
-export const getStaticProps = async ({
+export const getStaticProps: GetStaticProps = async ({
   params,
-}: GetStaticPropsContext<{ slug: string }>) => {
-  const post = await getBlogPost(params!.slug);
+  preview = null,
+}) => {
+  const slug = params?.slug as string;
+  const post = await getBlogPost(slug, preview);
 
   return {
     props: {
+      preview,
       post,
     },
     revalidate: 60,

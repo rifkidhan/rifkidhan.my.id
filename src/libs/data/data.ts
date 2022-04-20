@@ -1,21 +1,33 @@
 import { getDirectus } from "@libs/directus";
 
-export async function getPostForHome() {
+export async function getPreviewPost(slug: any) {
+  const directus = await getDirectus();
+  const { data: blog } = await directus.items("blog").readByQuery({
+    fields: ["slug"],
+    limit: 1,
+    filter: { slug: { _eq: slug } },
+  });
+
+  return blog?.[0];
+}
+
+export async function getPostForHome(preview: any) {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
     fields: ["id", "title", "feature_image.*", "content", "slug"],
     limit: 4,
     sort: ["-date_updated"],
-    filter: { status: { _eq: "published" } },
+    filter: preview ? {} : { status: { _eq: "published" } },
   });
 
   return blog;
 }
 
-export async function getBlogPostsIndex() {
+export async function getBlogPostsIndex(preview: any) {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
-    fields: ["id", "title", "slug", "feature_image.id", "content"],
+    sort: ["-date_updated"],
+    filter: preview ? {} : { status: { _eq: "published" } },
   });
 
   return blog;
@@ -36,14 +48,13 @@ export async function getBlogPostBySlug() {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
     fields: ["slug"],
-    filter: { status: { _eq: "published" } },
     limit: -1,
   });
 
   return blog;
 }
 
-export async function getBlogPost(slug: string) {
+export async function getBlogPost(slug: string, preview: any) {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
     fields: [
@@ -64,7 +75,9 @@ export async function getBlogPost(slug: string) {
       "meta_description",
       "tags",
     ],
-    filter: { slug: { _eq: slug }, status: { _eq: "published" } },
+    filter: preview
+      ? { slug: { _eq: slug } }
+      : { slug: { _eq: slug }, status: { _eq: "published" } },
   });
 
   return blog;

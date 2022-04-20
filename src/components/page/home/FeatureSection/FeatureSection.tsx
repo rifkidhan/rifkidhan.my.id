@@ -6,15 +6,6 @@ import { LoadingDots } from "@components/common";
 import Markdown from "markdown-to-jsx";
 import type { HomeFeature } from "@libs/data/types";
 
-interface Feature {
-  id: string;
-  title: string;
-  description: string;
-  animation: {
-    filename_disk: string;
-  };
-}
-
 interface Features {
   features: HomeFeature[];
 }

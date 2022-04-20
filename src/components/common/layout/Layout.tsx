@@ -1,5 +1,4 @@
 import type { FC, ReactNode } from "react";
-import { LazyMotion, domAnimation } from "framer-motion";
 import { Footer, Header, BackToTop } from "@components/common";
 
 interface Props {
@@ -8,12 +7,12 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   return (
-    <LazyMotion features={domAnimation}>
+    <>
       <Header />
       <BackToTop />
       <main>{children}</main>
       <Footer />
-    </LazyMotion>
+    </>
   );
 };
 

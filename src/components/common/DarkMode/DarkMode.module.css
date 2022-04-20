@@ -1,0 +1,6 @@
+.root {
+  @apply h-10 w-10 stroke-stone-900 stroke-1 dark:stroke-stone-50;
+}
+.invert {
+  @apply h-10 w-10 stroke-stone-50 dark:stroke-stone-900;
+}

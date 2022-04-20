@@ -1,32 +1,43 @@
 import { FC, useEffect, useState } from "react";
-import { m } from "framer-motion";
-import { DarkModeIcon } from "@components/icons";
+import { MoonIcon, SunIcon } from "@components/icons";
 import { useTheme } from "next-themes";
+import s from "./DarkMode.module.css";
 
 interface Props {
-  className: string;
+  isTop: boolean;
 }
 
-const DarkMode: FC<Props> = ({ ...props }) => {
+const DarkMode: FC<Props> = ({ isTop }) => {
   const [mounted, setMounted] = useState<boolean>(false);
   let { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => setMounted(true), []);
 
-  if (!mounted) return null;
-
   return (
-    <div>
-      <m.button
+    <>
+      <button
         type="button"
-        aria-label="Toggle Dark Mode"
+        aria-label="Dark Mode Button"
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-        initial={false}
-        animate={resolvedTheme === "dark" ? "active" : "nonactive"}
+        className="relative"
       >
-        <DarkModeIcon {...props} />
-      </m.button>
-    </div>
+        {mounted && (
+          <>
+            <MoonIcon
+              className={`${isTop ? s.invert : s.root} ${
+                resolvedTheme === "dark" ? "block" : "hidden"
+              } moonAnime`}
+            />
+
+            <SunIcon
+              className={`${isTop ? s.invert : s.root} ${
+                resolvedTheme === "dark" ? "hidden" : "block"
+              } sunAnime`}
+            />
+          </>
+        )}
+      </button>
+    </>
   );
 };
 
