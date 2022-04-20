@@ -1,7 +1,5 @@
 import type {
-  GetStaticPathsContext,
   InferGetStaticPropsType,
-  GetStaticPropsContext,
   GetStaticProps,
   GetStaticPaths,
 } from "next";
@@ -10,17 +8,15 @@ import { Layout } from "@components/common";
 import { Banner, Title, Body } from "@components/page/blog";
 import { BackIcon } from "@components/icons";
 import { useRouter } from "next/router";
-import { PostSeo, Preview } from "@components/common";
+import { PostSeo } from "@components/common";
 
 export default function BlogDetails({
   post,
-  preview,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
   return (
     <div className="page-wrapper">
-      {preview && <Preview />}
       {post?.map((item: any) => (
         <div key={item.id}>
           <PostSeo
@@ -73,16 +69,12 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  preview = null,
-}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
-  const post = await getBlogPost(slug, preview);
+  const post = await getBlogPost(slug);
 
   return {
     props: {
-      preview,
       post,
     },
     revalidate: 60,

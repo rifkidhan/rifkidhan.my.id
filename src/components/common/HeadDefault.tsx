@@ -9,12 +9,6 @@ const HeadDefault: FC = () => {
   const router = useRouter();
   return (
     <>
-      <Head>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
-        />
-      </Head>
       <DefaultSeo
         titleTemplate={`%s | ${siteConfig.title}`}
         twitter={{

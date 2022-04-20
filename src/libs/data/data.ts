@@ -1,33 +1,22 @@
 import { getDirectus } from "@libs/directus";
 
-export async function getPreviewPost(slug: any) {
-  const directus = await getDirectus();
-  const { data: blog } = await directus.items("blog").readByQuery({
-    fields: ["slug"],
-    limit: 1,
-    filter: { slug: { _eq: slug } },
-  });
-
-  return blog?.[0];
-}
-
-export async function getPostForHome(preview: any) {
+export async function getPostForHome() {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
     fields: ["id", "title", "feature_image.*", "content", "slug"],
     limit: 4,
     sort: ["-date_updated"],
-    filter: preview ? {} : { status: { _eq: "published" } },
+    filter: { status: { _eq: "published" } },
   });
 
   return blog;
 }
 
-export async function getBlogPostsIndex(preview: any) {
+export async function getBlogPostsIndex() {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
     sort: ["-date_updated"],
-    filter: preview ? {} : { status: { _eq: "published" } },
+    filter: { status: { _eq: "published" } },
   });
 
   return blog;
@@ -54,7 +43,7 @@ export async function getBlogPostBySlug() {
   return blog;
 }
 
-export async function getBlogPost(slug: string, preview: any) {
+export async function getBlogPost(slug: string) {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
     fields: [
@@ -75,9 +64,7 @@ export async function getBlogPost(slug: string, preview: any) {
       "meta_description",
       "tags",
     ],
-    filter: preview
-      ? { slug: { _eq: slug } }
-      : { slug: { _eq: slug }, status: { _eq: "published" } },
+    filter: { slug: { _eq: slug }, status: { _eq: "published" } },
   });
 
   return blog;
