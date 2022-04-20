@@ -2,8 +2,8 @@
   @apply fixed bottom-10 right-10 z-50 md:right-20 md:bottom-24;
 }
 .root button {
-  @apply rounded-full border border-stone-50 bg-stone-900 p-3 dark:border-stone-900 dark:bg-stone-50;
+  @apply rounded-full bg-stone-900 p-3 dark:bg-stone-50;
 }
-.root svg {
-  @apply h-7 w-7 text-stone-50 dark:text-stone-900;
+.svg {
+  @apply h-7 w-7 stroke-[1.5] text-stone-50 dark:text-stone-900;
 }

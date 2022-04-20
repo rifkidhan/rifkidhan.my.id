@@ -5,4 +5,5 @@ export { default as Email } from "./Email";
 export { default as Github } from "./Github";
 export { default as Hamburger } from "./Hamburger";
 export { default as Close } from "./Close";
-export { default as DarkModeIcon } from "./DarkModeIcon";
+export { default as MoonIcon } from "./MoonIcon";
+export { default as SunIcon } from "./SunIcon";

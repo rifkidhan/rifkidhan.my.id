@@ -1,7 +1,7 @@
 import type {
-  GetStaticPathsContext,
   InferGetStaticPropsType,
-  GetStaticPropsContext,
+  GetStaticProps,
+  GetStaticPaths,
 } from "next";
 import { getBlogPost, getBlogPostBySlug } from "@libs/data/data";
 import { Layout } from "@components/common";
@@ -14,6 +14,7 @@ export default function BlogDetails({
   post,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
+
   return (
     <div className="page-wrapper">
       {post?.map((item: any) => (
@@ -59,19 +60,18 @@ export default function BlogDetails({
   );
 }
 
-export const getStaticPaths = async ({}: GetStaticPathsContext) => {
+export const getStaticPaths: GetStaticPaths = async ({}) => {
   const getPost = await getBlogPostBySlug();
 
   return {
-    paths: getPost?.map((post: any) => `/blog/${post.slug}`),
+    paths: getPost?.map((post: any) => `/blog/${post.slug}`) || [],
     fallback: "blocking",
   };
 };
 
-export const getStaticProps = async ({
-  params,
-}: GetStaticPropsContext<{ slug: string }>) => {
-  const post = await getBlogPost(params!.slug);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const slug = params?.slug as string;
+  const post = await getBlogPost(slug);
 
   return {
     props: {

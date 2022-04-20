@@ -15,7 +15,8 @@ export async function getPostForHome() {
 export async function getBlogPostsIndex() {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
-    fields: ["id", "title", "slug", "feature_image.id", "content"],
+    sort: ["-date_updated"],
+    filter: { status: { _eq: "published" } },
   });
 
   return blog;
@@ -36,7 +37,6 @@ export async function getBlogPostBySlug() {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
     fields: ["slug"],
-    filter: { status: { _eq: "published" } },
     limit: -1,
   });
 

@@ -32,7 +32,7 @@ const Loader: FC = () => {
       router.events.off("routeChangeComplete", done);
       router.events.off("routeChangeError", done);
     };
-  }, []);
+  }, [router]);
 
   return <></>;
 };

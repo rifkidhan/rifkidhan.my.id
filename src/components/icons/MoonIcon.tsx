@@ -1,4 +1,4 @@
-const Close = ({ ...props }) => {
+const MoonIcon = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,10 +10,9 @@ const Close = ({ ...props }) => {
       shapeRendering="geometricPrecision"
       {...props}
     >
-      <path d="M18 6L6 18" pathLength={1} />
-      <path d="M6 6l12 12" pathLength={1} />
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" pathLength={1} />
     </svg>
   );
 };
 
-export default Close;
+export default MoonIcon;

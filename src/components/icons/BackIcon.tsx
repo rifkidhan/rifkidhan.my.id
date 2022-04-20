@@ -1,41 +1,28 @@
-import { m } from "framer-motion";
-import { FC, useState } from "react";
+import { FC } from "react";
+import { animate } from "motion";
 
-const svgVariants = {
-  mouseEnter: {
-    x: -5,
-    transition: {
-      type: "bounce",
-      duration: 0.5,
-    },
-  },
-  mouseLeave: {
-    x: 0,
-  },
+const hoverStart = () => {
+  animate(".backAnime path", { x: -5 }, { duration: 0.5, easing: "ease-in" });
+};
+const hoverEnd = () => {
+  animate(".backAnime path", { x: 0 }, { duration: 0.5, easing: "ease-out" });
 };
 
 const BackIcon: FC = () => {
-  const [isHovered, setIsHovered] = useState(false);
   return (
-    <div
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div onMouseEnter={hoverStart} onMouseLeave={hoverEnd}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-10 w-14"
+        className="backAnime h-10 w-14"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
       >
-        <m.path
+        <path
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
           d="M7 16l-4-4m0 0l4-4m-4 4h25"
-          initial={false}
-          animate={isHovered ? "mouseEnter" : "mouseLeave"}
-          variants={svgVariants}
         />
       </svg>
     </div>
