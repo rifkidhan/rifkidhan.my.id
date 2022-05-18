@@ -1,13 +1,13 @@
 import { FC } from "react";
 import s from "./Body.module.css";
-import Markdown from "markdown-to-jsx";
+import { Markdown } from "@components/common";
 
 interface Props {
   content: string;
 }
 
 const BlogBody: FC<Props> = ({ content }) => {
-  return <Markdown className={s.body}>{content}</Markdown>;
+  return <Markdown content={content} />;
 };
 
 export default BlogBody;

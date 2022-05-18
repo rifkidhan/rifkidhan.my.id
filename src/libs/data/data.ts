@@ -3,7 +3,7 @@ import { getDirectus } from "@libs/directus";
 export async function getPostForHome() {
   const directus = await getDirectus();
   const { data: blog } = await directus.items("blog").readByQuery({
-    fields: ["id", "title", "feature_image.*", "content", "slug"],
+    fields: ["id", "title", "feature_image.*", "excerpt", "slug"],
     limit: 4,
     sort: ["-date_updated"],
     filter: { status: { _eq: "published" } },
@@ -50,6 +50,7 @@ export async function getBlogPost(slug: string) {
       "id",
       "title",
       "subtitle",
+      "excerpt",
       "slug",
       "category.title",
       "feature_image.id ",

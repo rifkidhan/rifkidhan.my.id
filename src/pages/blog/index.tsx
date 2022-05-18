@@ -5,7 +5,7 @@ import useSWR, { SWRConfig } from "swr";
 import { useState } from "react";
 import { fetcher } from "@libs/directus";
 
-const blogsWithoutFilter = `blog?fields=id,title,slug,feature_image,content`;
+const blogsWithoutFilter = `blog?fields=id,title,slug,feature_image,excerpt`;
 const blogCategory = `blog_category?fields=id,title`;
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const Blogs = ({}) => {
   const [category, setCategory] = useState<string>("All");
 
-  const blogsWithFilter = `blog?filter[category][blog_category_id][title][_eq]=${category}&fields=id,title,slug,feature_image,content`;
+  const blogsWithFilter = `blog?filter[category][blog_category_id][title][_eq]=${category}&fields=id,title,slug,feature_image,excerpt`;
 
   const { data: blog } = useSWR(
     category !== "All" ? blogsWithFilter : blogsWithoutFilter,
@@ -62,7 +62,7 @@ const Blogs = ({}) => {
                 title={blog.title}
                 slug={blog.slug}
                 image={blog.feature_image}
-                content={blog.content}
+                content={blog.excerpt}
               />
             </div>
           ))}

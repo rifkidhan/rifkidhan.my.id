@@ -4,7 +4,8 @@ const { url } = require("./src/libs/siteConfig");
 
 module.exports = {
   siteUrl: url,
-  changefreq: "daily",
+  changefreq: "weekly",
   generateRobotsTxt: true,
   priority: 0.7,
+  sitemapSize: 1000,
 };

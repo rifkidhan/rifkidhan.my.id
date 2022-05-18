@@ -21,7 +21,7 @@ const BlogSection: FC<Blogs> = ({ blogs }) => {
               title={blog.title}
               slug={blog.slug}
               image={blog.feature_image.id}
-              content={blog.content}
+              content={blog.excerpt}
             />
           </div>
         ))}
