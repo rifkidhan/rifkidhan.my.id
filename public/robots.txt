@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://rifkidhan.vercel.app
+
+# Sitemaps
+Sitemap: https://rifkidhan.vercel.app/sitemap.xml

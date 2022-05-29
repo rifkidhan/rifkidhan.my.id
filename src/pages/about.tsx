@@ -1,25 +1,29 @@
-import { Layout, ProfileSeo } from "@components/common";
-import type { InferGetStaticPropsType, GetStaticProps } from "next";
-import { Breadcrumb } from "@components/common";
-import { Profile } from "@components/page/about";
-import { getAboutMe } from "@libs/data/data";
+import { Layout } from '@components/common';
+import type { InferGetStaticPropsType, GetStaticProps } from 'next';
+import { Breadcrumb, SEO } from '@components/common';
+import { Profile } from '@components/page/about';
+import { getAboutMe } from '@libs/data/data';
 
 const AboutPage = ({
-  about,
+  about
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="page-wrapper page-wrapper__atCenter">
-      <ProfileSeo
-        title={about.title}
-        description={about.description}
-        slug={"/about"}
-        firstName="Rifki"
-        lastName="Ramadhan"
-        userName="Rifkidhan"
-        gender="male"
-        images={about.image.id}
-        width={about.image.width}
-        height={about.image.height}
+      <SEO
+        title={about.meta_title}
+        description={about.meta_description}
+        openGraph={{
+          title: about.meta_title,
+          description: about.meta_description,
+          images: [
+            {
+              url: about.image.id,
+              height: about.image.height,
+              width: about.image.width,
+              alt: about.meta_title
+            }
+          ]
+        }}
       />
       <Breadcrumb title={about.title} />
       <Profile image={about.image.id} description={about.description} />
@@ -34,9 +38,9 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      about,
+      about
     },
-    revalidate: 60 * 5,
+    revalidate: 60 * 5
   };
 };
 

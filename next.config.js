@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
-const withPlugins = require("next-compose-plugins");
-const webPA = require("next-pwa");
-const runtimeCaching = require("next-pwa/cache");
+const withPlugins = require('next-compose-plugins');
+const webPA = require('next-pwa');
+const runtimeCaching = require('next-pwa/cache');
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
 });
 
 const nextConfig = {
@@ -15,8 +15,8 @@ const nextConfig = {
       if (Array.isArray(loaders.use)) {
         loaders.use.forEach((l) => {
           if (
-            typeof l !== "string" &&
-            typeof l.loader === "string" &&
+            typeof l !== 'string' &&
+            typeof l.loader === 'string' &&
             /(?<!post)css-loader/.test(l.loader)
           ) {
             if (!l.options.modules) return;
@@ -27,10 +27,10 @@ const nextConfig = {
               modules: {
                 ...others,
                 getLocalIdent: (ctx, localIdentName, localName) => {
-                  if (localName === "dark") return localName;
+                  if (localName === 'dark') return localName;
                   return getLocalIdent(ctx, localIdentName, localName);
-                },
-              },
+                }
+              }
             };
           }
         });
@@ -41,59 +41,59 @@ const nextConfig = {
   },
   reactStrictMode: true,
   images: {
-    domains: ["rifkidhan.herokuapp.com"],
+    domains: ['rifkidhan.herokuapp.com']
   },
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source: '/(.*)',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
           },
           {
-            key: "Access-Control-Allow-Credentials",
-            value: "true",
+            key: 'Access-Control-Allow-Credentials',
+            value: 'true'
           },
           {
-            key: "Access-Control-Allow-Origin",
-            value: "*",
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
           },
           {
-            key: "Access-Control-Allow-Methods",
-            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT'
           },
           {
-            key: "Access-Control-Allow-Headers",
-            value: `X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version`,
-          },
-        ],
-      },
+            key: 'Access-Control-Allow-Headers',
+            value: `X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version`
+          }
+        ]
+      }
     ];
   },
   swcMinify: true,
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: false
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true
   },
   pwa: {
-    dest: "public",
-    disable: process.env.NODE_ENV === "development",
+    dest: 'public',
+    disable: process.env.NODE_ENV === 'development',
     register: true,
     runtimeCaching,
-    cacheOnFrontEndNav: true,
+    cacheOnFrontEndNav: true
   },
   publicRuntimeConfig: {
-    url: process.env.DIRECTUS_URL,
+    url: process.env.NEXT_PUBLIC_DIRECTUS_URL
   },
   serverRuntimeConfig: {
     email: process.env.DIRECTUS_EMAIL,
-    password: process.env.DIRECTUS_PASSWORD,
+    password: process.env.DIRECTUS_PASSWORD
     // token: process.env.DIRECTUS_STATIC_TOKEN,
-  },
+  }
 };
 
 module.exports = withPlugins([webPA, withBundleAnalyzer], nextConfig);

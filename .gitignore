@@ -45,7 +45,6 @@ yarn-error.log*
 **/public/worker-*.js.map
 
 # sitemap
-**/public/robots.txt
 **/sitemap.xml
 **/sitemap-*.xml
 

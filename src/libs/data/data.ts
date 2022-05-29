@@ -1,12 +1,12 @@
-import { getDirectus } from "@libs/directus";
+import { getDirectus } from '@libs/directus';
 
 export async function getPostForHome() {
   const directus = await getDirectus();
-  const { data: blog } = await directus.items("blog").readByQuery({
-    fields: ["id", "title", "feature_image.*", "excerpt", "slug"],
+  const { data: blog } = await directus.items('blog').readByQuery({
+    fields: ['id', 'title', 'feature_image.*', 'excerpt', 'slug'],
     limit: 4,
-    sort: ["-date_updated"],
-    filter: { status: { _eq: "published" } },
+    sort: ['-date_updated'],
+    filter: { status: { _eq: 'published' } }
   });
 
   return blog;
@@ -14,9 +14,9 @@ export async function getPostForHome() {
 
 export async function getBlogPostsIndex() {
   const directus = await getDirectus();
-  const { data: blog } = await directus.items("blog").readByQuery({
-    sort: ["-date_updated"],
-    filter: { status: { _eq: "published" } },
+  const { data: blog } = await directus.items('blog').readByQuery({
+    sort: ['-date_updated'],
+    filter: { status: { _eq: 'published' } }
   });
 
   return blog;
@@ -25,9 +25,9 @@ export async function getBlogPostsIndex() {
 export async function getBlogCategories() {
   const directus = await getDirectus();
   const { data: blog_category } = await directus
-    .items("blog_category")
+    .items('blog_category')
     .readByQuery({
-      fields: ["id", "title"],
+      fields: ['id', 'title']
     });
 
   return blog_category;
@@ -35,9 +35,9 @@ export async function getBlogCategories() {
 
 export async function getBlogPostBySlug() {
   const directus = await getDirectus();
-  const { data: blog } = await directus.items("blog").readByQuery({
-    fields: ["slug"],
-    limit: -1,
+  const { data: blog } = await directus.items('blog').readByQuery({
+    fields: ['slug'],
+    limit: -1
   });
 
   return blog;
@@ -45,27 +45,27 @@ export async function getBlogPostBySlug() {
 
 export async function getBlogPost(slug: string) {
   const directus = await getDirectus();
-  const { data: blog } = await directus.items("blog").readByQuery({
+  const { data: blog } = await directus.items('blog').readByQuery({
     fields: [
-      "id",
-      "title",
-      "subtitle",
-      "excerpt",
-      "slug",
-      "category.title",
-      "feature_image.id ",
-      "feature_image.width",
-      "feature_image.height",
-      "content",
-      "date_created",
-      "date_updated",
-      "user_created.first_name",
-      "user_created.last_name",
-      "meta_title",
-      "meta_description",
-      "tags",
+      'id',
+      'title',
+      'subtitle',
+      'excerpt',
+      'slug',
+      'category.title',
+      'feature_image.id ',
+      'feature_image.width',
+      'feature_image.height',
+      'content',
+      'date_created',
+      'date_updated',
+      'user_created.first_name',
+      'user_created.last_name',
+      'meta_title',
+      'meta_description',
+      'tags'
     ],
-    filter: { slug: { _eq: slug }, status: { _eq: "published" } },
+    filter: { slug: { _eq: slug }, status: { _eq: 'published' } }
   });
 
   return blog;
@@ -74,10 +74,10 @@ export async function getBlogPost(slug: string) {
 export async function getHomeFeature() {
   const directus = await getDirectus();
   const { data: home_feature } = await directus
-    .items("home_feature")
+    .items('home_feature')
     .readByQuery({
-      fields: ["id", "title", "content", "animation.filename_disk"],
-      filter: { status: { _eq: "published" } },
+      fields: ['id', 'title', 'content', 'animation.filename_disk'],
+      filter: { status: { _eq: 'published' } }
     });
 
   return home_feature;
@@ -85,15 +85,17 @@ export async function getHomeFeature() {
 
 export async function getAboutMe() {
   const directus = await getDirectus();
-  const { data: about_me } = await directus.items("about_me").readByQuery({
+  const { data: about_me } = await directus.items('about_me').readByQuery({
     fields: [
-      "title",
-      "slug",
-      "image.id",
-      "image.width",
-      "image.height",
-      "description",
-    ],
+      'title',
+      'slug',
+      'image.id',
+      'image.width',
+      'image.height',
+      'description',
+      'meta_title',
+      'meta_description'
+    ]
   });
 
   return about_me;
