@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Head from 'next/head';
+import { SEO } from '@components/common';
 
 interface IProductLD {
   type?: string;
@@ -32,20 +32,25 @@ const BlogLD: FC<IProductLD> = (props) => {
                     "@context": "https://schema.org",
                     "@type": "${type}",
                     "headline": "${headline}",
-                    "image": ${image},
+                    "image": "${image}",
                     "datePublished": "${datePublished}",
                     "dateModified": "${dateModified}",
-                    "author": ${setAuthor(authorName)}
+                    "author": [{
+                      "@type" : "Person",
+                      "name": "${authorName}"
+                    }]
                   }
             }`
     };
   };
   return (
-    <script
-      key="post-jsonld"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={postLD(props)}
-    />
+    <SEO>
+      <script
+        key="post-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={postLD(props)}
+      />
+    </SEO>
   );
 };
 

@@ -5,7 +5,7 @@ import { meta } from '@libs/metaSeo';
 
 const frontendUrl =
   process.env.NEXT_PUBLIC_DIRECTUS_URL || process.env.NEXT_PUBLIC_FRONTEND;
-const frontendBaseUrl = frontendUrl ? `${frontendUrl}` : null;
+const frontendBaseUrl = frontendUrl ? `${frontendUrl}/assets` : null;
 
 interface OgImage {
   url?: string;
@@ -34,6 +34,7 @@ const ogImage = ({ url, width, height, alt }: OgImage, index: number) => {
   const imgUrl = frontendBaseUrl
     ? new URL(url!, frontendBaseUrl).toString()
     : url;
+
   return (
     <Fragment key={`og:image:${index}`}>
       <meta

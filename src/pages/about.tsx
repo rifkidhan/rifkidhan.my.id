@@ -17,7 +17,7 @@ const AboutPage = ({
           description: about.meta_description,
           images: [
             {
-              url: about.image.id,
+              url: 'assets/' + about.image.id,
               height: about.image.height,
               width: about.image.width,
               alt: about.meta_title

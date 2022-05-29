@@ -8,6 +8,7 @@ import { Layout, SEO, BlogLD } from '@components/common';
 import { Banner, Title, Body } from '@components/page/blog';
 import { BackIcon } from '@components/icons';
 import { useRouter } from 'next/router';
+import { imageUrl } from '@libs/directus';
 
 export default function BlogDetails({
   post
@@ -27,25 +28,22 @@ export default function BlogDetails({
               description: item.meta_description,
               images: [
                 {
-                  url: item.feature_image.id,
+                  url: 'assets/' + item.feature_image.id,
                   width: item.feature_image.width,
                   height: item.feature_image.height,
                   alt: item.meta_title
                 }
               ]
             }}
-          >
-            <BlogLD
-              type="Blog"
-              headline={item.title + '.' + item.subtitle}
-              image={item.feature_image.id}
-              datePublished={item.date_created}
-              dateModified={item.date_updated}
-              authorName={
-                item.user_created.first_name + ' ' + item.user_created.last_name
-              }
-            />
-          </SEO>
+          />
+          <BlogLD
+            type="Blog"
+            headline={item.title + '.' + item.subtitle}
+            image={[`${imageUrl}/${item.feature_image.id}`]}
+            datePublished={item.date_created}
+            dateModified={item.date_updated}
+            authorName={`${item.user_created.first_name} ${item.user_created.last_name}`}
+          />
           <Banner title={item.title} image={item.feature_image.id} />
           <section className="post isContainer">
             <button
