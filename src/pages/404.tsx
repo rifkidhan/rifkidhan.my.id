@@ -1,8 +1,7 @@
-import dynamic from "next/dynamic";
-import { NextSeo } from "next-seo";
-import { Footer } from "@components/common";
-import Link from "next/link";
-import type { ReactNode } from "react";
+import dynamic from 'next/dynamic';
+import { Footer } from '@components/common';
+import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -11,12 +10,6 @@ interface Props {
 const Layout = ({ children }: Props) => {
   return (
     <>
-      <NextSeo
-        nofollow={true}
-        noindex={true}
-        title="Not Found"
-        description="Page Not Found"
-      />
       <main>{children}</main>
       <Footer />
     </>
@@ -24,8 +17,8 @@ const Layout = ({ children }: Props) => {
 };
 
 export default function NotFound() {
-  const Animation = dynamic(() => import("@components/common/Lottie"), {
-    ssr: false,
+  const Animation = dynamic(() => import('@components/common/Lottie'), {
+    ssr: false
   });
   return (
     <div className="isContainer">
@@ -37,7 +30,7 @@ export default function NotFound() {
           <h3 className="font-semibold uppercase">Empat Nol Empat</h3>
           <p>Halaman yang kamu cari tidak ada.</p>
         </div>
-        <Link href={"/"}>
+        <Link href={'/'}>
           <a className="border border-stone-900 py-3 px-5 transition-all duration-300 hover:bg-stone-900 hover:text-stone-50 dark:border-stone-50 dark:hover:bg-stone-50 dark:hover:text-stone-900">
             Kembali ke Home
           </a>

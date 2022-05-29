@@ -16,6 +16,7 @@ export type Blog = {
   tags: string[];
   title: string;
   subtitle: string;
+  excerpt: string;
   feature_image: {
     id: string;
     width: number;

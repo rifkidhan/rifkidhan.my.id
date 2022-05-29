@@ -13,7 +13,7 @@ const Banner: FC<Props> = ({ image, title }) => {
   return (
     <section className={s.root}>
       <Image
-        src={`${imageUrl}/${image}`}
+        src={`${imageUrl}/${image}?key=convert-webp`}
         alt={`Image From ${title}`}
         layout="fill"
         objectFit="cover"

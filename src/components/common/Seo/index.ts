@@ -1,3 +1,2 @@
-export { default as PostSeo } from "./PostSeo";
-export { default as BaseSeo } from "./BaseSeo";
-export { default as ProfileSeo } from "./ProfileSeo";
+export { default as SEO } from './SEO';
+export { default as BlogLD } from './BlogLD';

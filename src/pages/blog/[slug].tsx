@@ -1,17 +1,17 @@
 import type {
   InferGetStaticPropsType,
   GetStaticProps,
-  GetStaticPaths,
-} from "next";
-import { getBlogPost, getBlogPostBySlug } from "@libs/data/data";
-import { Layout } from "@components/common";
-import { Banner, Title, Body } from "@components/page/blog";
-import { BackIcon } from "@components/icons";
-import { useRouter } from "next/router";
-import { PostSeo } from "@components/common";
+  GetStaticPaths
+} from 'next';
+import { getBlogPost, getBlogPostBySlug } from '@libs/data/data';
+import { Layout, SEO, BlogLD } from '@components/common';
+import { Banner, Title, Body } from '@components/page/blog';
+import { BackIcon } from '@components/icons';
+import { useRouter } from 'next/router';
+import { imageUrl } from '@libs/directus';
 
 export default function BlogDetails({
-  post,
+  post
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
@@ -19,19 +19,30 @@ export default function BlogDetails({
     <div className="page-wrapper">
       {post?.map((item: any) => (
         <div key={item.id}>
-          <PostSeo
+          <SEO
             title={item.meta_title}
             description={item.meta_description}
-            slug={`/blog/${item.slug}`}
-            tags={item.tags}
-            images={item.feature_image.id}
-            imageWidth={item.feature_image.width}
-            imageHeight={item.feature_image.height}
+            openGraph={{
+              type: 'website',
+              title: item.meta_title,
+              description: item.meta_description,
+              images: [
+                {
+                  url: 'assets/' + item.feature_image.id,
+                  width: item.feature_image.width,
+                  height: item.feature_image.height,
+                  alt: item.meta_title
+                }
+              ]
+            }}
+          />
+          <BlogLD
+            type="Blog"
+            headline={item.title + '.' + item.subtitle}
+            image={[`${imageUrl}/${item.feature_image.id}`]}
             datePublished={item.date_created}
             dateModified={item.date_updated}
-            author={
-              item.user_created.first_name + " " + item.user_created.last_name
-            }
+            authorName={`${item.user_created.first_name} ${item.user_created.last_name}`}
           />
           <Banner title={item.title} image={item.feature_image.id} />
           <section className="post isContainer">
@@ -48,9 +59,10 @@ export default function BlogDetails({
               subtitle={item.subtitle}
               published={item.date_created}
               author={
-                item.user_created.first_name + " " + item.user_created.last_name
+                item.user_created.first_name + ' ' + item.user_created.last_name
               }
               updated={item.date_updated}
+              readtime={item.content}
             />
             <Body content={item.content} />
           </section>
@@ -65,7 +77,7 @@ export const getStaticPaths: GetStaticPaths = async ({}) => {
 
   return {
     paths: getPost?.map((post: any) => `/blog/${post.slug}`) || [],
-    fallback: "blocking",
+    fallback: 'blocking'
   };
 };
 
@@ -75,9 +87,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      post,
-    },
-    revalidate: 60,
+      post
+    }
   };
 };
 

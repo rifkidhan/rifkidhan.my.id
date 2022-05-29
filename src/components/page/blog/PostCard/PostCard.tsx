@@ -20,7 +20,7 @@ const PostCard: FC<Props> = ({ slug, image, content, title }) => {
         <div className={`${s.wrapper} group`}>
           <div className={`${s.image} group-hover:grayscale-0`}>
             <Image
-              src={`${imageUrl}/${image}`}
+              src={`${imageUrl}/${image}?key=convert-webp`}
               layout="responsive"
               width={500}
               height={400}
@@ -39,7 +39,7 @@ const PostCard: FC<Props> = ({ slug, image, content, title }) => {
             <h4 className={`${s.textTitle} group-hover:text-orange-600`}>
               {title}
             </h4>
-            <Markdown className={s.textBody}>{content}</Markdown>
+            <p className={s.textBody}>{content}</p>
           </div>
         </div>
       </a>

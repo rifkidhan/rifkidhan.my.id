@@ -1,24 +1,18 @@
-import { InferGetStaticPropsType, GetStaticProps } from "next";
-import { Layout } from "@components/common";
+import { InferGetStaticPropsType, GetStaticProps } from 'next';
+import { Layout } from '@components/common';
 import {
   HeroSection,
   FeatureSection,
-  BlogSection,
-} from "@components/page/home";
-import { BaseSeo } from "@components/common";
-import { getPostForHome, getHomeFeature } from "@libs/data/data";
+  BlogSection
+} from '@components/page/home';
+import { getPostForHome, getHomeFeature } from '@libs/data/data';
 
 const Home = ({
   blogs,
-  homeFeatures,
+  homeFeatures
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <div className="page-wrapper page-wrapper__atCenter">
-      <BaseSeo
-        title="Home"
-        description="Rifkidhan is Rifki Ramadhan's personal website. Rifkidhan can make you a website base on your need."
-        slug="/"
-      />
       <HeroSection />
       <FeatureSection features={homeFeatures} />
       <BlogSection blogs={blogs} />
@@ -33,9 +27,9 @@ export const getStaticProps: GetStaticProps = async ({}) => {
   return {
     props: {
       blogs,
-      homeFeatures,
+      homeFeatures
     },
-    revalidate: 60,
+    revalidate: 60
   };
 };
 

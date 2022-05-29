@@ -1,6 +1,5 @@
-import { Layout, Breadcrumb, BaseSeo } from "@components/common";
-import { LoadingDots } from "@components/common";
-import dynamic from "next/dynamic";
+import { Layout, Breadcrumb, LoadingDots, SEO } from '@components/common';
+import dynamic from 'next/dynamic';
 
 const Loading = () => (
   <div className="loading">
@@ -10,22 +9,25 @@ const Loading = () => (
 
 const dynamicProps = {
   loading: Loading,
-  ssr: false,
+  ssr: false
 };
 
 const ProjectPage = () => {
-  const Yoga = dynamic(() => import("@components/common/Lottie"), {
-    ...dynamicProps,
+  const Yoga = dynamic(() => import('@components/common/Lottie'), {
+    ...dynamicProps
   });
 
   return (
     <div className="page-wrapper page-wrapper__atCenter">
-      <BaseSeo
-        title="Rifki Ramadhan Project"
-        description="All project created by Rifki Ramadhan"
-        slug="/project"
+      <SEO
+        title="Project"
+        description="Project by Rifki Ramadhan"
+        openGraph={{
+          title: 'Project',
+          description: 'Project by Rifki Ramadhan'
+        }}
       />
-      <Breadcrumb title={"My Project"} />
+      <Breadcrumb title={'My Project'} />
       <div className="isContainer mb-10 flex flex-col items-center gap-10">
         <div className="w-1/2">
           <Yoga src="lottie/WorkAndBalance.lottie" />
@@ -41,4 +43,4 @@ const ProjectPage = () => {
 
 export default ProjectPage;
 
-ProjectPage.Layout = Layout
+ProjectPage.Layout = Layout;
