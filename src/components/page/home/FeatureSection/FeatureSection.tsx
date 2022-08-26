@@ -1,10 +1,10 @@
-import s from "./Feature.module.css";
-import dynamic from "next/dynamic";
-import { imageUrl } from "@libs/directus";
-import { FC } from "react";
-import { LoadingDots } from "@components/common";
-import Markdown from "markdown-to-jsx";
-import type { HomeFeature } from "@libs/data/types";
+import s from './Feature.module.css';
+import dynamic from 'next/dynamic';
+import { imageUrl } from '@libs/directus';
+import { FC } from 'react';
+import { LoadingDots } from '@components/common';
+import Markdown from 'markdown-to-jsx';
+import type { HomeFeature } from '@libs/data/types';
 
 interface Features {
   features: HomeFeature[];
@@ -18,11 +18,11 @@ const Loading = () => (
 
 const dynamicProps = {
   loading: Loading,
-  ssr: false,
+  ssr: false
 };
 
-const Animation = dynamic(() => import("@components/common/Lottie"), {
-  ...dynamicProps,
+const Animation = dynamic(() => import('@components/common/Lottie'), {
+  ...dynamicProps
 });
 
 const FeatureSection: FC<Features> = ({ features }) => {
@@ -33,7 +33,7 @@ const FeatureSection: FC<Features> = ({ features }) => {
         <h2>Make your website without dizzie</h2>
       </div>
       <div className={`${s.features} isContainer`}>
-        {features.map((feature) => (
+        {features?.map((feature) => (
           <div key={feature.id} className={s.feature}>
             <div className={s.featureAnimation}>
               <div>

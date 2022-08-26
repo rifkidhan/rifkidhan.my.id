@@ -1,16 +1,16 @@
-import { FC, useEffect, useState } from "react";
-import Link from "next/link";
-import debounce from "@libs/debounce";
-import dynamic from "next/dynamic";
-import { Hamburger } from "@components/icons";
-import { timeline, stagger, spring } from "motion";
-import { useRouter } from "next/router";
-import { DarkMode } from "@components/common";
-import MenuItems from "./MenuItems";
-import { useTheme } from "next-themes";
-import s from "./Header.module.css";
+import { FC, useEffect, useState } from 'react';
+import Link from 'next/link';
+import debounce from '@libs/debounce';
+import dynamic from 'next/dynamic';
+import { Hamburger } from '@components/icons';
+import { timeline, stagger, spring } from 'motion';
+import { useRouter } from 'next/router';
+import { DarkMode } from '@components/common';
+import MenuItems from './MenuItems';
+import { useTheme } from 'next-themes';
+import s from './Header.module.css';
 
-const Menu = dynamic(() => import("@components/common/Header/MenuItems"));
+const Menu = dynamic(() => import('@components/common/Header/MenuItems'));
 
 const Header: FC = () => {
   const router = useRouter();
@@ -35,20 +35,20 @@ const Header: FC = () => {
       setPrevScrollPos(currentScrollPos);
     }, 50);
 
-    window.addEventListener("scroll", scrollHandler);
+    window.addEventListener('scroll', scrollHandler);
     return () => {
-      window.removeEventListener("scroll", scrollHandler);
+      window.removeEventListener('scroll', scrollHandler);
     };
   }, [prevScrollPos, visible, isTop]);
 
   useEffect(() => {
-    const bodyLock = document.querySelector("body") as HTMLElement;
+    const bodyLock = document.querySelector('body') as HTMLElement;
 
     if (isOpen === true) {
-      bodyLock.classList.add("scroll-lock");
+      bodyLock.classList.add('scroll-lock');
     }
     return () => {
-      bodyLock.classList.remove("scroll-lock");
+      bodyLock.classList.remove('scroll-lock');
     };
   });
 
@@ -59,95 +59,95 @@ const Header: FC = () => {
   }, [isOpen, opened]);
 
   const drawPath = () => ({
-    strokeDasharray: "1px 1px",
+    strokeDasharray: '1px 1px',
 
-    visibility: "visible",
+    visibility: 'visible'
   });
 
   const deletePath = () => ({
-    strokeDasharray: "0px 1px",
+    strokeDasharray: '0px 1px',
 
-    visibility: "hidden",
+    visibility: 'hidden'
   });
 
   useEffect(() => {
     const toggleOpen = () => {
       timeline([
         [
-          ".hamburgerAnime path",
+          '.hamburgerAnime path',
           deletePath(),
-          { duration: 0.5, delay: stagger(0.3), easing: "ease-in-out" },
+          { duration: 0.5, delay: stagger(0.3), easing: 'ease-in-out' }
         ],
         [
-          ".menuAnime",
-          { x: ["100%", "0%"] },
+          '.menuAnime',
+          { x: ['100%', '0%'] },
           {
             easing: spring({
               velocity: 50,
               stiffness: 100,
               damping: 50,
-              mass: 1,
+              mass: 1
             }),
-            at: "-0.7",
-          },
+            at: '-0.7'
+          }
         ],
         [
-          ".menuItemsAnime div",
+          '.menuItemsAnime div',
           { y: 0, opacity: 1 },
-          { duration: 0.3, delay: stagger(0.1), easing: "ease-in-out" },
+          { duration: 0.3, delay: stagger(0.1), easing: 'ease-in-out' }
         ],
         [
-          ".closeAnime path",
+          '.closeAnime path',
           drawPath(),
           {
             duration: 0.5,
             delay: stagger(0.3),
-            easing: "ease-in-out",
-          },
-        ],
+            easing: 'ease-in-out'
+          }
+        ]
       ]);
     };
 
     const toggleClose = () => {
       timeline([
         [
-          ".closeAnime path",
+          '.closeAnime path',
           deletePath(),
-          { duration: 0.5, delay: stagger(0.3), easing: "ease-in-out" },
+          { duration: 0.5, delay: stagger(0.3), easing: 'ease-in-out' }
         ],
         [
-          ".menuItemsAnime div",
+          '.menuItemsAnime div',
           { y: 10, opacity: 0 },
           {
             duration: 0.5,
-            delay: stagger(0.2, { from: "last" }),
-            easing: "ease-in-out",
-            at: "-0.5",
-          },
+            delay: stagger(0.2, { from: 'last' }),
+            easing: 'ease-in-out',
+            at: '-0.5'
+          }
         ],
         [
-          ".menuAnime",
-          { x: ["0%", "100%"] },
+          '.menuAnime',
+          { x: ['0%', '100%'] },
           {
             easing: spring({
               velocity: 50,
               stiffness: 100,
               damping: 50,
-              mass: 1,
-            }),
-          },
+              mass: 1
+            })
+          }
         ],
 
         [
-          ".hamburgerAnime path",
+          '.hamburgerAnime path',
           drawPath(),
           {
             duration: 0.8,
             delay: stagger(0.3),
-            easing: "ease-in-out",
-            at: "-0.5",
-          },
-        ],
+            easing: 'ease-in-out',
+            at: '-0.5'
+          }
+        ]
       ]).finished.then(() => {
         setOpened(false);
       });
@@ -164,62 +164,62 @@ const Header: FC = () => {
     const sunMode = () => {
       timeline([
         [
-          ".sunAnime circle",
+          '.sunAnime circle',
           drawPath(),
-          { duration: 0.5, delay: 0.2, easing: "ease-in-out" },
+          { duration: 0.5, delay: 0.2, easing: 'ease-in-out' }
         ],
         [
-          ".sunAnime path",
+          '.sunAnime path',
           drawPath(),
           {
             duration: 0.3,
             delay: stagger(0.1),
-            at: "-0.2",
-            easing: "ease-in-out",
-          },
+            at: '-0.2',
+            easing: 'ease-in-out'
+          }
         ],
         [
-          ".moonAnime path",
+          '.moonAnime path',
           deletePath(),
-          { duration: 0.5, at: "-0.3", easing: "ease-in-out" },
-        ],
+          { duration: 0.5, at: '-0.3', easing: 'ease-in-out' }
+        ]
       ]);
     };
 
     const moonMode = () => {
       timeline([
         [
-          ".moonAnime Path",
+          '.moonAnime Path',
           drawPath(),
-          { duration: 0.5, delay: 0.2, easing: "ease-in-out" },
+          { duration: 0.5, delay: 0.2, easing: 'ease-in-out' }
         ],
         [
-          ".sunAnime path",
+          '.sunAnime path',
           deletePath(),
           {
             duration: 0.3,
             delay: stagger(0.1),
-            at: "-0.3",
-            easing: "ease-in-out",
-          },
+            at: '-0.3',
+            easing: 'ease-in-out'
+          }
         ],
         [
-          ".sunAnime circle",
+          '.sunAnime circle',
           deletePath(),
-          { duration: 0.5, at: "-0.2", easing: "ease-in-out" },
-        ],
+          { duration: 0.5, at: '-0.2', easing: 'ease-in-out' }
+        ]
       ]);
     };
 
-    if (theme === "dark") {
+    if (theme === 'dark') {
       moonMode();
     }
-    if (theme === "light") {
+    if (theme === 'light') {
       sunMode();
     }
   }, [theme]);
 
-  if (router.pathname === "/blog/[slug]")
+  if (router.pathname === '/blog/[slug]')
     return (
       <>
         <header
@@ -230,7 +230,7 @@ const Header: FC = () => {
           }`}
         >
           <div className={s.inner}>
-            <Link href={"/"}>
+            <Link href={'/'}>
               <a className={`${isTop ? s.logoTypeWhite : s.logoTypeBlack}`}>
                 Rifkidhan
               </a>
@@ -240,7 +240,8 @@ const Header: FC = () => {
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                aria-label="Menu Button"
+                aria-label="open menu button"
+                name="open menu button"
               >
                 <Hamburger
                   className={`${s.menuHamburger} ${
@@ -253,11 +254,11 @@ const Header: FC = () => {
         </header>
         <Menu
           changeToggle={() => setIsOpen(false)}
-          className={`${s.menu} menuAnime ${opened ? "block" : "hidden"}`}
+          className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
         />
       </>
     );
-  if (router.pathname !== "/")
+  if (router.pathname !== '/')
     return (
       <>
         <header
@@ -268,7 +269,7 @@ const Header: FC = () => {
           }`}
         >
           <div className={s.inner}>
-            <Link href={"/"}>
+            <Link href={'/'}>
               <a className={`${isTop ? s.logoTypeWhite : s.logoTypeBlack}`}>
                 Rifkidhan
               </a>
@@ -278,7 +279,8 @@ const Header: FC = () => {
               <button
                 type="button"
                 onClick={() => setIsOpen(true)}
-                aria-label="Open Menu Button"
+                aria-label="open menu button"
+                name="open menu button"
               >
                 <Hamburger
                   className={`${s.menuHamburger} ${
@@ -291,7 +293,7 @@ const Header: FC = () => {
         </header>
         <Menu
           changeToggle={() => setIsOpen(false)}
-          className={`${s.menu} menuAnime ${opened ? "block" : "hidden"}`}
+          className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
         />
       </>
     );
@@ -303,7 +305,7 @@ const Header: FC = () => {
         } ${s.borderBlack}`}
       >
         <div className={s.inner}>
-          <Link href={"/"}>
+          <Link href={'/'}>
             <a className={s.logoTypeBlack}>Rifkidhan</a>
           </Link>
           <div className={s.innerLeft}>
@@ -311,7 +313,8 @@ const Header: FC = () => {
             <button
               type="button"
               onClick={() => setIsOpen(true)}
-              aria-label="Menu Button"
+              aria-label="open menu button"
+              name="open menu button"
             >
               <Hamburger className={`${s.menuHamburger} hamburgerAnime`} />
             </button>
@@ -320,7 +323,7 @@ const Header: FC = () => {
       </header>
       <Menu
         changeToggle={() => setIsOpen(false)}
-        className={`${s.menu} menuAnime ${opened ? "block" : "hidden"}`}
+        className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
       />
     </>
   );
