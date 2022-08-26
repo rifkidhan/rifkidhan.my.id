@@ -3,7 +3,14 @@ User-agent: *
 Allow: /
 
 # Host
+<<<<<<< HEAD
 Host: https://rifkidhan.my.id
 
 # Sitemaps
 Sitemap: https://rifkidhan.my.id/sitemap.xml
+=======
+Host: https://rifkidhan.vercel.app
+
+# Sitemaps
+Sitemap: https://rifkidhan.vercel.app/sitemap.xml
+>>>>>>> develop

@@ -23,7 +23,7 @@
   @apply border-stone-50 dark:border-stone-900;
 }
 .inner {
-  @apply container flex w-full flex-row justify-between;
+  @apply container mx-auto flex w-full flex-row justify-between;
 }
 .logoTypeBlack {
   @apply font-sans text-4xl font-medium text-stone-900 dark:text-stone-50;

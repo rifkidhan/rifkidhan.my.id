@@ -1,7 +1,7 @@
-import { imageUrl } from "@libs/directus";
-import Image from "next/image";
-import { FC, useState } from "react";
-import s from "./Profile.module.css";
+import { imageUrl } from '@libs/directus';
+import Image from 'next/image';
+import { FC, useState } from 'react';
+import s from './Profile.module.css';
 
 interface Props {
   image: string;
@@ -24,8 +24,8 @@ const Profile: FC<Props> = ({ image, description }) => {
             priority
             className={
               loading
-                ? "scale-110 blur-2xl grayscale"
-                : "scale-100 blur-0 grayscale-0"
+                ? 'scale-110 blur-2xl grayscale'
+                : 'scale-100 blur-0 grayscale-0'
             }
             onLoadingComplete={() => setLoading(false)}
           />

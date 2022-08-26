@@ -5,7 +5,11 @@ import { meta } from '@libs/metaSeo';
 
 const frontendUrl =
   process.env.NEXT_PUBLIC_DIRECTUS_URL || process.env.NEXT_PUBLIC_FRONTEND;
+<<<<<<< HEAD
 const frontendBaseUrl = frontendUrl ? `${frontendUrl}` : null;
+=======
+const frontendBaseUrl = frontendUrl ? `${frontendUrl}/assets` : null;
+>>>>>>> develop
 
 interface OgImage {
   url?: string;
