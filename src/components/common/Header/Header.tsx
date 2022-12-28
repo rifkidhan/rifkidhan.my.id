@@ -220,103 +220,33 @@ const Header: FC = () => {
   }, [theme]);
 
   if (router.pathname === '/blog/[slug]')
-    return (
-      <>
-        <header
-          className={`${s.root} ${
-            visible ? s.navbarActive : s.navbarInactive
-          } ${isTop ? s.bgOnTopGlass : s.bgOnScroll} ${
-            isTop ? s.borderWhite : s.borderBlack
-          }`}
-        >
-          <div className={s.inner}>
-            <Link href={'/'}>
-              <a className={`${isTop ? s.logoTypeWhite : s.logoTypeBlack}`}>
-                Rifkidhan
-              </a>
-            </Link>
-            <div className={s.innerLeft}>
-              <DarkMode isTop={isTop} />
-              <button
-                type="button"
-                onClick={() => setIsOpen(true)}
-                aria-label="open menu button"
-                name="open menu button"
-              >
-                <Hamburger
-                  className={`${s.menuHamburger} ${
-                    isTop ? s.menuHamburgerTop : s.menuHamburgerNotTop
-                  } hamburgerAnime`}
-                />
-              </button>
-            </div>
-          </div>
-        </header>
-        <Menu
-          changeToggle={() => setIsOpen(false)}
-          className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
-        />
-      </>
-    );
-  if (router.pathname !== '/')
-    return (
-      <>
-        <header
-          className={`${s.root} ${
-            visible ? s.navbarActive : s.navbarInactive
-          } ${isTop ? s.bgOnTop : s.bgOnScroll} ${
-            isTop ? s.borderWhite : s.borderBlack
-          }`}
-        >
-          <div className={s.inner}>
-            <Link href={'/'}>
-              <a className={`${isTop ? s.logoTypeWhite : s.logoTypeBlack}`}>
-                Rifkidhan
-              </a>
-            </Link>
-            <div className={s.innerLeft}>
-              <DarkMode isTop={isTop} />
-              <button
-                type="button"
-                onClick={() => setIsOpen(true)}
-                aria-label="open menu button"
-                name="open menu button"
-              >
-                <Hamburger
-                  className={`${s.menuHamburger} ${
-                    isTop ? s.menuHamburgerTop : s.menuHamburgerNotTop
-                  } hamburgerAnime`}
-                />
-              </button>
-            </div>
-          </div>
-        </header>
-        <Menu
-          changeToggle={() => setIsOpen(false)}
-          className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
-        />
-      </>
-    );
-  return (
-    <>
+    return <>
       <header
-        className={`${s.root} ${visible ? s.navbarActive : s.navbarInactive} ${
-          isTop ? s.bgOnTop : s.bgOnScroll
-        } ${s.borderBlack}`}
+        className={`${s.root} ${
+          visible ? s.navbarActive : s.navbarInactive
+        } ${isTop ? s.bgOnTopGlass : s.bgOnScroll} ${
+          isTop ? s.borderWhite : s.borderBlack
+        }`}
       >
         <div className={s.inner}>
-          <Link href={'/'}>
-            <a className={s.logoTypeBlack}>Rifkidhan</a>
+          <Link href={'/'} className={`${isTop ? s.logoTypeWhite : s.logoTypeBlack}`}>
+            
+              Rifkidhan
+            
           </Link>
           <div className={s.innerLeft}>
-            <DarkMode isTop={false} />
+            <DarkMode isTop={isTop} />
             <button
               type="button"
               onClick={() => setIsOpen(true)}
               aria-label="open menu button"
               name="open menu button"
             >
-              <Hamburger className={`${s.menuHamburger} hamburgerAnime`} />
+              <Hamburger
+                className={`${s.menuHamburger} ${
+                  isTop ? s.menuHamburgerTop : s.menuHamburgerNotTop
+                } hamburgerAnime`}
+              />
             </button>
           </div>
         </div>
@@ -325,8 +255,72 @@ const Header: FC = () => {
         changeToggle={() => setIsOpen(false)}
         className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
       />
-    </>
-  );
+    </>;
+  if (router.pathname !== '/')
+    return <>
+      <header
+        className={`${s.root} ${
+          visible ? s.navbarActive : s.navbarInactive
+        } ${isTop ? s.bgOnTop : s.bgOnScroll} ${
+          isTop ? s.borderWhite : s.borderBlack
+        }`}
+      >
+        <div className={s.inner}>
+          <Link href={'/'} className={`${isTop ? s.logoTypeWhite : s.logoTypeBlack}`}>
+            
+              Rifkidhan
+            
+          </Link>
+          <div className={s.innerLeft}>
+            <DarkMode isTop={isTop} />
+            <button
+              type="button"
+              onClick={() => setIsOpen(true)}
+              aria-label="open menu button"
+              name="open menu button"
+            >
+              <Hamburger
+                className={`${s.menuHamburger} ${
+                  isTop ? s.menuHamburgerTop : s.menuHamburgerNotTop
+                } hamburgerAnime`}
+              />
+            </button>
+          </div>
+        </div>
+      </header>
+      <Menu
+        changeToggle={() => setIsOpen(false)}
+        className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
+      />
+    </>;
+  return <>
+    <header
+      className={`${s.root} ${visible ? s.navbarActive : s.navbarInactive} ${
+        isTop ? s.bgOnTop : s.bgOnScroll
+      } ${s.borderBlack}`}
+    >
+      <div className={s.inner}>
+        <Link href={'/'} className={s.logoTypeBlack}>
+          Rifkidhan
+        </Link>
+        <div className={s.innerLeft}>
+          <DarkMode isTop={false} />
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            aria-label="open menu button"
+            name="open menu button"
+          >
+            <Hamburger className={`${s.menuHamburger} hamburgerAnime`} />
+          </button>
+        </div>
+      </div>
+    </header>
+    <Menu
+      changeToggle={() => setIsOpen(false)}
+      className={`${s.menu} menuAnime ${opened ? 'block' : 'hidden'}`}
+    />
+  </>;
 };
 
 export default Header;

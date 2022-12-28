@@ -29,13 +29,13 @@ const MenuItems: FC<MenuItemsType> = ({ changeToggle, ...props }) => {
         {menu?.data.map((menu: any) => (
           <div key={menu.id}>
             {menu.slug === 'home' && (
-              <Link href={`/`} passHref>
-                <a onClick={changeToggle}>{menu.title}</a>
+              <Link href={`/`} passHref onClick={changeToggle}>
+                {menu.title}
               </Link>
             )}
             {menu.slug !== 'home' && (
-              <Link href={`/${menu.slug}`} passHref>
-                <a onClick={changeToggle}>{menu.title}</a>
+              <Link href={`/${menu.slug}`} passHref onClick={changeToggle}>
+                {menu.title}
               </Link>
             )}
           </div>

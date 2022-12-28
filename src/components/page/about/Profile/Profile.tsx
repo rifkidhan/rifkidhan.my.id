@@ -1,5 +1,5 @@
 import { imageUrl } from '@libs/directus';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { FC, useState } from 'react';
 import s from './Profile.module.css';
 

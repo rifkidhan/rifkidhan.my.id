@@ -1,5 +1,5 @@
 import s from "./Banner.module.css";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { imageUrl } from "@libs/directus";
 import { FC, useState } from "react";
 

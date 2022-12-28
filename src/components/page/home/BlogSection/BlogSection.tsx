@@ -26,8 +26,8 @@ const BlogSection: FC<Blogs> = ({ blogs }) => {
           </div>
         ))}
       </div>
-      <Link href={`/blog`} passHref>
-        <a className={s.readMore}>Click here to more post</a>
+      <Link href={`/blog`} passHref className={s.readMore}>
+        Click here to more post
       </Link>
     </section>
   );

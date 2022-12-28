@@ -1,7 +1,7 @@
 import { FC, Fragment, useState } from "react";
 import Markdown from "markdown-to-jsx";
 import s from "./MarkdownToHtml.module.css";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 interface Images {
   src: string;
