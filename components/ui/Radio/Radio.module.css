@@ -1,0 +1,43 @@
+.root {
+  @apply relative inline-flex items-center gap-2;
+}
+.root input {
+  @apply appearance-none;
+}
+.right {
+  @apply flex-row;
+}
+.left {
+  @apply flex-row-reverse;
+}
+.radio {
+  @apply relative h-5 w-5 rounded-full border-2 border-accent-3 bg-accent-2;
+}
+.radio:hover {
+  @apply border-secondary bg-accent-1;
+}
+.radio:checked {
+  @apply border-secondary bg-primary;
+}
+.radio:checked::after {
+  @apply absolute inset-[2px] block h-3 w-3 rounded-full border-2 border-secondary bg-yellow content-[""];
+}
+
+.check {
+  @apply relative h-5 w-5 rounded-full border-2 border-accent-3 bg-accent-2;
+}
+.check:hover {
+  @apply border-secondary bg-accent-1;
+}
+.check:checked {
+  @apply border-yellow bg-yellow;
+}
+.check:checked::after {
+  @apply absolute inset-0 block rounded-full text-xl font-medium leading-none text-secondary content-['\2714'];
+}
+
+.disabled,
+.check:hover,
+.check:checked {
+  @apply cursor-not-allowed border-accent-4 bg-accent-4 shadow-none grayscale;
+}

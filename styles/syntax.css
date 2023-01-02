@@ -1,0 +1,112 @@
+pre[class*='language-'],
+code[class*='language-'] {
+  @apply whitespace-pre break-normal text-left font-mono text-syntax-4;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+pre[class*='language-']::selection,
+code[class*='language-']::selection,
+pre[class*='language-']::mozselection,
+code[class*='language-']::mozselection {
+  @apply text-syntax-5;
+  text-shadow: none;
+}
+@media print {
+  pre[class*='language-'],
+  code[class*='language-'] {
+    text-shadow: none;
+  }
+}
+pre[class*='language-'] {
+  @apply overflow-auto rounded-xl bg-syntax-3 p-5;
+}
+:not(pre) > code[class*='language-'] {
+  @apply rounded-xl bg-syntax-2 p-1 text-syntax-1;
+}
+/*********************************************************
+* Tokens
+*/
+.namespace {
+  @apply opacity-70;
+}
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-syntax-8;
+}
+.token.punctuation {
+  @apply text-blue;
+}
+.token.class-name {
+  @apply text-syntax-12;
+}
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-syntax-9;
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-syntax-10;
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-syntax-11;
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-syntax-15;
+}
+.token.function {
+  @apply text-syntax-14;
+}
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-syntax-13;
+}
+.token.important,
+.token.bold {
+  @apply font-bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  @apply cursor-help;
+}
+/*********************************************************
+* Line highlighting
+*/
+pre[data-line] {
+  @apply relative;
+}
+pre[class*='language-'] > code[class*='language-'] {
+  @apply relative z-[1];
+}
+.line-highlight [data-theme='dark'] {
+  box-shadow: inset 5px 0 0 #f7d87c;
+  @apply pointer-events-none absolute left-0 top-0 z-0 mt-1 whitespace-pre bg-syntax-6;
+}
+.line-highlight {
+  box-shadow: inset 5px 0 0 #bdb089;
+  @apply pointer-events-none absolute left-0 top-0 z-0 mt-1 whitespace-pre bg-syntax-6;
+}

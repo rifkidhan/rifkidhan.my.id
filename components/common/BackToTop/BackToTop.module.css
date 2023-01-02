@@ -1,0 +1,7 @@
+.root {
+  @apply fixed bottom-10 right-10 bg-primary;
+}
+
+.icon {
+  @apply h-6 w-6 stroke-[1.5];
+}

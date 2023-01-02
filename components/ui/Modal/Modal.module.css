@@ -1,0 +1,19 @@
+.root {
+  @apply fixed inset-0 z-[101] flex items-center justify-center bg-secondary/10 backdrop-blur-sm;
+}
+
+.modal {
+  @apply relative mx-auto flex max-h-[90vh] flex-col gap-5 overflow-y-auto rounded-xl border-2 border-secondary bg-primary;
+}
+
+.modal:focus {
+  @apply outline-none;
+}
+
+.topModal {
+  @apply sticky top-0 z-10 flex flex-row items-center justify-between border-b-2 border-secondary bg-primary p-3;
+}
+
+.bottomModal {
+  @apply p-3;
+}
