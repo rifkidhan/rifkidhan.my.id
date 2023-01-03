@@ -12,7 +12,8 @@ import {
 } from '@libs/scroll-lock'
 import cn from 'clsx'
 import { animate } from 'motion'
-import { useSession, signOut } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
+import { getSession } from '@libs/session'
 import s from './Navbar.module.css'
 
 const Navbar = () => {
@@ -20,7 +21,8 @@ const Navbar = () => {
   const outerNavbar = useRef() as MutableRefObject<HTMLElement>
   const innerNavbar = useRef() as MutableRefObject<HTMLDivElement>
   const { displayNavbar, closeNavbar } = useUI()
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
+  const { session } = getSession()
 
   useEffect(() => {
     const outCurrent = outerNavbar.current
@@ -37,6 +39,8 @@ const Navbar = () => {
   }, [displayNavbar])
 
   const rootCN = cn(s.root, 'navbarMenu')
+
+  console.log(session)
 
   const menuItem = [
     {
