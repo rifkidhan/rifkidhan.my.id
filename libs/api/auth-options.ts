@@ -1,7 +1,6 @@
 import type { NextAuthOptions } from 'next-auth'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import GoogleProvider from 'next-auth/providers/google'
-import Credentials from 'next-auth/providers/credentials'
 import prisma from './prisma'
 
 export const authOptions: NextAuthOptions = {
@@ -27,8 +26,8 @@ export const authOptions: NextAuthOptions = {
   // },
 
   pages: {
-    signIn: '/auth/signin',
-    newUser: '/auth/new-user'
+    signIn: '/signin'
+    // newUser: '/auth/new-user'
   },
 
   callbacks: {

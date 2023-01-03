@@ -48,11 +48,11 @@
 .disabled,
 .disabled:hover,
 .disabled:focus {
-  @apply translate-y-0 cursor-not-allowed border-accent-3 bg-accent-4 py-3 px-2 text-secondary shadow-none grayscale;
+  @apply translate-y-0 cursor-not-allowed border-accent-3 bg-accent-2 py-3 px-2 text-accent-5 opacity-50 shadow-none grayscale;
 }
 
 .disabledCircle,
 .disabledCircle:hover,
 .disabledCircle:focus {
-  @apply translate-y-0 cursor-not-allowed border-accent-3 bg-accent-4 p-1.5 text-secondary shadow-none grayscale;
+  @apply translate-y-0 cursor-not-allowed border-accent-3 bg-accent-2 p-1.5 text-accent-5 opacity-50 shadow-none grayscale;
 }

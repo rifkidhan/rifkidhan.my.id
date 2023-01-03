@@ -1,7 +1,12 @@
 'use client'
 
 import { ManagedUI } from '@components/ui'
+import { SessionProvider } from 'next-auth/react'
 
 export default function Provider({ children }: { children?: React.ReactNode }) {
-  return <ManagedUI>{children}</ManagedUI>
+  return (
+    <SessionProvider>
+      <ManagedUI>{children}</ManagedUI>
+    </SessionProvider>
+  )
 }

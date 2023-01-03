@@ -12,6 +12,7 @@ import {
 } from '@libs/scroll-lock'
 import cn from 'clsx'
 import { animate } from 'motion'
+import { useSession, signOut } from 'next-auth/react'
 import s from './Navbar.module.css'
 
 const Navbar = () => {
@@ -19,6 +20,7 @@ const Navbar = () => {
   const outerNavbar = useRef() as MutableRefObject<HTMLElement>
   const innerNavbar = useRef() as MutableRefObject<HTMLDivElement>
   const { displayNavbar, closeNavbar } = useUI()
+  const { data: session } = useSession()
 
   useEffect(() => {
     const outCurrent = outerNavbar.current
@@ -123,6 +125,29 @@ const Navbar = () => {
               </Link>
             </span>
           ))}
+        </div>
+        <div className={s.authWrapper}>
+          {session ? (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => signOut()}
+              className={s.authButton}
+            >
+              Sign Out
+            </Button>
+          ) : (
+            <Link href="/signin" legacyBehavior>
+              <Button
+                variant="secondary"
+                Component="a"
+                onClick={() => closeNavbar()}
+                className={s.authButton}
+              >
+                Sign In
+              </Button>
+            </Link>
+          )}
         </div>
         <div className={s.bottom}>
           <div className={s.items}>© 2022, Rifkidhan</div>

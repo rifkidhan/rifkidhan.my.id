@@ -2,7 +2,9 @@ import {
   ButtonHTMLAttributes,
   FC,
   JSXElementConstructor,
-  AnchorHTMLAttributes
+  AnchorHTMLAttributes,
+  forwardRef,
+  Ref
 } from 'react'
 import { LoadingDots, Icons } from '@components/ui'
 import cn from 'clsx'
@@ -28,6 +30,9 @@ export type ButtonHTMLType<C extends ButtonComponentType = 'button'> =
     ? AnchorHTMLAttributes<HTMLAnchorElement>
     : ButtonHTMLAttributes<HTMLButtonElement>
 
+export type ButtonRefType<C extends ButtonComponentType = 'button'> =
+  C extends 'a' ? HTMLAnchorElement : HTMLButtonElement
+
 type ButtonFC<C extends ButtonComponentType = 'button'> = FC<
   ButtonHTMLType<C> & ButtonProps<C>
 >
@@ -36,7 +41,8 @@ type ButtonType = <C extends ButtonComponentType = 'button'>(
   ...args: Parameters<ButtonFC<C>>
 ) => ReturnType<ButtonFC<C>>
 
-const Button = ((props) => {
+/* eslint-disable-next-line react/display-name */
+const Button = forwardRef((props, ref: Ref<ButtonRefType>) => {
   const {
     className,
     variant = 'primary',
@@ -68,6 +74,7 @@ const Button = ((props) => {
 
   return (
     <Component
+      ref={ref}
       aria-pressed={active}
       data-variant={variant}
       disabled={disabled}

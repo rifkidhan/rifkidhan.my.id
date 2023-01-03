@@ -2,6 +2,7 @@ node_modules
 dist
 .next
 public
+.vscode
 
 # Ignore files for PNPM, NPM and YARN
 pnpm-lock.yaml

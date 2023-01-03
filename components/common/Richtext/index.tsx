@@ -5,11 +5,13 @@ import {
   TextareaHTMLAttributes,
   useState,
   Fragment,
-  useEffect
+  useEffect,
+  lazy,
+  Suspense
 } from 'react'
 import s from './RichText.module.css'
 import { Button } from '@components/ui'
-import { Markdown } from '@components/common'
+// import { Markdown } from '@components/common'
 import {
   useTextAreaMarkdownEditor,
   boldCommand,
@@ -39,6 +41,8 @@ interface RichTextProps
   className?: string
   value?: string
 }
+
+const Markdown = lazy(() => import('@components/common/Markdown'))
 
 const RichText: FC<RichTextProps> = (props) => {
   const { disabled = false, placeholder, value, className, ...rest } = props
@@ -231,7 +235,13 @@ const RichText: FC<RichTextProps> = (props) => {
 
       {preview ? (
         <div className={s.preview}>
-          {value ? <Markdown content={value} /> : 'tidak ada content'}
+          {value ? (
+            <Suspense>
+              <Markdown content={value} />
+            </Suspense>
+          ) : (
+            'tidak ada content'
+          )}
         </div>
       ) : (
         <textarea
