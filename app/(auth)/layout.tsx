@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
-import { Logo } from '@components/ui'
 import { unstable_getServerSession } from 'next-auth'
 import { authOptions } from '@libs/api/auth-options'
+import { Logo } from '@components/ui'
 
 export default async function AuthLayout({
   children

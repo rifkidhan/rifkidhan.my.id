@@ -1,0 +1,44 @@
+.root {
+  @apply relative flex max-h-fit w-full flex-col rounded-xl border-2 border-secondary;
+}
+.divider {
+  @apply h-[2px] w-full bg-secondary;
+}
+
+/* toolbar style */
+.toolbar {
+  @apply relative flex flex-row flex-wrap items-center justify-start gap-x-1 gap-y-2 p-2 md:p-3 lg:p-5;
+}
+.separator {
+  @apply mx-3 h-8 w-[2px] bg-secondary;
+}
+.buttonActive {
+  @apply bg-secondary hover:!shadow-red-down;
+  & > svg {
+    @apply stroke-primary;
+  }
+}
+.icon {
+  @apply w-6 stroke-secondary stroke-2;
+}
+
+/* editor style  */
+
+.editor {
+  @apply mx-auto max-h-[200vh] min-h-[20rem] w-full overflow-y-auto overscroll-y-auto whitespace-pre-wrap break-words p-5 focus:outline-none;
+}
+.counter {
+  @apply px-5 py-2;
+}
+.placeholder {
+  @apply pointer-events-none absolute left-5 top-[14.5rem] inline-block select-none overflow-hidden text-ellipsis
+  whitespace-nowrap text-accent-3 sm:top-[11.4rem] md:top-36 lg:top-28;
+}
+
+/* preview style */
+.preview {
+  @apply p-5;
+}
+.image {
+  @apply aspect-w-1 aspect-h-1 relative w-full xl:aspect-w-16 xl:aspect-h-9;
+}

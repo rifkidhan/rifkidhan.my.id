@@ -12,7 +12,6 @@ export default function AuthPage() {
           variant="color"
           onClick={() => signIn('google', { callbackUrl: '/' })}
           className="bg-blue text-white"
-          icons="google"
         >
           Google
         </Button>

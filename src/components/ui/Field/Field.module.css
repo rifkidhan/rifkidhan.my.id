@@ -1,0 +1,7 @@
+.root {
+  @apply flex flex-col gap-1;
+}
+
+.label {
+  @apply ml-3 text-primary;
+}

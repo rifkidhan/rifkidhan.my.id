@@ -1,0 +1,184 @@
+@import url('./syntax.css');
+@import url('./richtext.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: 255 255 255;
+    --secondary: 23 24 31;
+    --text-base: var(--secondary);
+    --text-primary: var(--secondary);
+    --text-secondary: var(--primary);
+
+    --white: 255 255 255;
+    --black: 23 24 31;
+
+    --accent-1: 244 245 247;
+    --accent-2: 238 239 244;
+    --accent-3: 159 164 180;
+    --accent-4: 150 155 171;
+    --accent-5: 71 74 87;
+
+    --red-1: 249 90 44;
+    --red-2: 255 150 146;
+    --red-3: 255 232 232;
+
+    --blue-1: 25 71 229;
+    --blue-2: 128 148 255;
+    --blue-3: 233 231 252;
+
+    --pink-1: 255 137 187;
+    --pink-2: 255 199 222;
+    --pink-3: 255 243 248;
+
+    --yellow-1: 255 189 18;
+    --yellow-2: 255 212 101;
+    --yellow-3: 255 244 204;
+
+    --green-1: 0 198 174;
+    --green-2: 97 228 197;
+    --green-3: 214 252 247;
+
+    /* syntax higlighting */
+    /* inline */
+    --syntax-1: #00d5ff;
+    --syntax-2: #2c2b2b;
+    /* code block */
+    --syntax-3: #121211;
+    --syntax-4: #dce2e4;
+    --syntax-5: #5a95dd;
+    /* line highlight */
+    --syntax-6: #7c6113;
+    --syntax-7: #bdb089;
+    /* tokens */
+    --syntax-8: #757575;
+
+    --syntax-9: #eeff00;
+    --syntax-10: #4efd7a;
+    --syntax-11: #e6e6e6;
+    --syntax-12: #fb5050;
+    --syntax-13: #f9ad1f;
+    --syntax-14: #fd2ba5;
+    --syntax-15: #01aef9;
+  }
+  .dark {
+    --primary: 23 24 31;
+    --secondary: 255 255 255;
+    --text-base: var(--secondary);
+    --text-primary: var(--secondary);
+    --text-secondary: var(--primary);
+
+    --accent-1: 71 74 87;
+    --accent-2: 150 155 171;
+    --accent-3: 159 164 180;
+    --accent-4: 238 239 244;
+    --accent-5: 244 245 247;
+
+    /* syntax higlighting */
+    /* syntax higlighting */
+    /* inline */
+    --syntax-1: #005161;
+    --syntax-2: #f9f2f4;
+    /* code block */
+    --syntax-3: #f8f5ec;
+    --syntax-4: #1c2426;
+    --syntax-5: #b3d4fc;
+    /* line highlight */
+    --syntax-6: #f7ebc6;
+    --syntax-7: #f7d87c;
+    /* tokens */
+    --syntax-8: #93a1a1;
+
+    --syntax-9: #990055;
+    --syntax-10: #669900;
+    --syntax-11: #a67f59;
+    --syntax-12: #f91a1a;
+    --syntax-13: #ee9900;
+    --syntax-14: #dd4a68;
+    --syntax-15: #0077aa;
+  }
+
+  html,
+  body {
+    @apply box-border h-full touch-manipulation overscroll-x-none bg-primary font-sans font-medium antialiased selection:bg-yellow;
+
+    scrollbar-color: var(--red-2) transparent;
+  }
+  body {
+    @apply relative m-0 min-h-full text-sm md:text-base;
+  }
+  h1 {
+    @apply font-sans text-5xl leading-[.9] tracking-[-0.01rem] md:text-6xl;
+  }
+  h2 {
+    @apply font-sans text-3xl tracking-[-0.01rem] md:text-4xl;
+  }
+  h3 {
+    @apply font-sans text-2xl tracking-[-0.01rem] md:text-3xl;
+  }
+  h4 {
+    @apply font-sans text-xl tracking-[-0.01rem] md:text-2xl;
+  }
+  h5 {
+    @apply font-sans text-lg leading-4 md:text-xl;
+  }
+  h6 {
+    @apply text-base md:text-lg;
+  }
+  :not(pre) > code {
+    @apply rounded-md bg-secondary py-1 px-1.5 text-syntax-1;
+  }
+}
+
+@layer components {
+  .h1 {
+    @apply font-sans text-6xl leading-[.9] tracking-[-0.01rem] md:text-8xl;
+  }
+  .h2 {
+    @apply font-sans text-4xl tracking-[-0.01rem] md:text-6xl;
+  }
+  .h3 {
+    @apply font-sans text-2xl tracking-[-0.01rem] md:text-4xl;
+  }
+  .h4 {
+    @apply font-sans text-xl tracking-[-0.01rem] md:text-3xl;
+  }
+  .h5 {
+    @apply font-sans text-lg leading-4 md:text-xl;
+  }
+  .h6 {
+    @apply text-base md:text-lg;
+  }
+  .small {
+    @apply text-sm;
+  }
+  .fit {
+    min-height: calc(100vh - 88px);
+  }
+}
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    @apply h-2 w-2 overflow-auto;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-red;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-red-2;
+  }
+  .skeleton {
+    @apply relative isolate overflow-hidden shadow-xl shadow-accent-4/10
+    before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite]
+    before:border-t before:border-accent-4/20 before:bg-gradient-to-r before:from-transparent before:via-secondary/30 before:to-transparent;
+  }
+}

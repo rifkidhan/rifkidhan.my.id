@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Navbar, BackToTop } from '@components/common'
 import { useUI } from '@components/ui'
 import { spring, timeline, stagger } from 'motion'
@@ -90,6 +90,7 @@ export default function ClientsComponent() {
       navbarOut()
     }
   }, [displayNavbar])
+
   return (
     <>
       <Navbar />

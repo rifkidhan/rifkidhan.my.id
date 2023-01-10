@@ -1,8 +1,11 @@
 import prisma from '@libs/api/prisma'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
-import { Markdown } from '@components/common'
 import { imageUrl, blurDataUrl } from '@libs/constants'
+import { Reader } from '@components/common'
+
+export const dynamic = 'error',
+  dynamicParams = true
 
 async function loadBlogs(slug: string) {
   const data = await prisma.posts.findUnique({
@@ -48,8 +51,7 @@ export default async function BlogPage({ params }: { params: any }) {
           blurDataURL={blurDataUrl}
         />
       </div>
-
-      <Markdown content={data.content} />
+      <Reader editorState={data.content} />
     </main>
   )
 }
