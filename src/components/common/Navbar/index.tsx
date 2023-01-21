@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, MutableRefObject } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useUI, Logo, Button } from '@components/ui'
 import {
   disableBodyScroll,
@@ -48,6 +48,7 @@ const Navbar = () => {
   const innerNavbar = useRef() as MutableRefObject<HTMLDivElement>
   const { displayNavbar, closeNavbar } = useUI()
   const { data: session } = useSession()
+  const router = useRouter()
 
   useEffect(() => {
     const outCurrent = outerNavbar.current
@@ -143,7 +144,10 @@ const Navbar = () => {
               <Link
                 href={item.link}
                 onClick={() => closeNavbar()}
-                className={cn(pathname === item.link && 'text-red', 'h1')}
+                className={cn(
+                  pathname === item.link && 'text-red',
+                  'display-md'
+                )}
                 onMouseEnter={() => onMouseEnter(item.name)}
                 onMouseLeave={() => onMouseLeave(item.name)}
               >
@@ -157,7 +161,10 @@ const Navbar = () => {
             <Button
               type="button"
               variant="secondary"
-              onClick={() => signOut()}
+              onClick={() => {
+                signOut()
+                router.refresh()
+              }}
               className={s.authButton}
             >
               Sign Out

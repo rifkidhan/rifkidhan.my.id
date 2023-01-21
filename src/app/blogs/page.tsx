@@ -5,8 +5,6 @@ import { imageUrl } from '@libs/constants'
 import cn from 'clsx'
 import s from './Blogs.module.css'
 
-export const dynamic = 'error'
-
 async function loadBlogs() {
   const data = await prisma.posts.findMany({
     select: {

@@ -2,7 +2,9 @@ import prisma from '@libs/api/prisma'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { imageUrl, blurDataUrl } from '@libs/constants'
-import { Reader } from '@components/common'
+import { lexicalParser } from '@components/common'
+import MDXContent from './md-remote'
+import s from './Blog.module.css'
 
 export const dynamic = 'error',
   dynamicParams = true
@@ -37,21 +39,27 @@ export default async function BlogPage({ params }: { params: any }) {
     notFound()
   }
 
+  const content = lexicalParser(data.content)
+
   return (
-    <main className="container my-10 mx-auto flex flex-col gap-10">
+    <main className={s.main}>
       <h1>{data.title}</h1>
-      <p className="h5 text-accent-4">{data.description}</p>
-      <div className="relative h-[90vh] w-full overflow-hidden rounded-xl border-2 border-secondary">
+      <p className="h6 text-accent-5">{data.description}</p>
+      <div className={s.image}>
         <Image
           src={imageUrl + '/blog/' + data.thumbnail}
           alt={data.title}
           fill
-          className="h-full w-full object-cover object-center"
+          className={s.imageItem}
           placeholder="blur"
           blurDataURL={blurDataUrl}
         />
       </div>
-      <Reader editorState={data.content} />
+
+      <article className={s.article}>
+        {/* @ts-expect-error Server Component */}
+        <MDXContent source={content} />
+      </article>
     </main>
   )
 }

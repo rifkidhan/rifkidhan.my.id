@@ -6,7 +6,7 @@ interface FieldProps extends LabelHTMLAttributes<HTMLLabelElement> {
   label?: string
 }
 
-const Field: FC<FieldProps> = (props) => {
+const Field = ((props) => {
   const { label, children, ...rest } = props
   return (
     <div className={s.root}>
@@ -16,6 +16,6 @@ const Field: FC<FieldProps> = (props) => {
       {children}
     </div>
   )
-}
+}) satisfies FC<FieldProps>
 
 export default Field

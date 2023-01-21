@@ -1,0 +1,43 @@
+.main {
+  @apply container my-10 mx-auto flex flex-col gap-10;
+}
+.article {
+  @apply prose max-w-none;
+}
+
+.image {
+  @apply aspect-h-9 aspect-w-16 relative overflow-hidden rounded-xl border-2 border-secondary;
+}
+.imageItem {
+  @apply object-cover object-center;
+}
+
+.lexical__listItemChecked {
+  @apply line-through;
+}
+.lexical__listItemUnchecked:before,
+.lexical__listItemChecked:before {
+  @apply absolute top-[2px] left-0 block h-4 w-4 cursor-pointer bg-cover content-[''];
+}
+.lexical__listItemUnchecked[dir='rtl']:before,
+.lexical__listItemChecked[dir='rtl']:before {
+  @apply left-auto right-0;
+}
+.lexical__listItemUnchecked:focus:before,
+.lexical__listItemChecked:focus:before {
+  @apply shadow-down-1;
+}
+.lexical__listItemUnchecked:before {
+  @apply rounded-full border border-secondary;
+}
+.lexical__listItemChecked:before {
+  @apply rounded-full border-2 border-secondary bg-yellow-1 bg-no-repeat;
+}
+.lexical__listItemChecked:after {
+  @apply absolute block rotate-45 cursor-pointer border-r-2 border-b-2 border-secondary content-[''];
+  top: 6px;
+  width: 3px;
+  left: 7px;
+  right: 7px;
+  height: 6px;
+}

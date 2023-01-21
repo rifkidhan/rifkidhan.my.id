@@ -27,7 +27,7 @@ export default async function handler(
           }
         })
         if (post) {
-          await res.revalidate('/blogs')
+          // await res.revalidate('/blogs')
           return res.status(200).json(post)
         }
       } catch (e: any) {

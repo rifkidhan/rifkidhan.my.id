@@ -47,7 +47,7 @@ import {
 } from '@lexical/utils'
 import getSelectedNode from '../utils/getSelectedNode'
 import { sanitizeUrl } from '../utils/url'
-import { Button, Dropdown, DropdownItem } from '@components/ui'
+import { Button, Dropdown, DropdownItem, useUI } from '@components/ui'
 import Toolbaricons from './Toolbaricons'
 import s from '../Editor.module.css'
 
@@ -89,6 +89,8 @@ const BlockFormat = ({
   editor: LexicalEditor
   disabled?: boolean
 }): JSX.Element => {
+  const { setModalView, openModal } = useUI()
+
   const formatParagraph = () => {
     if (blockType !== 'paragraph') {
       editor.update(() => {
@@ -251,14 +253,15 @@ const BlockFormat = ({
       name: 'Add Separator',
       command: () =>
         editor.dispatchCommand(INSERT_HORIZONTAL_RULE_COMMAND, undefined)
+    },
+    {
+      id: 'image',
+      name: 'Add Image',
+      command: () => {
+        openModal()
+        setModalView('EDITOR_IMAGE')
+      }
     }
-    // {
-    // 	id: 'image',
-    // 	name: 'Add Image',
-    // 	command: () => {
-    // 		activeModal.set('image-plugin-lexical');
-    // 	}
-    // }
   ]
 
   return (

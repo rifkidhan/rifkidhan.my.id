@@ -17,11 +17,14 @@ import {
   CodeHighlightingPlugin,
   HorizontalRulePlugin,
   LinkPlugin,
-  FloatingLinkEditor
+  FloatingLinkEditor,
+  ImagePlugin
 } from './plugins'
 import s from './Editor.module.css'
 import theme from './theme'
 import { EditorNode } from './nodes'
+import dynamic from 'next/dynamic'
+import { useUI } from '@components/ui'
 
 type onChange = (editorState: EditorState, editor: LexicalEditor) => void
 
@@ -32,6 +35,15 @@ interface EditorProps {
   initialEditorState?: string
 }
 
+const Modal = dynamic(() => import('@components/ui/Modal'), { ssr: false })
+const ImageModalPlugin = dynamic(
+  () =>
+    import('@components/common/Editor/plugins/ImagePlugin').then(
+      (mod) => mod.ImagePluginModal
+    ),
+  { ssr: false }
+)
+
 const Editor = ({
   onChange,
   placeholder = 'write something',
@@ -41,6 +53,7 @@ const Editor = ({
   const [floatingElement, setFloatingElement] = useState<HTMLDivElement | null>(
     null
   )
+  const { modalView, displayModal, closeModal } = useUI()
 
   const floating = (_floatingElement: HTMLDivElement) => {
     if (_floatingElement !== null) {
@@ -80,6 +93,7 @@ const Editor = ({
         <CheckListPlugin />
         {floatingElement && <FloatingLinkEditor anchorElem={floatingElement} />}
         <ListPlugin />
+        <ImagePlugin />
         <AutoFocusPlugin />
         <HistoryPlugin />
         <AutoLinkPlugin />
@@ -88,6 +102,13 @@ const Editor = ({
         <LinkPlugin />
         {onChange && <OnChangePlugin onChange={onChange} />}
       </div>
+      {displayModal && modalView === 'EDITOR_IMAGE' ? (
+        <Modal title="Insert Image" onClose={() => closeModal()}>
+          <ImageModalPlugin onClose={() => closeModal()} />
+        </Modal>
+      ) : (
+        <></>
+      )}
     </LexicalComposer>
   )
 }

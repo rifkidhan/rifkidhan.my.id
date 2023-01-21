@@ -1,0 +1,9 @@
+.main {
+  @apply my-10 flex flex-col items-center gap-10;
+}
+.section {
+  @apply container mx-auto flex min-h-screen flex-col items-center justify-center gap-5;
+}
+.blogs {
+  @apply grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}

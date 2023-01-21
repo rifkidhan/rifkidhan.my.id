@@ -20,21 +20,46 @@ export const authOptions: NextAuthOptions = {
     })
   ],
 
-  // session: {
-  //   strategy: 'jwt',
-  //   maxAge: 60 * 60 * 24 * 30
-  // },
+  session: {
+    strategy: 'jwt'
+  },
 
   pages: {
     signIn: '/signin'
-    // newUser: '/auth/new-user'
   },
 
   callbacks: {
-    async session({ session, user }) {
-      session.user.username = user.username
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id
+        session.user.username = token.username
+        session.user.email = token.email
+        session.user.name = token.name
+        session.user.image = token.picture
+      }
 
       return session
+    },
+
+    async jwt({ token, user }) {
+      const isUser = await prisma.user.findFirst({
+        where: {
+          email: token.email
+        }
+      })
+
+      if (!isUser) {
+        token.id = user!.id
+
+        return token
+      }
+
+      return {
+        id: isUser.id,
+        name: isUser.name,
+        email: isUser.email,
+        picture: isUser.image
+      }
     }
   }
 }

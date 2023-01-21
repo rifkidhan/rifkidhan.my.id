@@ -90,6 +90,7 @@ const FloatingLinkEditor = ({
       } else {
         rect = domRange.getBoundingClientRect()
       }
+
       let virtualElement: VirtualElement = {
         getBoundingClientRect() {
           return {
@@ -97,10 +98,10 @@ const FloatingLinkEditor = ({
             height: rect.height,
             x: rect.x,
             y: rect.y,
-            top: rect.y,
-            left: rect.x,
-            right: rect.x,
-            bottom: rect.y
+            top: rect.top,
+            left: rect.left,
+            right: rect.right,
+            bottom: rect.bottom
           }
         }
       }
@@ -114,7 +115,7 @@ const FloatingLinkEditor = ({
 
       // setFloatingElemPosition(rect, editorElem, anchorElem);
       setLastSelection(selection)
-    } else if (!activeElement || activeElement.className !== 'link-input') {
+    } else if (!activeElement) {
       if (rootElement !== null) {
         // setFloatingElemPosition(null, editorElem, anchorElem);
       }

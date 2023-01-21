@@ -1,0 +1,21 @@
+.url {
+  @apply flex flex-col gap-3;
+}
+.galleryWrapper {
+  @apply flex flex-col gap-3;
+}
+.gallery {
+  @apply grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3;
+}
+.imageWrapper {
+  @apply h-auto max-h-64 w-full translate-y-0 overflow-hidden rounded-xl border-2 border-secondary transition-all duration-200 ease-in-out;
+  &:hover {
+    @apply -translate-y-1 shadow-down-2;
+  }
+}
+.imageItems {
+  @apply h-full w-full object-cover;
+}
+.imageSingle {
+  @apply h-auto max-w-xl;
+}

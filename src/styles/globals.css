@@ -5,6 +5,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (prefers-color-scheme: light) {
+  .shiki .dark-plus {
+    display: none;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .shiki .light-plus {
+    display: none;
+  }
+}
+
 @layer base {
   :root {
     --primary: 255 255 255;
@@ -63,6 +74,27 @@
     --syntax-13: #f9ad1f;
     --syntax-14: #fd2ba5;
     --syntax-15: #01aef9;
+
+    --shiki-color-text: #dce2e4;
+    --shiki-color-background: #18191f;
+    /* text-syntax-9 */
+    --shiki-token-constant: #eeff00;
+    /* text-syntax-10 */
+    --shiki-token-string: #4efd7a;
+    /* text-syntax-8 */
+    --shiki-token-comment: #757575;
+    /* text-syntax-15 */
+    --shiki-token-keyword: #01aef9;
+    /* text-syntax-13 */
+    --shiki-token-parameter: #f9ad1f;
+    /* text-syntax-14 */
+    --shiki-token-function: #fd2ba5;
+    /* text-syntax-12 */
+    --shiki-token-string-expression: #fb5050;
+    /* text-blue */
+    --shiki-token-punctuation: #1947e5;
+    /* text-syntax-11 */
+    --shiki-token-link: #4efd7a;
   }
   .dark {
     --primary: 23 24 31;
@@ -99,6 +131,27 @@
     --syntax-13: #ee9900;
     --syntax-14: #dd4a68;
     --syntax-15: #0077aa;
+
+    --shiki-color-text: #1c2426;
+    --shiki-color-background: #ffffff;
+    /* text-syntax-9 */
+    --shiki-token-constant: #990055;
+    /* text-syntax-10 */
+    --shiki-token-string: #669900;
+    /* text-syntax-8 */
+    --shiki-token-comment: #93a1a1;
+    /* text-syntax-15 */
+    --shiki-token-keyword: #0077aa;
+    /* text-syntax-13 */
+    --shiki-token-parameter: #ee9900;
+    /* text-syntax-14 */
+    --shiki-token-function: #dd4a68;
+    /* text-syntax-12 */
+    --shiki-token-string-expression: #f91a1a;
+    /* text-blue */
+    --shiki-token-punctuation: #1947e5;
+    /* text-syntax-11 */
+    --shiki-token-link: #ee0000;
   }
 
   html,
@@ -111,46 +164,56 @@
     @apply relative m-0 min-h-full text-sm md:text-base;
   }
   h1 {
-    @apply font-sans text-5xl leading-[.9] tracking-[-0.01rem] md:text-6xl;
+    @apply font-sans text-6xl font-semibold leading-[.9] tracking-[-0.01rem] md:text-7xl;
   }
   h2 {
-    @apply font-sans text-3xl tracking-[-0.01rem] md:text-4xl;
+    @apply font-sans text-3xl font-semibold tracking-[-0.01rem] md:text-5xl;
   }
   h3 {
-    @apply font-sans text-2xl tracking-[-0.01rem] md:text-3xl;
+    @apply font-sans text-2xl font-semibold tracking-[-0.01rem] md:text-3xl;
   }
   h4 {
-    @apply font-sans text-xl tracking-[-0.01rem] md:text-2xl;
+    @apply font-sans text-xl font-semibold tracking-[-0.01rem] md:text-2xl;
   }
   h5 {
-    @apply font-sans text-lg leading-4 md:text-xl;
+    @apply font-sans text-lg font-semibold leading-4 md:text-xl;
   }
   h6 {
-    @apply text-base md:text-lg;
+    @apply font-semibold text-base md:text-lg;
   }
   :not(pre) > code {
     @apply rounded-md bg-secondary py-1 px-1.5 text-syntax-1;
   }
+
+  .shiki {
+    @apply relative my-2 block overflow-x-auto break-normal rounded-xl p-5 font-mono;
+  }
 }
 
 @layer components {
+  .display-md {
+    @apply font-sans text-8xl leading-[.9] tracking-[-0.01rem] md:text-9xl;
+  }
+  .display-sm {
+    @apply font-sans text-7xl leading-[.9] tracking-[-0.01rem] md:text-8xl;
+  }
   .h1 {
-    @apply font-sans text-6xl leading-[.9] tracking-[-0.01rem] md:text-8xl;
+    @apply font-sans text-6xl font-semibold leading-[.9] tracking-[-0.01rem] md:text-7xl;
   }
   .h2 {
-    @apply font-sans text-4xl tracking-[-0.01rem] md:text-6xl;
+    @apply font-sans text-3xl font-semibold tracking-[-0.01rem] md:text-5xl;
   }
   .h3 {
-    @apply font-sans text-2xl tracking-[-0.01rem] md:text-4xl;
+    @apply font-sans text-2xl font-semibold tracking-[-0.01rem] md:text-3xl;
   }
   .h4 {
-    @apply font-sans text-xl tracking-[-0.01rem] md:text-3xl;
+    @apply font-sans text-xl font-semibold tracking-[-0.01rem] md:text-2xl;
   }
   .h5 {
-    @apply font-sans text-lg leading-4 md:text-xl;
+    @apply font-sans text-lg font-semibold leading-4 md:text-xl;
   }
   .h6 {
-    @apply text-base md:text-lg;
+    @apply font-semibold text-base md:text-lg;
   }
   .small {
     @apply text-sm;

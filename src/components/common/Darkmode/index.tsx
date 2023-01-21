@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTheme } from '@components/themes'
+import { useTheme } from 'next-themes'
 import { timeline, spring, stagger } from 'motion'
 import { Button } from '@components/ui'
+import { Monitor } from 'lucide-react'
 
 const DarkmodeToggle = ({ className }: { className?: string }) => {
   const { resolvedTheme, setTheme } = useTheme()
@@ -23,6 +24,9 @@ const DarkmodeToggle = ({ className }: { className?: string }) => {
 
   useEffect(() => {
     setMounted(true)
+  }, [mounted])
+
+  useEffect(() => {
     if (mounted && resolvedTheme === 'dark') {
       timeline(
         [
@@ -47,7 +51,11 @@ const DarkmodeToggle = ({ className }: { className?: string }) => {
   }, [mounted, resolvedTheme])
 
   if (!mounted) {
-    return null
+    return (
+      <div className="skeleton rounded-full border-2 border-secondary p-1.5">
+        <Monitor />
+      </div>
+    )
   }
 
   return (

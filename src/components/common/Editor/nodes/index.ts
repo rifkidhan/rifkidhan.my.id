@@ -4,6 +4,7 @@ import { ListItemNode, ListNode } from '@lexical/list'
 import { HeadingNode, QuoteNode } from '@lexical/rich-text'
 import { CodeHighlightNode, CodeNode } from '@lexical/code'
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode'
+import { ImageNode } from './ImageNode'
 
 export const EditorNode: Array<Klass<LexicalNode>> = [
   AutoLinkNode,
@@ -14,5 +15,6 @@ export const EditorNode: Array<Klass<LexicalNode>> = [
   QuoteNode,
   CodeHighlightNode,
   CodeNode,
-  HorizontalRuleNode
+  HorizontalRuleNode,
+  ImageNode
 ]

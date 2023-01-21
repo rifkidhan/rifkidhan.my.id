@@ -36,29 +36,27 @@ const BlogCard = ((props) => {
 
   return (
     <Base className={rootCN} {...style} {...rest}>
-      <div>
-        {thumbnail ? (
-          <div className="aspect-w-4 aspect-h-3 relative overflow-hidden">
-            <Image
-              src={thumbnail}
-              alt={title ?? 'image from blog'}
-              fill
-              className={imageCN}
-              sizes="50vw"
-              quality={50}
-              placeholder="blur"
-              blurDataURL={blurDataUrl}
-            />
-          </div>
-        ) : (
-          <div className="bg-red">
-            <ImageIcon stroke="none" className="stroke-white" />
-          </div>
-        )}
-      </div>
-      <div className="p-5">
-        <h4 className="line-clamp-2">{title}</h4>
-        <div className="line-clamp-4">{description}</div>
+      {thumbnail ? (
+        <div className={s.imageWrapper}>
+          <Image
+            src={thumbnail}
+            alt={title ?? 'image from blog'}
+            fill
+            className={imageCN}
+            sizes="50vw"
+            quality={50}
+            placeholder="blur"
+            blurDataURL={blurDataUrl}
+          />
+        </div>
+      ) : (
+        <div className="bg-red">
+          <ImageIcon stroke="none" className="stroke-white" />
+        </div>
+      )}
+      <div className="inline-flex flex-col gap-3 p-5">
+        <h4 className="line-clamp-3">{title}</h4>
+        <p className="line-clamp-5">{description}</p>
       </div>
     </Base>
   )

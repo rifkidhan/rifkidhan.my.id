@@ -1,0 +1,6 @@
+.imageWrapper {
+  @apply aspect-h-9 aspect-w-16 relative overflow-hidden rounded-xl border-2 border-secondary;
+}
+.imageItem {
+  @apply object-cover object-center;
+}

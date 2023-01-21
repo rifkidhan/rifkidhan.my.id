@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { ThemeProvider } from '@components/themes'
 
 export interface State {
   displayNavbar: boolean
@@ -22,7 +21,7 @@ type Action =
   | { type: 'CLOSE_MODAL' }
   | { type: 'SET_MODAL_VIEWS'; view: MODAL_VIEWS }
 
-type MODAL_VIEWS = 'FILES_MODAL'
+type MODAL_VIEWS = 'FILES_MODAL' | 'EDITOR_IMAGE'
 
 export const UIContext = React.createContext<State | any>(initialState)
 

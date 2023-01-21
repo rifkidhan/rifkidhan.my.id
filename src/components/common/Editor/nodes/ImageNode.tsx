@@ -1,11 +1,3 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 import type {
   DOMConversionMap,
   DOMConversionOutput,
@@ -14,32 +6,27 @@ import type {
   LexicalEditor,
   LexicalNode,
   NodeKey,
-  SerializedEditor,
   SerializedLexicalNode,
-  Spread
+  Spread,
+  LexicalCommand
 } from 'lexical'
 
-import { $applyNodeReplacement, createEditor, DecoratorNode } from 'lexical'
-import * as React from 'react'
-import { Suspense } from 'react'
-import Image from 'next/image'
-
-const ImageComponent = React.lazy(
-  // @ts-ignore
-  () => import('./ImageComponent')
-)
+import { $applyNodeReplacement, DecoratorNode, createCommand } from 'lexical'
+import ImageComponent from './ImageComponent'
 
 export interface ImagePayload {
   altText: string
-  caption?: LexicalEditor
   height?: number
-  key?: NodeKey
-  maxWidth?: number
-  showCaption?: boolean
-  src: string
   width?: number
-  captionsEnabled?: boolean
+  key?: NodeKey
+  src: string
+  title?: string
 }
+
+export type InsertImagePayload = Readonly<ImagePayload>
+
+export const INSERT_IMAGE_COMMAND: LexicalCommand<InsertImagePayload> =
+  createCommand('INSERT_IMAGE_COMMAND')
 
 function convertImageElement(domNode: Node): null | DOMConversionOutput {
   if (domNode instanceof HTMLImageElement) {
@@ -53,12 +40,10 @@ function convertImageElement(domNode: Node): null | DOMConversionOutput {
 export type SerializedImageNode = Spread<
   {
     altText: string
-    caption: SerializedEditor
     height?: number
-    maxWidth: number
-    showCaption: boolean
     src: string
     width?: number
+    title?: string
     type: 'image'
     version: 1
   },
@@ -68,13 +53,9 @@ export type SerializedImageNode = Spread<
 export class ImageNode extends DecoratorNode<JSX.Element> {
   __src: string
   __altText: string
-  __width: 'inherit' | number
-  __height: 'inherit' | number
-  __maxWidth: number
-  __showCaption: boolean
-  __caption: LexicalEditor
-  // Captions cannot yet be used within editor cells
-  __captionsEnabled: boolean
+  __width: number | undefined
+  __height: number | undefined
+  __title: string | undefined
 
   static getType(): string {
     return 'image'
@@ -84,32 +65,23 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     return new ImageNode(
       node.__src,
       node.__altText,
-      node.__maxWidth,
       node.__width,
       node.__height,
-      node.__showCaption,
-      node.__caption,
-      node.__captionsEnabled,
-      node.__key
+      node.__key,
+      node.__title
     )
   }
 
   static importJSON(serializedNode: SerializedImageNode): ImageNode {
-    const { altText, height, width, maxWidth, caption, src, showCaption } =
-      serializedNode
+    const { altText, height, width, src, title } = serializedNode
     const node = $createImageNode({
       altText,
       height,
-      maxWidth,
-      showCaption,
       src,
-      width
+      width,
+      title
     })
-    const nestedEditor = node.__caption
-    const editorState = nestedEditor.parseEditorState(caption.editorState)
-    if (!editorState.isEmpty()) {
-      nestedEditor.setEditorState(editorState)
-    }
+
     return node
   }
 
@@ -117,8 +89,13 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     const element = document.createElement('img')
     element.setAttribute('src', this.__src)
     element.setAttribute('alt', this.__altText)
-    element.setAttribute('width', this.__width.toString())
-    element.setAttribute('height', this.__height.toString())
+    if (this.__height && this.__width) {
+      element.setAttribute('width', this.__width.toString())
+      element.setAttribute('height', this.__height.toString())
+    }
+    if (this.__title) {
+      element.setAttribute('title', this.__title)
+    }
     return { element }
   }
 
@@ -134,63 +111,45 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
   constructor(
     src: string,
     altText: string,
-    maxWidth: number,
-    width?: 'inherit' | number,
-    height?: 'inherit' | number,
-    showCaption?: boolean,
-    caption?: LexicalEditor,
-    captionsEnabled?: boolean,
-    key?: NodeKey
+    width?: number,
+    height?: number,
+    key?: NodeKey,
+    title?: string
   ) {
     super(key)
     this.__src = src
     this.__altText = altText
-    this.__maxWidth = maxWidth
-    this.__width = width || 'inherit'
-    this.__height = height || 'inherit'
-    this.__showCaption = showCaption || false
-    this.__caption = caption || createEditor()
-    this.__captionsEnabled = captionsEnabled || captionsEnabled === undefined
+    this.__width = width
+    this.__height = height
+    this.__title = title
   }
 
   exportJSON(): SerializedImageNode {
     return {
       altText: this.getAltText(),
-      caption: this.__caption.toJSON(),
-      height: this.__height === 'inherit' ? 0 : this.__height,
-      maxWidth: this.__maxWidth,
-      showCaption: this.__showCaption,
+      height: this.__height,
       src: this.getSrc(),
+      title: this.getTitleText(),
       type: 'image',
       version: 1,
-      width: this.__width === 'inherit' ? 0 : this.__width
+      width: this.__width
     }
   }
 
-  setWidthAndHeight(
-    width: 'inherit' | number,
-    height: 'inherit' | number
-  ): void {
+  setWidthAndHeight(width: number, height: number): void {
     const writable = this.getWritable()
     writable.__width = width
     writable.__height = height
   }
 
-  setShowCaption(showCaption: boolean): void {
-    const writable = this.getWritable()
-    writable.__showCaption = showCaption
-  }
-
-  // View
-
   createDOM(config: EditorConfig): HTMLElement {
-    const span = document.createElement('span')
+    const wrap = document.createElement('div')
     const theme = config.theme
     const className = theme.image
     if (className !== undefined) {
-      span.className = className
+      wrap.className = className
     }
-    return span
+    return wrap
   }
 
   updateDOM(): false {
@@ -205,22 +164,20 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
     return this.__altText
   }
 
-  decorate(): JSX.Element {
+  getTitleText(): string | undefined {
+    return this.__title
+  }
+
+  decorate(editor: LexicalEditor): JSX.Element {
     return (
-      <Suspense fallback={null}>
-        <ImageComponent
-          src={this.__src}
-          altText={this.__altText}
-          width={this.__width}
-          height={this.__height}
-          maxWidth={this.__maxWidth}
-          nodeKey={this.getKey()}
-          showCaption={this.__showCaption}
-          caption={this.__caption}
-          captionsEnabled={this.__captionsEnabled}
-          resizable={true}
-        />
-      </Suspense>
+      <ImageComponent
+        editor={editor}
+        nodeKey={this.__key}
+        src={this.__src}
+        alt={this.__altText}
+        height={this.__height}
+        width={this.__width}
+      />
     )
   }
 }
@@ -228,27 +185,11 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
 export function $createImageNode({
   altText,
   height,
-  maxWidth = 500,
-  captionsEnabled,
   src,
   width,
-  showCaption,
-  caption,
   key
 }: ImagePayload): ImageNode {
-  return $applyNodeReplacement(
-    new ImageNode(
-      src,
-      altText,
-      maxWidth,
-      width,
-      height,
-      showCaption,
-      caption,
-      captionsEnabled,
-      key
-    )
-  )
+  return $applyNodeReplacement(new ImageNode(src, altText, width, height, key))
 }
 
 export function $isImageNode(

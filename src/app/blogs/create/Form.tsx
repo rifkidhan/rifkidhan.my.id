@@ -3,11 +3,15 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { Editor } from '@components/common'
+// import { Editor } from '@components/common'
 import { useRouter } from 'next/navigation'
-import { Button, Input, Field, Toggle } from '@components/ui'
+import { Button, Input, Field, Toggle, Dropzone } from '@components/ui'
 import { Edit3 } from 'lucide-react'
 import slugify from '@libs/slugify'
+
+const Editor = dynamic(() =>
+  import('@components/common/Editor').then((mod) => mod.Editor)
+)
 
 export default function CreatePost() {
   const [content, setContent] = useState<{
@@ -157,19 +161,15 @@ export default function CreatePost() {
       </Field>
 
       <Field label="Thumbnail" htmlFor="thumbnail">
-        <Input
-          type="file"
+        <Dropzone
           name="thumbnail"
           id="thumbnail"
-          placeholder="tambahkan slug kamu"
-          icons={<Edit3 />}
-          // value={content.slug}
           accept="image/*"
           onChange={uploadPreview}
         />
       </Field>
 
-      {previewFile && (
+      {/* {previewFile && (
         <Image
           src={previewFile}
           alt="preview image"
@@ -178,7 +178,7 @@ export default function CreatePost() {
           height={500}
           className="h-auto w-auto"
         />
-      )}
+      )} */}
 
       <Field label="Konten Post" htmlFor="content">
         <Editor

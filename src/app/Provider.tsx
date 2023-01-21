@@ -2,11 +2,14 @@
 
 import { ManagedUI } from '@components/ui'
 import { SessionProvider } from 'next-auth/react'
+import Themes from './Themes'
 
 export default function Provider({ children }: { children?: React.ReactNode }) {
   return (
     <SessionProvider>
-      <ManagedUI>{children}</ManagedUI>
+      <Themes>
+        <ManagedUI>{children}</ManagedUI>
+      </Themes>
     </SessionProvider>
   )
 }
