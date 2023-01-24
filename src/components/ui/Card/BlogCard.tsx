@@ -8,7 +8,7 @@ import cn from 'clsx'
 
 interface BlogCard extends CardProps {
   className?: string
-  variant?: string
+  variant?: 'list' | 'card'
   title?: string
   description?: string
   thumbnail?: string | null
@@ -26,16 +26,21 @@ const BlogCard = ((props) => {
     avatar,
     author,
     date,
-    style = {},
     children,
+    variant = 'card',
     ...rest
   } = props
 
-  const rootCN = cn(className, s.blog)
+  const rootCN = cn(className, {
+    [s.blog]: variant === 'card',
+    [s.list]: variant === 'list'
+  })
+
   const imageCN = cn(s.image)
+  const propertiesCN = cn(s.properties, s.propertiesList)
 
   return (
-    <Base className={rootCN} {...style} {...rest}>
+    <Base className={rootCN} {...rest}>
       {thumbnail ? (
         <div className={s.imageWrapper}>
           <Image
@@ -54,10 +59,11 @@ const BlogCard = ((props) => {
           <ImageIcon stroke="none" className="stroke-white" />
         </div>
       )}
-      <div className="inline-flex flex-col gap-3 p-5">
+      <div className={propertiesCN}>
         <h4 className="line-clamp-3">{title}</h4>
         <p className="line-clamp-5">{description}</p>
       </div>
+      {children}
     </Base>
   )
 }) satisfies FC<BlogCard>

@@ -33,6 +33,7 @@ export async function generateStaticParams() {
 
 export default async function BlogPage({ params }: { params: any }) {
   const { slug } = params
+
   const data = await loadBlogs(slug)
 
   if (!data) {

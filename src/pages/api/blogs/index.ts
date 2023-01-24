@@ -7,9 +7,25 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
-    const session = await unstable_getServerSession(req, res, authOptions)
-    if (session) {
+  const session = await unstable_getServerSession(req, res, authOptions)
+  if (session) {
+    if (req.method === 'GET') {
+      try {
+        const id = req.query.id as string
+        const data = await prisma.posts.findFirst({
+          where: {
+            id
+          }
+        })
+        if (data) {
+          return res.status(200).json(data)
+        }
+      } catch (e: any) {
+        console.error(e)
+        return res.status(400).json({ error: e.toString() })
+      }
+    }
+    if (req.method === 'POST') {
       try {
         const body = JSON.parse(req.body)
         const date = new Date().toISOString()
@@ -27,17 +43,55 @@ export default async function handler(
           }
         })
         if (post) {
-          // await res.revalidate('/blogs')
           return res.status(200).json(post)
         }
       } catch (e: any) {
         console.error(e)
         return res.status(400).json({ error: e.toString() })
       }
+    }
+    if (req.method === 'PUT') {
+      try {
+        const id = req.query.id as string
+        const body = JSON.parse(req.body)
+        const date = new Date().toISOString()
+        const data = await prisma.posts.update({
+          where: {
+            id
+          },
+          data: {
+            ...body,
+            updated_at: date
+          }
+        })
+        if (data) {
+          await res.revalidate(`/blogs/${data.slug}`)
+          return res.status(200).json(data)
+        }
+      } catch (e: any) {
+        console.error(e)
+        return res.status(400).json({ error: e.toString() })
+      }
+    }
+    if (req.method === 'DELETE') {
+      try {
+        const id = req.query.id as string
+        const data = await prisma.posts.delete({
+          where: {
+            id
+          }
+        })
+        if (data) {
+          return res.status(200).json({ message: 'delete post success' })
+        }
+      } catch (e: any) {
+        console.error(e)
+        return res.status(400).json({ error: e.toString() })
+      }
     } else {
-      return res.status(401).send({ message: 'Unauthorized' })
+      res.status(405).end(`Method ${req.method} Not Allowed`)
     }
   } else {
-    res.status(405).end(`Method ${req.method} Not Allowed`)
+    return res.status(401).send({ message: 'Unauthorized' })
   }
 }

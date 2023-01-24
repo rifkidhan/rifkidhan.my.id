@@ -1,10 +1,12 @@
 'use client'
 
-import { ChangeEvent, FormEvent, useState, Suspense } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { Button, Input, Field, Toggle, Dropzone } from '@components/ui'
 import { Edit3 } from 'lucide-react'
+import type { Posts } from '@prisma/client'
+import { imageUrl } from '@libs/constants'
 import slugify from '@libs/slugify'
 
 const Editor = dynamic(
@@ -14,7 +16,7 @@ const Editor = dynamic(
   }
 )
 
-export default function CreatePost() {
+export default function CreatePost({ post }: { post: Posts }) {
   const [content, setContent] = useState<{
     title: string
     description: string
@@ -24,10 +26,10 @@ export default function CreatePost() {
     meta_description?: string
     published: boolean
   }>({
-    title: '',
-    description: '',
-    post: '',
-    published: false
+    title: post.title,
+    description: post.description,
+    post: post.content,
+    published: post.published
   })
   const [file, setFile] = useState<File | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
@@ -62,10 +64,8 @@ export default function CreatePost() {
       body: data
     })
 
-    if (upload.ok) {
-      console.log('Uploaded successfully!')
-    } else {
-      console.error('Upload failed.')
+    if (!upload.ok) {
+      throw new Error('Upload failed.')
     }
   }
 
@@ -85,7 +85,7 @@ export default function CreatePost() {
       await uploadImage(thumbnailName, fileExt)
     }
 
-    const post = {
+    const posted = {
       title: content.title,
       description: content.description,
       slug: slug,
@@ -100,19 +100,17 @@ export default function CreatePost() {
           : content.description
     }
 
-    const data = await fetch('/api/blogs', {
-      method: 'POST',
-      body: JSON.stringify(post)
+    const data = await fetch(`/api/blogs?id=${post.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(posted)
     })
 
     if (data) {
-      console.log('Success posting a post')
+      setLoading(false)
+      router.push(`/blogs/${slug}`)
     } else {
-      console.error('something wrong')
+      throw new Error('something wrong')
     }
-
-    setLoading(false)
-    router.push('/blogs')
   }
 
   return (
@@ -165,11 +163,15 @@ export default function CreatePost() {
           id="thumbnail"
           accept="image/*"
           onChange={uploadPreview}
+          lastChange={
+            post.thumbnail ? imageUrl + '/blog/' + post.thumbnail : undefined
+          }
         />
       </Field>
 
       <Field label="Konten Post" htmlFor="content">
         <Editor
+          initialEditorState={content.post}
           onChange={(s) => {
             setContent({ ...content, post: JSON.stringify(s.toJSON()) })
           }}
@@ -218,10 +220,14 @@ export default function CreatePost() {
           setContent({ ...content, published: !content.published })
         }
       />
-
-      <Button type="submit" loading={loading}>
-        Submit
-      </Button>
+      <div className="flex flex-row gap-5">
+        <Button type="button" onClick={() => router.back()}>
+          Cancel
+        </Button>
+        <Button type="submit" loading={loading}>
+          Submit
+        </Button>
+      </div>
     </form>
   )
 }

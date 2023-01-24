@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Navbar, BackToTop } from '@components/common'
 import { useUI } from '@components/ui'
 import { spring, timeline, stagger } from 'motion'

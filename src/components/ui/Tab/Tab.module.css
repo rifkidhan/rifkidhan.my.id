@@ -1,0 +1,11 @@
+.tabGroup {
+  @apply flex w-full flex-row items-center justify-between overflow-hidden rounded-full border-2 border-secondary;
+}
+
+.tab {
+  @apply inline-flex w-full items-center justify-center rounded-full bg-primary p-2;
+}
+
+.active {
+  @apply bg-green text-white;
+}

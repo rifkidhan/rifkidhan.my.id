@@ -11,7 +11,7 @@
 }
 
 .topModal {
-  @apply sticky top-0 z-10 flex flex-row items-center justify-between border-b-2 border-secondary bg-primary p-3;
+  @apply sticky top-0 z-10 flex flex-row items-center justify-between gap-3 border-b-2 border-secondary bg-primary p-3;
 }
 
 .bottomModal {

@@ -3,7 +3,7 @@
     border-2 border-secondary text-center font-semibold transition-all duration-300 ease-in-out;
 }
 .icons {
-  @apply inline-flex items-start gap-x-2;
+  @apply inline-flex items-center justify-center gap-x-2;
 }
 .iconLeft {
   @apply flex-row;
@@ -11,7 +11,6 @@
 .iconRight {
   @apply flex-row-reverse;
 }
-
 .primary {
   @apply bg-primary py-3 px-2 text-primary;
 }

@@ -2,7 +2,6 @@
 
 import { FC, useEffect, useState } from 'react'
 import { Button } from '@components/ui'
-import cn from 'clsx'
 import s from './BackToTop.module.css'
 
 const BackToTop: FC = () => {
@@ -28,14 +27,12 @@ const BackToTop: FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const rootCN = cn(s.root)
-
   return isShow ? (
     <Button
       type="button"
       variant="circle"
       onClick={backToTopPosition}
-      className={rootCN}
+      className={s.root}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

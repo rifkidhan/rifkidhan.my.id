@@ -46,6 +46,16 @@ export default async function handler(
     } catch (e: any) {
       return res.status(401).json({ error: e.toString() })
     }
+  }
+  if (req.method === 'DELETE') {
+    try {
+      const file = req.query.file as string
+      await s3.removeObject(bucket, file)
+
+      return res.status(200).json({ message: 'delete object successfully' })
+    } catch (e: any) {
+      return res.status(401).json({ error: e.toString() })
+    }
   } else {
     return res.status(405).end(`Method ${req.method} Not Allowed`)
   }

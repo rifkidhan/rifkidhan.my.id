@@ -86,7 +86,7 @@ const Button = forwardRef((props, ref: Ref<ButtonRefType>) => {
         <LoadingDots />
       ) : (
         <>
-          {icons && icons}
+          {icons && <span>{icons}</span>}
           {children}
         </>
       )}

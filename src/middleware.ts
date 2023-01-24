@@ -1,10 +1,17 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, URLPattern } from 'next/server'
 import { withAuth } from 'next-auth/middleware'
 import { getToken } from 'next-auth/jwt'
 
 export const config = {
-  matcher: ['/signin/:path*', '/blogs/create:path*']
+  matcher: [
+    '/signin/:path*',
+    '/blogs/create/:path*',
+    '/dashboard/:path*',
+    '/blogs/edit/:path*'
+  ]
 }
+
+const patterns = new URLPattern({ pathname: '/blogs/:slug/edit' })
 
 export default withAuth(
   async function middleware(req) {

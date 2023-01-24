@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef, useEffect, MutableRefObject } from 'react'
+import { useRef, useEffect, MutableRefObject, FC } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter, useSelectedLayoutSegments } from 'next/navigation'
 import { useUI, Logo, Button } from '@components/ui'
 import {
   disableBodyScroll,
@@ -42,13 +42,13 @@ const CloseMenuButton = () => {
   )
 }
 
-const Navbar = () => {
-  const pathname = usePathname()
+const Navbar: FC = () => {
   const outerNavbar = useRef() as MutableRefObject<HTMLElement>
   const innerNavbar = useRef() as MutableRefObject<HTMLDivElement>
   const { displayNavbar, closeNavbar } = useUI()
   const { data: session } = useSession()
   const router = useRouter()
+  const segment = useSelectedLayoutSegments()
 
   useEffect(() => {
     const outCurrent = outerNavbar.current
@@ -69,19 +69,23 @@ const Navbar = () => {
   const menuItem = [
     {
       name: 'Home',
-      link: '/'
+      link: '',
+      active: segment[0] === undefined
     },
     {
       name: 'Portfolio',
-      link: '/portfolio'
+      link: 'portfolio',
+      active: segment[0] === 'portfolio'
     },
     {
       name: 'Blogs',
-      link: '/blogs'
+      link: 'blogs',
+      active: segment[0] === 'blogs'
     },
     {
       name: 'About',
-      link: '/about'
+      link: 'about',
+      active: segment[0] === 'about'
     }
   ]
 
@@ -142,12 +146,9 @@ const Navbar = () => {
               className={`menuItem${item.name} menuItems mb-10`}
             >
               <Link
-                href={item.link}
+                href={`/${item.link}`}
                 onClick={() => closeNavbar()}
-                className={cn(
-                  pathname === item.link && 'text-red',
-                  'display-md'
-                )}
+                className={cn(item.active && 'text-red', 'display-md')}
                 onMouseEnter={() => onMouseEnter(item.name)}
                 onMouseLeave={() => onMouseLeave(item.name)}
               >
@@ -158,17 +159,29 @@ const Navbar = () => {
         </div>
         <div className={s.authWrapper}>
           {session ? (
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() => {
-                signOut()
-                router.refresh()
-              }}
-              className={s.authButton}
-            >
-              Sign Out
-            </Button>
+            <div className="inline-flex flex-row gap-3">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => {
+                  signOut()
+                  router.refresh()
+                }}
+                className={s.authButton}
+              >
+                Sign Out
+              </Button>
+              <Link href={'/dashboard'} legacyBehavior>
+                <Button
+                  variant="secondary"
+                  Component="a"
+                  onClick={() => closeNavbar()}
+                  className={s.authButton}
+                >
+                  Dashboard
+                </Button>
+              </Link>
+            </div>
           ) : (
             <Link href="/signin" legacyBehavior>
               <Button

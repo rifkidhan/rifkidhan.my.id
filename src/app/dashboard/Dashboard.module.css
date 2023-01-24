@@ -1,0 +1,9 @@
+.layout {
+  @apply my-10 flex flex-col gap-10;
+}
+.main {
+  @apply container mx-auto flex flex-col gap-10;
+}
+.itContainer {
+  @apply container mx-auto;
+}

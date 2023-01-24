@@ -1,5 +1,5 @@
 .root {
-  @apply overflow-hidden rounded-xl border-2 border-secondary transition ease-in-out;
+  @apply relative overflow-hidden rounded-xl border-2 border-secondary transition ease-in-out;
 }
 .blog {
   @apply flex flex-col justify-between;
@@ -7,10 +7,21 @@
 .blog:hover {
   @apply -translate-y-2 shadow-down-3;
 }
+.list {
+  @apply grid place-items-center gap-3 md:grid-cols-4;
+}
+.list:hover {
+  @apply -translate-y-2 shadow-down-3;
+}
+.properties {
+  @apply inline-flex flex-col gap-3 p-5;
+}
+.propertiesList {
+  @apply md:col-span-2;
+}
 .image {
   @apply h-full w-full object-cover transition-all duration-200 ease-in-out;
 }
-
 .imageWrapper {
-  @apply aspect-w-4 aspect-h-3 relative;
+  @apply aspect-w-4 aspect-h-3 relative place-self-stretch;
 }
