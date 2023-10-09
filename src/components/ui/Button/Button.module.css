@@ -1,0 +1,57 @@
+.root {
+  @apply border-secondary relative inline-flex cursor-pointer items-center justify-center overflow-hidden
+      rounded-xl border-2 text-center font-semibold transition-all duration-300 ease-in-out;
+}
+.icons {
+  @apply inline-flex items-center justify-center gap-x-2;
+}
+.iconLeft {
+  @apply flex-row;
+}
+.iconRight {
+  @apply flex-row-reverse;
+}
+.primary {
+  @apply bg-primary text-primary px-2 py-3;
+}
+.primary:hover,
+.primary:focus {
+  @apply shadow-down-2 -translate-y-1;
+}
+.secondary {
+  @apply bg-secondary text-secondary px-2 py-3;
+}
+.secondary:hover {
+  @apply shadow-red-down -translate-y-1;
+}
+.naked {
+  @apply border-none bg-transparent font-semibold shadow-none outline-none;
+}
+.naked:hover,
+.naked:focus {
+  @apply translate-y-0 border-none bg-transparent shadow-none;
+}
+.color {
+  @apply px-2 py-3;
+}
+.color:hover {
+  @apply shadow-down-2 -translate-y-1;
+}
+.circle {
+  @apply rounded-full p-1.5;
+}
+.circle:hover {
+  @apply shadow-down-1 -translate-y-1;
+}
+
+.disabled,
+.disabled:hover,
+.disabled:focus {
+  @apply border-accent-3 bg-accent-2 text-accent-5 translate-y-0 cursor-not-allowed px-2 py-3 opacity-50 shadow-none grayscale;
+}
+
+.disabledCircle,
+.disabledCircle:hover,
+.disabledCircle:focus {
+  @apply border-accent-3 bg-accent-2 text-accent-5 translate-y-0 cursor-not-allowed p-1.5 opacity-50 shadow-none grayscale;
+}

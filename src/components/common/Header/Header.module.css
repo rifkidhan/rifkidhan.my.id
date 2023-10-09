@@ -1,0 +1,18 @@
+.root {
+  @apply border-secondary bg-primary sticky top-0 z-[99] border-b-2 py-1 md:py-3;
+}
+.wrapper {
+  @apply container relative mx-auto flex flex-row items-center justify-between;
+}
+.home {
+  @apply inline-flex flex-row items-center md:gap-x-3;
+}
+.logo {
+  @apply w-10 md:w-12;
+}
+.logotype {
+  @apply fill-secondary hidden h-6 md:inline-block;
+}
+.headerItems {
+  @apply inline-flex flex-row items-center justify-center gap-2 md:gap-5;
+}

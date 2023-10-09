@@ -2,26 +2,167 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  pre[data-theme='light'],
+  code[data-theme='light'] {
+    display: none;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* @media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+  pre[data-theme='dark'],
+  code[data-theme='dark'] {
+    display: none;
+  }
+} */
+
+:root {
+  --primary: 255 255 255;
+  --secondary: 23 24 31;
+  --text-base: var(--secondary);
+  --text-primary: var(--secondary);
+  --text-secondary: var(--primary);
+
+  --white: 255 255 255;
+  --black: 23 24 31;
+
+  --accent-1: 244 245 247;
+  --accent-2: 238 239 244;
+  --accent-3: 159 164 180;
+  --accent-4: 150 155 171;
+  --accent-5: 71 74 87;
+
+  --red-1: 249 90 44;
+  --red-2: 255 150 146;
+  --red-3: 255 232 232;
+
+  --blue-1: 25 71 229;
+  --blue-2: 128 148 255;
+  --blue-3: 233 231 252;
+
+  --pink-1: 255 137 187;
+  --pink-2: 255 199 222;
+  --pink-3: 255 243 248;
+
+  --yellow-1: 255 189 18;
+  --yellow-2: 255 212 101;
+  --yellow-3: 255 244 204;
+
+  --green-1: 0 198 174;
+  --green-2: 97 228 197;
+  --green-3: 214 252 247;
+
+  pre[data-theme='dark'],
+  code[data-theme='dark'] {
+    display: none;
+  }
+}
+
+.dark {
+  --primary: 23 24 31;
+  --secondary: 255 255 255;
+  --text-base: var(--secondary);
+  --text-primary: var(--secondary);
+  --text-secondary: var(--primary);
+
+  --accent-1: 71 74 87;
+  --accent-2: 150 155 171;
+  --accent-3: 159 164 180;
+  --accent-4: 238 239 244;
+  --accent-5: 244 245 247;
+
+  pre[data-theme='light'],
+  code[data-theme='light'] {
+    display: none;
+  }
+}
+
+@layer base {
+  html,
+  body {
+    @apply box-border h-full touch-manipulation overscroll-x-none bg-primary font-sans font-medium antialiased selection:bg-yellow;
+
+    scrollbar-color: var(--red-2) transparent;
+  }
+  body {
+    @apply relative m-0 min-h-full text-sm md:text-base;
+  }
+  h1 {
+    @apply relative font-sans text-6xl font-semibold leading-[.9] tracking-[-0.01rem] md:text-7xl;
+  }
+  h2 {
+    @apply font-sans text-3xl font-semibold tracking-[-0.01rem] md:text-5xl;
+  }
+  h3 {
+    @apply font-sans text-2xl font-semibold tracking-[-0.01rem] md:text-3xl;
+  }
+  h4 {
+    @apply font-sans text-xl font-semibold tracking-[-0.01rem] md:text-2xl;
+  }
+  h5 {
+    @apply font-sans text-lg font-semibold leading-4 md:text-xl;
+  }
+  h6 {
+    @apply text-base font-semibold md:text-lg;
+  }
+
+  pre {
+    @apply relative my-2 block overflow-x-auto break-normal rounded-xl p-5 font-mono;
+  }
+}
+
+@layer components {
+  .display-md {
+    @apply font-sans text-8xl leading-[.9] tracking-[-0.01rem] md:text-9xl;
+  }
+  .display-sm {
+    @apply font-sans text-7xl leading-[.9] tracking-[-0.01rem] md:text-8xl;
+  }
+  .h1 {
+    @apply font-sans text-6xl font-semibold leading-[.9] tracking-[-0.01rem] md:text-7xl;
+  }
+  .h2 {
+    @apply font-sans text-3xl font-semibold tracking-[-0.01rem] md:text-5xl;
+  }
+  .h3 {
+    @apply font-sans text-2xl font-semibold tracking-[-0.01rem] md:text-3xl;
+  }
+  .h4 {
+    @apply font-sans text-xl font-semibold tracking-[-0.01rem] md:text-2xl;
+  }
+  .h5 {
+    @apply font-sans text-lg font-semibold leading-4 md:text-xl;
+  }
+  .h6 {
+    @apply text-base font-semibold md:text-lg;
+  }
+  .small {
+    @apply text-sm;
+  }
+  .fit {
+    min-height: calc(100vh - 88px);
+  }
+}
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    @apply h-2 w-2 overflow-auto;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-red;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-red-2;
+  }
+  .skeleton {
+    @apply relative isolate overflow-hidden shadow-xl shadow-accent-4/10
+    before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite]
+    before:border-t before:border-accent-4/20 before:bg-gradient-to-r before:from-transparent before:via-secondary/30 before:to-transparent;
+  }
 }
