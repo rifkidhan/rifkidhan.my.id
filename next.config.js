@@ -1,13 +1,11 @@
-const { withContentlayer } = require('next-contentlayer')
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp']
   },
   experimental: {
-    serverComponentsExternalPackages: ['sharp', 'shiki']
+    serverComponentsExternalPackages: ['sharp', 'next-mdx-remote']
   }
 }
 
-module.exports = withContentlayer(nextConfig)
+module.exports = nextConfig

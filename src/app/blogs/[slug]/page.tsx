@@ -1,57 +1,76 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { format, parseISO } from 'date-fns'
-import { allBlogs } from 'contentlayer/generated'
-import { getMDXComponent } from 'next-contentlayer/hooks'
+import MDX from './MDX'
 import { notFound } from 'next/navigation'
+import { getAllPublished, getSinglePost } from '#/lib/notion'
 
-export const generateStaticParams = async () =>
-  allBlogs.map((post) => ({ slug: post.slug }))
+export const generateStaticParams = async () => {
+  const posts = await getAllPublished()
 
-export const generateMetadata = ({
+  return posts.map((post) => ({
+    slug: post.slug
+  }))
+}
+
+export const generateMetadata = async ({
   params
 }: {
   params: { slug: string }
-}): Metadata => {
-  const post = allBlogs.find((post) => post.slug === params.slug)
+}): Promise<Metadata> => {
+  const post = await getSinglePost(params.slug)
 
   if (!post) return notFound()
 
   const baseOgUrl = process.env.OG_IMAGE
 
+  const { title, description, createdTime, cover } = post.metadata
+
+  const ogImage = cover
+    ? cover
+    : baseOgUrl +
+      `?title=${encodeURIComponent(title)}` +
+      `&content=${encodeURIComponent(description)}`
+
   return {
-    title: post.title,
-    description: post.title,
-    openGraph: baseOgUrl
-      ? {
-          images: [
-            {
-              url:
-                baseOgUrl +
-                `?title=${encodeURIComponent(post.title)}` +
-                `&content=${encodeURIComponent(post.description)}`,
-              width: 1200,
-              height: 630,
-              alt: post.title
-            }
-          ]
+    title: title,
+    description: description,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      publishedTime: createdTime,
+      images: [
+        {
+          url: ogImage,
+          alt: title
         }
-      : null
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage]
+    }
   }
 }
 
-export default function Post({ params }: { params: { slug: string } }) {
-  const post = allBlogs.find((post) => post.slug === params.slug)
+export default async function Post({ params }: { params: { slug: string } }) {
+  const post = await getSinglePost(params.slug)
 
   if (!post) {
     notFound()
   }
 
-  const Content = getMDXComponent(post.body.code)
-
   return (
-    <article className="container mx-auto my-10 flex flex-col gap-10">
-      <h1>{post.title}</h1>
-      <Content />
-    </article>
+    <main className="container mx-auto my-10 flex flex-col gap-10">
+      <h1>{post.metadata.title}</h1>
+      <article className="prose max-w-none">
+        <Suspense>
+          <MDX source={post.content.parent} />
+        </Suspense>
+      </article>
+    </main>
   )
 }

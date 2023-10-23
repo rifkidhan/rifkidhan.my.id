@@ -1,18 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Epilogue, Plus_Jakarta_Sans } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import { Header, Footer } from '#/components/common'
 import ClientComponents from './Client'
 import { Suspense, ReactNode } from 'react'
 import Providers from './Providers'
-
-const epilogue = Epilogue({
-  variable: '--epilogue',
-  weight: 'variable',
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
-  fallback: ['Arial', 'system-ui']
-})
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: '--jakarta-sans',

@@ -1,20 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { compareDesc, format, parseISO } from 'date-fns'
-import { allBlogs, Blog } from 'contentlayer/generated'
-import { getMDXComponent } from 'next-contentlayer/hooks'
+import { getAllPublished } from '#/lib/notion'
 
-export default function Home() {
-  const posts = allBlogs.sort((a, b) =>
-    compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))
-  )
+export default async function Home() {
+  const posts = await getAllPublished()
+  console.log(posts)
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Ini Home</h1>
       <div>
-        {posts.map((post, idx) => (
-          <div key={idx}>
+        {posts.map((post) => (
+          <div key={post.id}>
             <Link href={`/blogs/${post.slug}`}>
               <div>{post.title}</div>
               <div>{post.slug}</div>
