@@ -1,6 +1,5 @@
-import { compareDesc, format, parseISO } from 'date-fns'
+import { Card } from '#/components/ui'
 import { getAllPublished } from '#/lib/notion'
-import Link from 'next/link'
 
 export default async function BlogIndex() {
   const posts = await getAllPublished()
@@ -8,16 +7,25 @@ export default async function BlogIndex() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1>Ini Blog</h1>
-      <div>
-        {posts.map((post) => (
-          <div key={post.id}>
-            <Link href={`/blogs/${post.slug}`}>
-              <div>{post.title}</div>
-              <div>{post.slug}</div>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <section className="relative flex w-full flex-col gap-5">
+        <h2>Latest Post</h2>
+        <div
+          role="list"
+          className="relative grid w-full grid-cols-1 gap-x-3 gap-y-6 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+        >
+          {posts.map((post) => (
+            <div key={post.id} className="flex w-full flex-col" role="listitem">
+              <Card
+                title={post.title}
+                description={post.description}
+                href={`/blogs/${post.slug}`}
+                thumbnail={post.cover}
+                createdTime={post.createdTime}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
     </main>
   )
 }

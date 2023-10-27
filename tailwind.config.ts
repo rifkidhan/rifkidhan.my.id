@@ -141,7 +141,7 @@ const config: Config = {
               borderColor: 'rgb(var(--secondary))'
             },
             blockquote: {
-              color: 'rgb(var(--accent-4))',
+              color: 'rgb(var(--accent-5))',
               borderLeftColor: 'rgb(var(--red-1))'
             },
             figcaption: {
@@ -175,7 +175,7 @@ const config: Config = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/aspect-ratio')
   ]
 }
 export default config

@@ -1,5 +1,5 @@
 .root {
-  @apply fixed bottom-10 right-10 !bg-primary;
+  @apply fixed bottom-10 right-10 z-[120] !bg-primary;
 }
 
 .icon {

@@ -1,0 +1,19 @@
+.wrapper {
+  @apply relative flex h-full w-full flex-col gap-y-3 overflow-hidden rounded-lg border-2
+  border-secondary transition-all duration-200 ease-in-out;
+}
+.wrapper:hover {
+  @apply -translate-y-2 shadow-down-3;
+}
+.thumbnailWrapper {
+  @apply relative h-56 w-full overflow-hidden border-b-2 border-secondary;
+}
+.thumbnailImage {
+  @apply block;
+}
+.thumbnailError {
+  @apply flex flex-col items-center justify-center bg-red;
+}
+.content {
+  @apply flex flex-col items-start gap-4 px-5 py-4;
+}
