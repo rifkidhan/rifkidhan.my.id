@@ -9,20 +9,21 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.notion.so',
+        hostname: 'images.unsplash.com',
         port: '',
-        pathname: '/images/**'
+        pathname: '/**'
       },
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: 'static.ghost.org',
         port: '',
         pathname: '/**'
       }
     ]
   },
   experimental: {
-    serverComponentsExternalPackages: ['sharp', 'next-mdx-remote']
+    serverComponentsExternalPackages: ['sharp', 'shiki'],
+    webpackBuildWorker: true
   }
 }
 

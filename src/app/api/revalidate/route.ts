@@ -1,19 +1,21 @@
-import { NextRequest } from 'next/server'
-import { revalidatePath } from 'next/cache'
+import { NextRequest, NextResponse } from 'next/server'
+import { revalidateTag } from 'next/cache'
 
-export async function POST(req: NextRequest) {
-  const path = req.nextUrl.searchParams.get('path')
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  const tag = req.nextUrl.searchParams.get('tag')
   const secret = req.nextUrl.searchParams.get('secret')
 
-  if (!path) {
-    return Response.json({ message: 'Missing path param' }, { status: 400 })
+  if (!tag) {
+    console.error('Missing tags')
+    return NextResponse.json({ status: 200 })
   }
 
-  if (secret !== process.env.REVALIDATE) {
-    return Response.json({ message: 'Invalid secret' }, { status: 401 })
+  if (!secret || secret !== process.env.REVALIDATE) {
+    console.error('Invalid revalidated secret')
+    return NextResponse.json({ status: 200 })
   }
 
-  revalidatePath(path)
+  revalidateTag(tag)
 
-  return Response.json({ revalidated: true, now: Date.now() })
+  return NextResponse.json({ status: 200, revalidated: true, now: Date.now() })
 }

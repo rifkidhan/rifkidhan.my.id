@@ -7,6 +7,7 @@ import s from './Card.module.css'
 
 interface CardProps {
   thumbnail?: string
+  thumbnailAlt?: string
   title: string
   href: string
   description: string
@@ -14,7 +15,8 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-  const { title, href, thumbnail, description, createdTime } = props
+  const { title, href, thumbnail, description, createdTime, thumbnailAlt } =
+    props
 
   const createdTimeFormat = format(new Date(createdTime), 'EEEE, dd MMMM yyyy')
   return (
@@ -28,7 +30,7 @@ const Card = (props: CardProps) => {
         {thumbnail ? (
           <Image
             src={thumbnail}
-            alt={title}
+            alt={thumbnailAlt ? thumbnailAlt : title}
             fill
             style={{
               objectFit: 'cover'

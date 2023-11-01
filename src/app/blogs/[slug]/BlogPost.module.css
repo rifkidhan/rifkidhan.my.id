@@ -1,0 +1,37 @@
+.layout {
+  @apply container mx-auto my-10 flex flex-col gap-10 md:gap-16 xl:gap-20;
+}
+.heading {
+  @apply flex w-full flex-col gap-5;
+}
+.tags {
+  @apply flex flex-row gap-x-2 text-red-1;
+
+  li {
+    @apply uppercase;
+  }
+}
+
+.title {
+  @apply relative inline-block align-middle capitalize;
+}
+
+.titleDecoration {
+  @apply align-top font-thin text-red;
+}
+
+.info {
+  @apply flex flex-col gap-2 text-accent-5;
+}
+
+.featureImageWrapper {
+  @apply relative flex flex-col gap-2;
+}
+
+.featureImage {
+  @apply aspect-h-9 aspect-w-16 relative block overflow-hidden rounded-xl border-4 border-secondary;
+
+  img {
+    @apply h-full w-full object-cover object-center;
+  }
+}

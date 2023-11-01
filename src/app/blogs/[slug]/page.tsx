@@ -2,14 +2,16 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Image from 'next/image'
 import { format } from 'date-fns'
-import MDX from './MDX'
+import { htmlParser } from '#/lib/htmlparser'
 import { notFound } from 'next/navigation'
-import { getAllPublished, getSinglePost } from '#/lib/notion'
+import { getAllSlugs, getSinglePost } from '#/lib/ghost'
+import cn from 'clsx'
+import s from './BlogPost.module.css'
 
 export const generateStaticParams = async () => {
-  const posts = await getAllPublished()
+  const posts = await getAllSlugs('/posts')
 
-  return posts.map((post) => ({
+  return posts.posts.map((post) => ({
     slug: post.slug
   }))
 }
@@ -19,92 +21,119 @@ export const generateMetadata = async ({
 }: {
   params: { slug: string }
 }): Promise<Metadata> => {
-  const post = await getSinglePost(params.slug)
+  const fetchPost = await getSinglePost(params.slug)
 
-  if (!post) return notFound()
+  if (!fetchPost) return notFound()
 
   const baseOgUrl = process.env.OG_IMAGE
 
-  const { title, description, createdTime, cover } = post.metadata
+  const post = fetchPost.posts[0]
 
-  const ogImage = cover
-    ? cover
+  const ogImage = post.feature_image
+    ? post.feature_image
     : baseOgUrl +
-      `?title=${encodeURIComponent(title)}` +
-      `&content=${encodeURIComponent(description)}`
+      `?title=${encodeURIComponent(post.title)}` +
+      `&content=${encodeURIComponent(post.excerpt)}`
 
   return {
-    title: title,
-    description: description,
+    title: post.meta_title ?? post.title,
+    description:
+      post.meta_description ?? post.custom_excerpt ?? post.custom_excerpt,
     openGraph: {
-      title,
-      description,
+      title: post.meta_title ?? post.title,
+      description:
+        post.meta_description ?? post.custom_excerpt ?? post.custom_excerpt,
       type: 'article',
-      publishedTime: createdTime,
+      publishedTime: post.published_at,
       images: [
         {
           url: ogImage,
-          alt: title
+          alt: post.feature_image_alt ?? post.title
         }
       ]
     },
     twitter: {
       card: 'summary_large_image',
-      title,
-      description,
+      title: post.meta_title ?? post.title,
+      description:
+        post.meta_description ?? post.custom_excerpt ?? post.custom_excerpt,
       images: [ogImage]
     }
   }
 }
 
 export default async function Post({ params }: { params: { slug: string } }) {
-  const post = await getSinglePost(params.slug)
+  const fetchPost = await getSinglePost(params.slug)
 
-  if (!post) {
+  if (!fetchPost) {
     notFound()
   }
 
-  const { metadata, content } = post
+  const post = fetchPost.posts[0]
 
-  const createdTimeFormat = format(
-    new Date(metadata.createdTime),
-    'EEEE, dd MMMM yyyy'
-  )
+  const content = await htmlParser(post.html)
+
+  const formatTime = (time: string) => {
+    return format(new Date(time), 'EEEE, dd MMMM yyyy')
+  }
 
   return (
-    <article className="container mx-auto my-10 flex flex-col gap-10 md:gap-16 xl:gap-20">
-      <section className="flex w-full flex-col gap-5">
-        <ul className="h6 flex flex-row gap-x-2 text-red-1">
-          {metadata.tags.map((tag) => (
-            <li key={tag.id} className="uppercase">
-              {tag.name}
-            </li>
+    <article className={s.layout}>
+      <section className={s.heading}>
+        <ul className={cn(s.tags, 'h6')}>
+          {post.tags.map((tag) => (
+            <li key={tag.id}>{tag.name}</li>
           ))}
         </ul>
-        <h1 className="shadow-red-down">{metadata.title}</h1>
-        <p className="h4 font-normal">{metadata.description}</p>
-        <div className="small flex flex-col gap-2 text-accent-5">
-          <span>Published on {createdTimeFormat}</span>
-        </div>
-        <hr className="border-t-2 border-secondary" />
-      </section>
-      {metadata.cover && (
-        <div className="aspect-h-9 aspect-w-16 relative overflow-hidden rounded-xl border-4 border-secondary">
-          <Image
-            fill
-            src={metadata.cover}
-            alt={metadata.title}
-            priority
-            className="h-full w-full object-cover object-center"
-          />
-        </div>
-      )}
+        <h1 className={s.title}>
+          <span className={s.titleDecoration} aria-hidden="true">
+            /{' '}
+          </span>
+          {post.title}
+        </h1>
+        <p className="h4 font-normal">
+          {post.custom_excerpt ?? post.custom_excerpt}
+        </p>
+        <div className={cn(s.info, 'small')}>
+          <span>Published on {formatTime(post.published_at)}</span>
+          {post.updated_at !== post.published_at && (
+            <span>Last updated on {formatTime(post.updated_at)}</span>
+          )}
 
-      <section className="prose">
-        <Suspense>
-          <MDX source={content.parent} />
-        </Suspense>
+          <span>
+            Reading Time {post.reading_time}{' '}
+            {post.reading_time > 1 ? 'minutes' : 'minute'}
+          </span>
+        </div>
+
+        <figure className={s.featureImageWrapper}>
+          {post.feature_image && (
+            <div className={s.featureImage}>
+              <Image
+                fill
+                src={post.feature_image}
+                alt={post.feature_image_alt ?? post.title}
+                priority
+              />
+            </div>
+          )}
+          {post.feature_image_caption && (
+            <figcaption
+              dangerouslySetInnerHTML={{ __html: post.feature_image_caption }}
+              className="prose text-accent-4"
+            />
+          )}
+        </figure>
+
+        <hr className="border-t-2 border-red" />
       </section>
+
+      <Suspense>
+        <section
+          className="blog"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      </Suspense>
     </article>
   )
 }
