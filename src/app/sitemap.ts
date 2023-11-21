@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next'
 import { checkEnv } from '#/lib/checkEnv'
-import { getAllPosts } from '#/lib/ghost'
+import { getAllPosts } from '#/lib/pocketbase'
 
 type Route = {
   url: string
@@ -30,10 +30,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   ]
 
-  const allBlogPosts = getAllPosts({ limit: 'all' }).then((posts) =>
-    posts.posts.map((post) => ({
-      url: `${env.host}/blogs/${post.slug}`,
-      lastModified: post.updated_at
+  const allBlogPosts = getAllPosts({ perPage: 1000 }).then((posts) =>
+    posts.items.map((post) => ({
+      url: `${env.host}/blogs/${post.id}`,
+      lastModified: post.updated
     }))
   )
 

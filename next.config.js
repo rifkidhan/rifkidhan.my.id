@@ -18,11 +18,16 @@ const nextConfig = {
         hostname: 'static.ghost.org',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'cms-rifkidhan.koyeb.app',
+        port: '',
+        pathname: '/api/files/**'
       }
     ]
   },
   experimental: {
-    serverComponentsExternalPackages: ['sharp', 'shiki'],
     webpackBuildWorker: true
   }
 }

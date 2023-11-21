@@ -43,7 +43,7 @@ const Card = (props: CardProps) => {
       </div>
       <div className={s.content}>
         <h4>{title}</h4>
-        <p>{description}</p>
+        <p className="line-clamp-5 md:line-clamp-4">{description}</p>
         <span className="small text-accent-5">{createdTimeFormat}</span>
       </div>
     </Link>

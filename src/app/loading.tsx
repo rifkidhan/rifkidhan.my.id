@@ -1,7 +1,7 @@
-export default function Loading() {
+export default async function Loading() {
   return (
-    <div className="container mx-auto flex min-h-screen flex-col">
-      Loading...
+    <div className="flex min-h-screen flex-col items-center justify-center">
+      Loading....
     </div>
   )
 }
