@@ -4,7 +4,7 @@ export const checkEnv = () => {
 
   if (process.env.NETLIFY) {
     isProd = true
-    host = process.env.NEXT_PUBLIC_URL as string
+    host = process.env.URL as string
   } else if (process.env.NEXT_PUBLIC_VERCEL_URL) {
     isProd = false
     host = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
