@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className={s.root}>
       <div className={s.wrapper}>
-        <Link href="/" className={s.home}>
+        <Link href="/" className={s.home} aria-hidden="true">
           <Logo className={s.logo} />
           <Logo variant="types" className={s.logotype} />
         </Link>
