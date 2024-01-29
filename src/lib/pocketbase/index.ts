@@ -1,63 +1,36 @@
-import type { AllPosts, Post } from './types'
-
-interface Params {
-  page?: number
-  perPage?: number
-  sort?: string
-  filter?: string
-  expand?: string
-  fields?: string
-  skipTotal?: boolean
-}
-
-// const paramsToString = (params: Params) => {
-//   const parameter = {
-//     page?: params.page
-//    }
-//   const test = new URLSearchParams(parameter)
-// }
+import type { AllPosts, Post, SlugPosts } from './types'
 
 const TAGS = {
   posts: 'posts',
   tags: 'tags'
 }
 
-/**
- *
- * use query parameter
- * page?: number
- * perPage?: number
- * sort?: string
- * expand?: string
- * fields?: string
- * skipTotal?: boolean
- * filter?: string
- */
 export const pocketbaseApi = async <T>({
   endpoint,
   headers,
   cache = 'force-cache',
   tags,
-  params
+  query
 }: {
   endpoint: string
   headers?: HeadersInit
   cache?: RequestCache
   tags?: string[]
-  params?: string
+  query?: Record<string, string>
 }): Promise<{ status: number; body: T } | never> => {
   const { CMS_URL, CMS_TOKEN } = process.env
 
-  let url = `${CMS_URL}/collections${endpoint}`
+  let url = new URL(`${CMS_URL}/collections${endpoint}`)
 
-  if (params) {
-    url += `?${params}`
+  if (query) {
+    Object.entries(query).forEach(([key, value]) => {
+      url.searchParams.append(key, value)
+    })
   }
 
   const result = await fetch(url, {
     method: 'GET',
     headers: {
-      'X-Token-Key': `${CMS_TOKEN}`,
       ...headers
     },
     cache,
@@ -79,63 +52,70 @@ export const pocketbaseApi = async <T>({
   }
 }
 
+/**
+ * get All Posts
+ */
 export const getAllPosts = async ({
   perPage = 6,
-  preview = false
+  page = 1
 }: {
   perPage?: number
-  preview?: boolean
+  page?: number
 }) => {
-  const params = {
+  const query = {
     sort: '-updated',
-    filter: 'published=true',
     fields:
       'id,title,description,created,updated,featured_image,collectionName,slug',
-    perPage: String(perPage)
-  }
-
-  const paramsString = new URLSearchParams(params).toString()
-
-  const result = await pocketbaseApi<AllPosts>({
-    endpoint: '/posts/records',
-    tags: [TAGS.posts],
-    params: paramsString
-  })
-
-  return result.body
-}
-
-export const getAllSlugPosts = async (preview?: boolean) => {
-  const params = {
-    filter: 'published=true',
-    fields: 'id,slug',
+    perPage: String(perPage),
+    page: String(page),
     skipTotal: 'true'
   }
 
-  const paramsString = new URLSearchParams(params).toString()
-
   const result = await pocketbaseApi<AllPosts>({
     endpoint: '/posts/records',
     tags: [TAGS.posts],
-    params: paramsString
+    query
   })
 
   return result.body
 }
 
-export const getPost = async (id: string) => {
-  const params = {
-    fields: '*,expand.tags.title,expand.tags.id',
-    expand: 'tags'
+/**
+ * get All Slug
+ */
+export const getAllSlugPosts = async () => {
+  const query = {
+    fields: 'slug,updated',
+    skipTotal: 'true',
+    perPage: '1000'
   }
 
-  const paramsString = new URLSearchParams(params).toString()
-
-  const result = await pocketbaseApi<Post>({
-    endpoint: `/posts/records/${id}`,
+  const result = await pocketbaseApi<SlugPosts>({
+    endpoint: '/posts/records',
     tags: [TAGS.posts],
-    params: paramsString
+    query
   })
 
   return result.body
+}
+
+/**
+ * get post
+ */
+export const getPost = async (slug: string) => {
+  const query = {
+    filter: `slug='${slug}'`,
+    fields: '*,expand.tags.title,expand.tags.id',
+    expand: 'tags',
+    skipTotal: 'true',
+    perPage: '1'
+  }
+
+  const result = await pocketbaseApi<Post>({
+    endpoint: '/posts/records',
+    tags: [TAGS.posts],
+    query
+  })
+
+  return result.body.items[0]
 }

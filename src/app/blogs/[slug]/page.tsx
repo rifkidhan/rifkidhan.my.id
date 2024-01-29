@@ -14,7 +14,7 @@ export const generateStaticParams = async () => {
   const posts = await getAllSlugPosts()
 
   return posts.items.map((post) => ({
-    slug: post.id
+    slug: post.slug
   }))
 }
 
@@ -30,7 +30,7 @@ export const generateMetadata = async ({
   const baseOgUrl = process.env.OG_IMAGE
 
   const ogImage = post.featured_image
-    ? `${imageUrl}/${post.collectionName}/${post.id}/${post.featured_image}?thumb=1200:630`
+    ? `${imageUrl}/${post.collectionName}/${post.id}/${post.featured_image}?thumb=1200x630`
     : baseOgUrl +
       `?title=${encodeURIComponent(post.title)}` +
       `&content=${encodeURIComponent(post.description)}`
@@ -97,7 +97,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
             <div className={s.featureImage}>
               <Image
                 fill
-                src={`${imageUrl}/${post.collectionName}/${post.id}/${post.featured_image}?thumb=0x300`}
+                src={`${imageUrl}/${post.collectionName}/${post.id}/${post.featured_image}?thumb=1024x0`}
                 alt={post.title}
                 priority
               />

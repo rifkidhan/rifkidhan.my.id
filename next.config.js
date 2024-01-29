@@ -21,14 +21,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cms-rifkidhan.koyeb.app',
+        hostname: 'rifkidhan.pockethost.io',
         port: '',
         pathname: '/api/files/**'
       }
     ]
-  },
-  experimental: {
-    webpackBuildWorker: true
   }
 }
 

@@ -25,8 +25,8 @@ export const GridPost = ({ posts }: { posts: AllPosts['items'] }) => {
           <Card
             title={post.title}
             description={post.description}
-            href={`/blogs/${post.id}`}
-            thumbnail={`${imageUrl}/${post.collectionName}/${post.id}/${post.featured_image}?thumb=200x0`}
+            href={`/blogs/${post.slug}`}
+            thumbnail={`${imageUrl}/${post.collectionName}/${post.id}/${post.featured_image}?thumb=256x0`}
             createdTime={post.created}
             thumbnailAlt={post.title}
           />

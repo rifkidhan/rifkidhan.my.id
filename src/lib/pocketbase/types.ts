@@ -1,21 +1,16 @@
-const test = {
-  collectionId: 'nwb413pm3f29pdj',
-  collectionName: 'tags',
-  created: '2023-11-17 10:22:31.758Z',
-  description: '',
-  feature_image: '',
-  id: '1wc37osxxflqm0s',
-  posts: [],
-  title: 'teknologi',
-  updated: '2023-11-17 10:22:31.758Z'
-}
-
 interface Tags {
   id: string
   title: String
 }
 
-export interface Post {
+interface Metadata {
+  page: number
+  perPage: number
+  totalPages: number
+  totalItems: number
+}
+
+interface IPost {
   id: string
   collectionId: string
   collectionName: string
@@ -34,10 +29,13 @@ export interface Post {
   }
 }
 
-export interface AllPosts {
-  page: number
-  perPage: number
-  totalPages: number
-  totalItems: number
-  items: Omit<Post, 'tags' | 'content' | 'published'>[]
+export interface SlugPosts extends Metadata {
+  items: Pick<IPost, 'id' | 'slug' | 'updated'>[]
+}
+export interface AllPosts extends Metadata {
+  items: Omit<IPost, 'tags' | 'content' | 'published' | 'expand'>[]
+}
+
+export interface Post extends Metadata {
+  items: IPost[]
 }
